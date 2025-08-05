@@ -1,0 +1,56 @@
+{
+  "header": {
+    "logos": [
+      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "/assets/mir-w.png", "alt": "Logo SECTIES" },
+      { "href": "https://gov.br/", "src": "/assets/logo-gov-w.png", "alt": "Logo Governo da Paraíba" },
+      { "href": "/", "src": "/assets/icon-odsr.png", "alt": "Logo ODS Racial" }
+    ],
+    "navActions": [
+      { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
+      { "href": "/contato", "label": "Contato", "icon": "fas fa-envelope", "extraClass": "ml-4" }
+    ]
+  },
+  "estatisticas": [
+    {"icon": "fas fa-users-viewfinder", "value": "83 indicadores", "label": "por Grupos Raciais e Localidades"},
+    {"icon": "fas fa-seedling", "value": "11 objetivos", "label": "de Desenvolvimento Sustentável"},
+    {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"}
+  ],
+  "pilares": [
+    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "text": "Seu ponto de partida com os principais insights e métricas da plataforma", "cards": 
+    [
+      { "title": "Monitoramento PDI 2024-2028", "source": "PROPLAN", "url": "/monitoramento-pdi", "cardIcon": "fas fa-chart-pie" }
+    ]},
+    { "id": "indicadores", "label": "Indicadores por Grupo", "icon": "fas fa-users-viewfinder", "text": "Explore os dados segmentados por diferentes grupos raciais e localidades", 
+    "cards": [
+      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
+    ]},
+    { "id": "comparativo", "label": "Análise Comparativa", "icon": "fas fa-scale-balanced", "text": "Compare indicadores lado a lado para analisar disparidades e tendências", 
+    "cards": [
+      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
+    ]},
+    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável", "cards": [
+      { "title": "Acompanhamento de Egressos", "source": "LEMA", "url": "/acompanhamento-egressos", "cardIcon": "fas fa-briefcase" },
+      { "title": "Avaliação pelo Discente", "source": "STI", "url": "/avaliacao-discente", "cardIcon": "fas fa-user-check" }
+    ]},
+    { "id": "observatorio", "label": "Documentação e Tutorial", "icon": "fas fa-book-open-reader", "text": "Encontre notas técnicas, guias de uso e vídeos tutoriais sobre a plataforma", "cards": [
+      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
+    ]},
+    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "text": "Baixe dados e indicadores por grupos raciais", "cards": [
+      { "title": "Dados Abertos UFPB", "source": "STI", "url": "https://dados.gov.br/", "cardIcon": "fas fa-download" }
+    ]},
+    { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }
+  ],
+  "faq": [
+    {"question": "O que é o ODS Racial?", "answer": "O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> é a plataforma central de Business Intelligence (BI) e Analytics da UFPB..."},
+    {"question": "Quem desenvolveu o sistema?", "answer": "A Equipe de desenvolvimento do ODS Racial é liderada pelo docente..."},
+    {"question": "De onde vêm os dados apresentados nos painéis?", "answer": "Os dados dos painéis, em geral, são extraídos dos sistemas institucionais da UFPB..."},
+    {"question": "Como posso solicitar correção de algum link ou informação incorreta?", "answer": "Pode ser enviado um e-mail direcionado à <strong> <a href='mailto:codeinfo@proplan.ufpb.br' ...>Coordenação de Informação (Codeinfo)</a></strong>..."}
+  ],
+  "pages": [
+    { "Avaliação pelo Discente": [{"slug": "avaliacao-discente", "text": "...", "icon":"fas fa-users", "cols": 5}, {"title": "Ensino Básico...", "source": "SEBTT", "url": "...", "cardIcon": "fas fa-user" } ]},
+    { "Acompanhamento de Egressos": [{"slug": "acompanhamento-egressos", "text": "...", "icon":"fas fa-briefcase", "cols": 3}, { "title": "Ensino Básico...", "source": "SEBTT", "url": "...", "cardIcon": "fas fa-user" } ]}
+  ],
+  "iframes": [
+    {"slug": "monitoramento-pdi", "url": "https://app.powerbi.com/view?r=eyJrIjoiNjJjOWI2NWYtNDcyMS00MmY1LTljZDUtMmJhN2NhM2Y4MTQ4IiwidCI6IjAzNGEzN2ViLWFkYTYtNGI4ZS05NzZkLTViMDQwYjIyZWQwNSJ9"}
+  ]
+}

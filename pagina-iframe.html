@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGOV | Relatório BI</title> <link rel="icon" type="image/png" href="/assets/favicon.ico">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" ...>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.config.js"></script>
+    <link rel="stylesheet" href="/assets/styles.css">
+    
+    <style>
+        /* Ajusta o container do iframe para ocupar o espaço restante */
+        #iframe-container {
+            /* Calcula a altura: 100% da altura da janela (vh) menos os 100px 
+              do padding que o seu CSS adiciona para o header. 
+            */
+            height: calc(108vh - 100px); 
+        }
+
+        #powerbi-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+</head>
+<body class="overflow-hidden"> 
+    
+    <div id="header-placeholder"></div>
+
+    <main id="iframe-container">
+        <iframe id="powerbi-iframe"
+            title="Relatório Power BI"
+            src="about:blank" 
+            allowfullscreen="true">
+        </iframe>
+    </main>
+
+    <script type="module" src="/assets/js/app.js"></script>
+
+</body>
+</html>

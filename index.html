@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODS Racial - Inteligência de Dados por Grupos Raciais </title>
+    <link rel="icon" type="image/png" href="/assets/favicon.ico">    
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" ...>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.config.js"></script>
+    <link rel="stylesheet" href="/assets/styles.css">
+
+</head>
+<body class="bg-fundo-claro">
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-texto-contraste pt-12 pb-8 md:pt-40 md:pb-16 relative">
+        <div id="particles-hero" class="absolute top-0 left-0 w-full h-full"></div>
+        <div class="container mx-auto px-6 text-center flex flex-col items-center relative z-10">
+            <img src="/assets/icon-odsr.png" alt="Logo ODS Racial" class="h-28 md:h-48 mb-0" onerror="this.onerror=null;this.src='https://placehold.co/240x96/cccccc/ffffff?text=ODS Racial';" style="opacity: 1.0;">
+            <h1 class="text-6xl md:text-6xl font-bold mb-0">Plataforma ODS Racial</h1>
+            <p class="text-base md:text-lg max-w-3xl mx-auto">
+                Disponibilizando informações para auxiliar na tomada de decisão de políticas que promovam a igualdade étnico-racial no Brasil.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats and Pillars Section -->
+    <section class="pt-0 py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <!-- Pillars -->
+            <div id="pillars-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            </div>
+             <!-- Stats -->
+            <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
+            </div>            
+        </div>
+    </section>
+
+    <!-- Panels Section -->
+    <main id="paineis" class="py-20 bg-fundo-claro">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal">Conheça os Painéis</h2>
+                <p class="text-texto-secundario mt-2 max-w-3xl mx-auto">
+                    A Plataforma ODS Racial disponibiliza indicadores sociais, econômicos e institucionais relacionados aos Objetivos de Desenvolvimento Sustentável.
+                </p>
+            </div>
+            
+            <!-- Barra de Busca -->
+            <div class="mb-12 max-w-xl mx-auto">
+                <label for="search-input" class="sr-only">Filtrar painéis</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-texto-sutil"></i>
+                    </div>
+                    <input type="text" id="search-input" placeholder="Filtrar por título, fonte ou seção..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm" aria-label="Filtrar painéis">
+                </div>
+            </div>
+
+            <!-- Dynamic Content Sections -->
+            <div id="paineis-container" class="space-y-16">
+                <p id="loading-message" class="text-center text-texto-sutil">Carregando painéis...</p>
+                <p id="no-results-message" class="text-center text-texto-sutil hidden">Nenhum painel encontrado.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal"><i class="fas fa-question-circle text-primaria"></i> Sobre o ODS Racial</h2>
+            </div>
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-lg text-texto-principal mb-10 leading-relaxed">
+                    O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> foi desenvolvido pela <strong>Coordenação de Informação (Codeinfo)</strong>, vinculada à <strong>Pró-Reitoria de Planejamento e Desenvolvimento (Proplan)</strong>, e contou com o apoio fundamental da <strong>Superintendência de Tecnologia da Informação (STI)</strong> da UFPB.
+                    <br><br>
+                    A ferramenta encontra-se em sua fase inicial de desenvolvimento e tem como objetivo principal consolidar-se como a plataforma central de Business Intelligence (BI) e Analytics da universidade, promovendo uma cultura de gestão baseada em dados.
+                </p>
+                <div class="mb-12">
+                    <a href="https://drive.ufpb.br/s/PqqgQGaMrWnwGtD" target="_blank" rel="noopener noreferrer" class="inline-block bg-primaria text-texto-contraste font-bold py-3 px-6 rounded-lg hover:bg-primaria-hover transition-colors duration-300 shadow-lg">
+                        <i class="fas fa-file-pdf mr-2"></i>
+                        Notas Técnicas do ODS Racial
+                    </a>
+                </div>
+                <h3 class="text-xl font-semibold text-texto-principal mb-6">Realização:</h3>
+                <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 md:gap-x-12">
+                    <a href="https://www.ufpb.br/" target="_blank" rel="noopener noreferrer">
+                        <img src="/assets/mir.png" alt="Logo MIR" class="h-14 md:h-24" onerror="this.onerror=null;this.src='https://placehold.co/56x56/cccccc/ffffff?text=UFPB';">
+                    </a>
+                    <a href="https://www.proplan.ufpb.br/coordenacao-de-informacao-codeinfo/" target="_blank" rel="noopener noreferrer">
+                        <img src="/assets/logo-lema.png" alt="Logo Codeinfo" class="h-20 md:h-28" onerror="this.onerror=null;this.src='https://placehold.co/110x40/cccccc/ffffff?text=Codeinfo';">
+                    </a>
+                </div>
+               </div>
+        </div>
+    </section>    
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <script type="module" src="/assets/js/app.js"></script>
+
+</body>
+</html>
