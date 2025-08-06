@@ -5,7 +5,7 @@
  */
 export function criarPillar(pillar) {
     // Usa o ID do pilar para criar a âncora do link
-    const href = `#${pillar.id}`;
+    const href = `${pillar.href}`;
 
     return `
         <a href="${href}" class="block p-4 rounded-lg hover:bg-fundo-medio transition-colors duration-300">

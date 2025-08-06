@@ -1,0 +1,80 @@
+{
+  "2022": {
+    "estados": [
+      { "codigo_uf": 11, "nome": "Rondônia", "valor": 2.1 },
+      { "codigo_uf": 12, "nome": "Acre", "valor": 2.5 },
+      { "codigo_uf": 13, "nome": "Amazonas", "valor": 3.0 },
+      { "codigo_uf": 14, "nome": "Roraima", "valor": 3.2 },
+      { "codigo_uf": 15, "nome": "Pará", "valor": 4.5 },
+      { "codigo_uf": 16, "nome": "Amapá", "valor": 4.1 },
+      { "codigo_uf": 17, "nome": "Tocantins", "valor": 3.8 },
+      { "codigo_uf": 21, "nome": "Maranhão", "valor": 2.4 },
+      { "codigo_uf": 22, "nome": "Piauí", "valor": 2.9 },
+      { "codigo_uf": 23, "nome": "Ceará", "valor": 3.3 },
+      { "codigo_uf": 24, "nome": "Rio Grande do Norte", "valor": 3.6 },
+      { "codigo_uf": 25, "nome": "Paraíba", "valor": 3.5 },
+      { "codigo_uf": 26, "nome": "Pernambuco", "valor": 4.1 },
+      { "codigo_uf": 27, "nome": "Alagoas", "valor": 2.8 },
+      { "codigo_uf": 28, "nome": "Sergipe", "valor": 3.1 },
+      { "codigo_uf": 29, "nome": "Bahia", "valor": 3.7 },
+      { "codigo_uf": 31, "nome": "Minas Gerais", "valor": 4.2 },
+      { "codigo_uf": 32, "nome": "Espírito Santo", "valor": 4.0 },
+      { "codigo_uf": 33, "nome": "Rio de Janeiro", "valor": 4.4 },
+      { "codigo_uf": 35, "nome": "São Paulo", "valor": 4.8 },
+      { "codigo_uf": 41, "nome": "Paraná", "valor": 4.6 },
+      { "codigo_uf": 42, "nome": "Santa Catarina", "valor": 4.9 },
+      { "codigo_uf": 43, "nome": "Rio Grande do Sul", "valor": 4.7 },
+      { "codigo_uf": 50, "nome": "Mato Grosso do Sul", "valor": 3.4 },
+      { "codigo_uf": 51, "nome": "Mato Grosso", "valor": 3.0 },
+      { "codigo_uf": 52, "nome": "Goiás", "valor": 3.9 },
+      { "codigo_uf": 53, "nome": "Distrito Federal", "valor": 4.3 }
+    ],
+    "municipios": {
+      "pb": [
+        { "codigo_mun": 2507507, "nome": "João Pessoa", "valor": 4.8 },
+        { "codigo_mun": 2504009, "nome": "Campina Grande", "valor": 4.5 },
+        { "codigo_mun": 2500106, "nome": "Água Branca", "valor": 1.75 },
+        { "codigo_mun": 2513703, "nome": "Santa Rita", "valor": 3.1 }
+      ]
+    }
+  },
+  "2021": {
+    "estados": [
+      { "codigo_uf": 11, "nome": "Rondônia", "valor": 2.0 },
+      { "codigo_uf": 12, "nome": "Acre", "valor": 2.4 },
+      { "codigo_uf": 13, "nome": "Amazonas", "valor": 2.9 },
+      { "codigo_uf": 14, "nome": "Roraima", "valor": 3.1 },
+      { "codigo_uf": 15, "nome": "Pará", "valor": 4.4 },
+      { "codigo_uf": 16, "nome": "Amapá", "valor": 4.0 },
+      { "codigo_uf": 17, "nome": "Tocantins", "valor": 3.7 },
+      { "codigo_uf": 21, "nome": "Maranhão", "valor": 2.3 },
+      { "codigo_uf": 22, "nome": "Piauí", "valor": 2.8 },
+      { "codigo_uf": 23, "nome": "Ceará", "valor": 3.2 },
+      { "codigo_uf": 24, "nome": "Rio Grande do Norte", "valor": 3.5 },
+      { "codigo_uf": 25, "nome": "Paraíba", "valor": 3.4 },
+      { "codigo_uf": 26, "nome": "Pernambuco", "valor": 4.0 },
+      { "codigo_uf": 27, "nome": "Alagoas", "valor": 2.7 },
+      { "codigo_uf": 28, "nome": "Sergipe", "valor": 3.0 },
+      { "codigo_uf": 29, "nome": "Bahia", "valor": 3.6 },
+      { "codigo_uf": 31, "nome": "Minas Gerais", "valor": 4.1 },
+      { "codigo_uf": 32, "nome": "Espírito Santo", "valor": 3.9 },
+      { "codigo_uf": 33, "nome": "Rio de Janeiro", "valor": 4.3 },
+      { "codigo_uf": 35, "nome": "São Paulo", "valor": 4.7 },
+      { "codigo_uf": 41, "nome": "Paraná", "valor": 4.5 },
+      { "codigo_uf": 42, "nome": "Santa Catarina", "valor": 4.8 },
+      { "codigo_uf": 43, "nome": "Rio Grande do Sul", "valor": 4.6 },
+      { "codigo_uf": 50, "nome": "Mato Grosso do Sul", "valor": 3.3 },
+      { "codigo_uf": 51, "nome": "Mato Grosso", "valor": 2.9 },
+      { "codigo_uf": 52, "nome": "Goiás", "valor": 3.8 },
+      { "codigo_uf": 53, "nome": "Distrito Federal", "valor": 4.2 }
+    ],
+    "municipios": {
+      "pb": [
+        { "codigo_mun": 2507507, "nome": "João Pessoa", "valor": 4.6 },
+        { "codigo_mun": 2504009, "nome": "Campina Grande", "valor": 4.3 },
+        { "codigo_mun": 2500106, "nome": "Água Branca", "valor": 1.5 },
+        { "codigo_mun": 2513703, "nome": "Santa Rita", "valor": 2.9 }
+      ]
+    }
+  }
+}

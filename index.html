@@ -34,6 +34,7 @@
                 Disponibilizando informações para auxiliar na tomada de decisão de políticas que promovam a igualdade étnico-racial no Brasil.
             </p>
         </div>
+        </div>
     </section>
 
     <!-- Stats and Pillars Section -->
@@ -41,41 +42,34 @@
         <div class="container mx-auto px-6">
             <!-- Pillars -->
             <div id="pillars-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            </div>
-             <!-- Stats -->
-            <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
-            </div>            
+            </div>      
         </div>
     </section>
 
     <!-- Panels Section -->
-    <main id="paineis" class="py-20 bg-fundo-claro">
+    <main id="paineis" class="py-2 bg-fundo-claro">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal">Conheça os Painéis</h2>
-                <p class="text-texto-secundario mt-2 max-w-3xl mx-auto">
-                    A Plataforma ODS Racial disponibiliza indicadores sociais, econômicos e institucionais relacionados aos Objetivos de Desenvolvimento Sustentável.
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal"><i class="fas fa-chart-bar text-primaria"></i> Síntese do ODS Racial no Brasil</h2>
             </div>
-            
-            <!-- Barra de Busca -->
-            <div class="mb-12 max-w-xl mx-auto">
-                <label for="search-input" class="sr-only">Filtrar painéis</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-texto-sutil"></i>
-                    </div>
-                    <input type="text" id="search-input" placeholder="Filtrar por título, fonte ou seção..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm" aria-label="Filtrar painéis">
+        <!-- Stats -->
+         <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
+            </div> 
+        <section id="sintese-grafica" class="py-16 bg-transparent">
+        <div class="container mx-auto px-6">
+            <div id="titulo-sintese" class="text-center mb-12">
                 </div>
-            </div>
+            
+            <div id="grafico-radial-container" class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-16">
+                </div>
 
-            <!-- Dynamic Content Sections -->
-            <div id="paineis-container" class="space-y-16">
-                <p id="loading-message" class="text-center text-texto-sutil">Carregando painéis...</p>
-                <p id="no-results-message" class="text-center text-texto-sutil hidden">Nenhum painel encontrado.</p>
-            </div>
+            <div id="grafico-serie-container">
+                </div>
         </div>
+    </section>
     </main>
+
+    
 
     <!-- Seção Sobre -->
     <section id="sobre" class="py-20 bg-white">
@@ -112,8 +106,11 @@
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    
+    <!-- Bibliotecas -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Funções JS -->
     <script type="module" src="/assets/js/app.js"></script>
 
 </body>

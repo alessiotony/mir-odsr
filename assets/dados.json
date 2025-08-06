@@ -7,38 +7,33 @@
     ],
     "navActions": [
       { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
-      { "href": "/contato", "label": "Contato", "icon": "fas fa-envelope", "extraClass": "ml-4" }
+      { "id": "mapa", "href": "/mapa", "label": "Mapa Exploratório", "icon": "fas fa-map-location-dot", "extraClass": "ml-2"},
+      { "href": "/contato", "label": "Contato", "icon": "fas fa-envelope", "extraClass": "ml-2" }
     ]
   },
   "estatisticas": [
     {"icon": "fas fa-users-viewfinder", "value": "83 indicadores", "label": "por Grupos Raciais e Localidades"},
     {"icon": "fas fa-seedling", "value": "11 objetivos", "label": "de Desenvolvimento Sustentável"},
-    {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"}
+    {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"},
+    {"icon": "fas fa-bullseye", "value": "7 metas", "label": "do ODS 18 com indicadores monitorados"},
+    {"icon": "fas fa-database", "value": "+20 fontes de dados", "label": "usados para o desenvolvimento dos indicadores"},
+    {"icon": "fas fa-users", "value": "5 grupos raciais", "label": "pretos, pardos, indígenas, brancos e amarelos "}
   ],
   "pilares": [
-    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "text": "Seu ponto de partida com os principais insights e métricas da plataforma", "cards": 
-    [
-      { "title": "Monitoramento PDI 2024-2028", "source": "PROPLAN", "url": "/monitoramento-pdi", "cardIcon": "fas fa-chart-pie" }
-    ]},
-    { "id": "indicadores", "label": "Indicadores por Grupo", "icon": "fas fa-users-viewfinder", "text": "Explore os dados segmentados por diferentes grupos raciais e localidades", 
-    "cards": [
-      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
-    ]},
-    { "id": "comparativo", "label": "Análise Comparativa", "icon": "fas fa-scale-balanced", "text": "Compare indicadores lado a lado para analisar disparidades e tendências", 
-    "cards": [
-      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
-    ]},
-    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável", "cards": [
-      { "title": "Acompanhamento de Egressos", "source": "LEMA", "url": "/acompanhamento-egressos", "cardIcon": "fas fa-briefcase" },
-      { "title": "Avaliação pelo Discente", "source": "STI", "url": "/avaliacao-discente", "cardIcon": "fas fa-user-check" }
-    ]},
-    { "id": "observatorio", "label": "Documentação e Tutorial", "icon": "fas fa-book-open-reader", "text": "Encontre notas técnicas, guias de uso e vídeos tutoriais sobre a plataforma", "cards": [
-      { "title": "Painel de Gestão de Pessoas", "source": "PROGEP", "url": "https://tinyurl.com/2rtwrusx", "cardIcon": "fas fa-users-cog" }
-    ]},
-    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "text": "Baixe dados e indicadores por grupos raciais", "cards": [
-      { "title": "Dados Abertos UFPB", "source": "STI", "url": "https://dados.gov.br/", "cardIcon": "fas fa-download" }
-    ]},
-    { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }
+    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/contato",
+    "text": "Seu ponto de partida com os principais insights e métricas da plataforma", "cards": []},
+    { "id": "indicadores", "label": "Indicadores por Grupo", "icon": "fas fa-users-viewfinder", "href": "/contato",
+    "text": "Explore os dados segmentados por diferentes grupos raciais e localidades", "cards": []},
+    { "id": "comparativo", "label": "Análise Comparativa", "icon": "fas fa-scale-balanced", "href": "/contato",
+    "text": "Compare indicadores lado a lado para analisar disparidades e tendências", "cards": []},
+    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "/contato",
+    "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável", "cards": []},
+    { "id": "observatorio", "label": "Documentação e Tutorial", "icon": "fas fa-book-open-reader", "href": "/contato",
+    "text": "Encontre notas técnicas, guias de uso e vídeos tutoriais sobre a plataforma", "cards": []},
+    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "/contato",
+    "text": "Baixe dados e indicadores por grupos raciais", "cards": []},
+    { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "href": "#sobre",
+    "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }
   ],
   "faq": [
     {"question": "O que é o ODS Racial?", "answer": "O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> é a plataforma central de Business Intelligence (BI) e Analytics da UFPB..."},

@@ -1,6 +1,6 @@
 // /assets/js/renderizadores/renderHeader.js (VERSÃO CORRIGIDA)
 
-export function renderizarHeader(headerData) {
+export function renderizarHeader(headerData, isHomepage = false) {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) return;
 
@@ -15,7 +15,7 @@ export function renderizarHeader(headerData) {
 
     // 2. Gera HTML para os links de navegação (pilares)
     const sectionLinksHtml = pilares.map(link => `
-        <a href="#${link.id}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
+        <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
             <i class="${link.icon} fa-xl pl-2 text-texto-contraste hover:text-primaria transition-colors"></i>
         </a>
     `).join('');
@@ -43,9 +43,20 @@ export function renderizarHeader(headerData) {
     `).join('');
     const mobileNavLinks = mobileActionLinks + '<hr class="my-2 border-gray-600">' + mobileSectionLinks;
     
+    // Definição das classes do header
+    let headerClass = "fixed top-0 left-0 right-0 shadow-md z-50";
+
+    // Se for a homepage, adiciona bg-transparent. Caso contrário, bg-fundo-escuro.
+    // A classe 'header-scrolled' será adicionada pelo JavaScript em `app.js`
+    if (isHomepage) {
+        headerClass += " bg-transparent";
+    } else {
+        headerClass += " bg-fundo-escuro";
+    }
+    
     // 5. Monta o HTML final do Header
     const headerHtml = `
-        <header class="fixed top-0 left-0 right-0 bg-transparent shadow-md z-50">
+        <header class="${headerClass}">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="flex justify-between items-center py-2">
                     <div class="flex items-center space-x-4 flex-shrink-0">${logosHtml}</div>

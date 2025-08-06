@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "CD_MUN": "2500106", "NM_MUN": "Água Branca" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -37.63, -7.48 ], [ -37.68, -7.52 ], [ -37.65, -7.58 ], [ -37.59, -7.55 ], [ -37.63, -7.48 ] ] ] } },
+{ "type": "Feature", "properties": { "CD_MUN": "2500205", "NM_MUN": "Aguiar" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -38.27, -7.03 ], [ -38.32, -7.08 ], [ -38.29, -7.14 ], [ -38.23, -7.11 ], [ -38.27, -7.03 ] ] ] } },
+{ "type": "Feature", "properties": { "CD_MUN": "2504009", "NM_MUN": "Campina Grande" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -35.88, -7.22 ], [ -35.95, -7.25 ], [ -35.92, -7.30 ], [ -35.85, -7.28 ], [ -35.88, -7.22 ] ] ] } },
+{ "type": "Feature", "properties": { "CD_MUN": "2507507", "NM_MUN": "João Pessoa" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -34.80, -7.10 ], [ -34.88, -7.15 ], [ -34.85, -7.20 ], [ -34.78, -7.18 ], [ -34.80, -7.10 ] ] ] } }
+]
+}

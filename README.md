@@ -3,7 +3,7 @@ Portal ODS Racial PB
 
 ```bash
 # 2. Construa a nova imagem Docker com o código atualizado
-docker build -t odsr-app .
+docker build --no-cache -t odsr-app .
 # 3. Pare o container antigo que está em execução
 docker stop odsr
 docker rm odsr

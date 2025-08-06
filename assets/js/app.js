@@ -1,24 +1,32 @@
-// /assets/js/app.js - PONTO DE ENTRADA PRINCIPAL
+// /assets/js/app.js - PONTO DE ENTRADA PRINCIPAL (VERSÃO CORRIGIDA)
 
 import { iniciarAplicacao } from './core/inicializacao.js';
 import { setupMobileMenuAndNav } from './core/navegacao.js';
+// ALTERADO: Importa a CLASSE MapController em vez da função initMap
+import { MapController } from './map.js';
 
 // --- FUNÇÕES DE EFEITOS VISUAIS ---
 
 function setupHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
-    
+
+    const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+
     const handleScroll = () => {
-        header.classList.toggle('header-scrolled', window.scrollY > 50);
+        if (isHomepage) {
+            header.classList.toggle('bg-fundo-escuro', window.scrollY > 50);
+            header.classList.toggle('bg-transparent', window.scrollY <= 50);
+        }
     };
+    
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 }
 
 function setupParticles() {
     const particleContainer = document.getElementById('particles-hero');
-    if (particleContainer) {
+    if (particleContainer && window.tsParticles) { // Verifica se tsParticles está disponível
         tsParticles.load("particles-hero", {
             fullScreen: {enable: false},
             background: { color: { value: "transparent" } },
@@ -67,24 +75,36 @@ function setupParticles() {
     }
 }
 
-
 // --- INICIALIZAÇÃO DA APLICAÇÃO ---
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM carregado. Iniciando aplicação...");
 
-    // Scripts visuais independentes podem iniciar
     setupParticles();
 
-    // Inicia o carregamento de dados e renderização de conteúdo
     iniciarAplicacao().then(success => {
         if (success) {
             console.log("Conteúdo renderizado. Configurando listeners...");
-            // Listeners que dependem do DOM renderizado (header, menu)
             setupMobileMenuAndNav();
             setupHeaderScroll();
+
+            // ALTERADO: Lógica de inicialização do mapa usando a nova classe
+            if (document.getElementById('map-container')) {
+                console.log("Container do mapa encontrado. Tentando inicializar MapController...");
+                try {
+                    const mapApp = new MapController('map-container');
+                    mapApp.init();
+                    console.log("Controlador do mapa inicializado com sucesso.");
+                } catch (error) {
+                    // Este bloco agora só será acionado por erros DENTRO da classe MapController
+                    console.error("Erro durante a inicialização da classe MapController:", error);
+                    alert("Ocorreu um erro crítico ao tentar renderizar o mapa.");
+                }
+            }
         } else {
-            console.error("Aplicação não iniciada devido a erros.");
+            console.error("A função iniciarAplicacao() falhou e retornou false.");
         }
+    }).catch(error => {
+        // Captura erros que possam ocorrer dentro da própria função iniciarAplicacao
+        console.error("Erro crítico na promessa de iniciarAplicacao():", error);
     });
 });
