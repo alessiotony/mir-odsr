@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  odsr-app:
+    build: .
+    image: odsr-app
+  proxy:
+    image: nginx:alpine
+    volumes:
+      # Mapeia nosso arquivo de configuração do proxy para dentro do container
+      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      # Expõe a porta 80 do proxy para a porta 8080 do seu computador
+      - "8095:80" 
+    depends_on:
+      - odsr-app
