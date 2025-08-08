@@ -1,4 +1,4 @@
-// assets/js/utils/setupSearch.js
+// js/utils/setupSearch.js
 
 export function setupSearch(data) {
     const searchInput = document.getElementById('search-input');

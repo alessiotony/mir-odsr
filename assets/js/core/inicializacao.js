@@ -1,4 +1,4 @@
-// assets/js/core/inicializacao.js
+// js/core/inicializacao.js
 
 // REMOVIDO: import { initMap } from '../map.js';
 import { loadComponent } from '../utils/loadComponent.js';

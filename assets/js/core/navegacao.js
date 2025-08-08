@@ -1,4 +1,4 @@
-// assets/js/core/navegacao.js
+// js/core/navegacao.js
 
 export function setupMobileMenuAndNav() {
     const menuButton = document.getElementById('menu-button');

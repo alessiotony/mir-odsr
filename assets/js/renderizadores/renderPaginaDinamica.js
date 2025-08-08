@@ -1,4 +1,4 @@
-// assets/js/renderizadores/renderPaginaDinamica.js
+// js/renderizadores/renderPaginaDinamica.js
 
 import { criarCard } from '../utils/criarCard.js';
 

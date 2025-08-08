@@ -1,4 +1,4 @@
-// assets/js/renderizadores/renderComponentes.js (VERSÃO CORRIGIDA)
+// js/renderizadores/renderComponentes.js (VERSÃO CORRIGIDA)
 
 import { criarCard } from '../utils/criarCard.js';
 import { criarPillar } from '../utils/criarPillar.js';

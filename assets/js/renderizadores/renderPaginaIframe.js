@@ -1,4 +1,4 @@
-// assets/js/renderizadores/renderPaginaIframe.js
+// js/renderizadores/renderPaginaIframe.js
 
 export function renderizarPaginaIframe(slug, iframesData) {
     const mainContent = document.querySelector('body'); // Renderiza no corpo todo

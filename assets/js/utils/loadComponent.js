@@ -1,4 +1,4 @@
-// assets/js/utils/loadComponent.js
+// js/utils/loadComponent.js
 
 /**
  * Carrega um componente HTML estático (como o footer) e o injeta na página.

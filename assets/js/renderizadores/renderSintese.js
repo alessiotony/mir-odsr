@@ -1,4 +1,4 @@
-// assets/js/renderizadores/renderSintese.js
+// js/renderizadores/renderSintese.js
 
 /**
  * Renderiza a seção de síntese com múltiplos gráficos.

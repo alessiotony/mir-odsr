@@ -1,4 +1,4 @@
-// assets/js/map.js (VERSÃO FINAL CORRIGIDA)
+// js/map.js (VERSÃO FINAL CORRIGIDA)
 
 export class MapController {
     constructor(containerId) {
@@ -212,7 +212,7 @@ export class MapController {
     }
 
     async getGeoJson() {
-        const path = this.state.uf === 'br' ? 'assets/maps/brazil-states.json' : `assets/maps/${this.state.uf}-municipalities.json`;
+        const path = this.state.uf === 'br' ? 'maps/brazil-states.json' : `maps/${this.state.uf}-municipalities.json`;
         if (!this.geoJsonCache[path]) {
             const response = await fetch(path);
             if (!response.ok) throw new Error(`Falha ao carregar geometria de ${path}`);
