@@ -38,7 +38,7 @@ async function carregarSintese() {
  */
 export async function iniciarAplicacao() {
     try {
-        const response = await fetch('dados.json');
+        const response = await fetch('assets/data/dados.json');
         if (!response.ok) throw new Error('Falha ao carregar dados.json');
         const data = await response.json();
 
