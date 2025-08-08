@@ -18,7 +18,7 @@ async function carregarSintese() {
     try {
         
         // ALTERAÇÃO: Mudar o endpoint de carregamento para a API
-        const response = await fetch('assets/dados_sintese.json');
+        const response = await fetch('dados_sintese.json');
         // const response = await fetch('http://0.0.0.0:8000/sintese/dados');
 
         if (!response.ok) throw new Error('Falha ao carregar dados de síntese');
@@ -38,7 +38,7 @@ async function carregarSintese() {
  */
 export async function iniciarAplicacao() {
     try {
-        const response = await fetch('assets/dados.json');
+        const response = await fetch('dados.json');
         if (!response.ok) throw new Error('Falha ao carregar dados.json');
         const data = await response.json();
 

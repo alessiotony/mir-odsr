@@ -201,7 +201,7 @@ export class MapController {
     // ... (O restante das funções: getIndicatorData, getGeoJson, getColor, etc. permanecem iguais) ...
     async getIndicatorData() {
         if (!this.allIndicatorData) {
-            const response = await fetch('assets/mapa_dados.json');
+            const response = await fetch('mapa_dados.json');
             if (!response.ok) throw new Error('Falha ao carregar mapa_dados.json');
             this.allIndicatorData = await response.json();
         }
