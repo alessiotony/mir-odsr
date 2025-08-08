@@ -16,12 +16,17 @@ async function carregarSintese() {
         return;
     }
     try {
-        const response = await fetch('/assets/dados_sintese.json');
-        if (!response.ok) throw new Error('Falha ao carregar dados_sintese.json');
+        
+        // ALTERAÇÃO: Mudar o endpoint de carregamento para a API
+        // const response = await fetch('/assets/dados_sintese.json');
+        const response = await fetch('http://0.0.0.0:8000/sintese/dados');
+
+        if (!response.ok) throw new Error('Falha ao carregar dados de síntese');
+        
         const data = await response.json();
         
-        if (data.sintese) {
-            renderizarSintese(data.sintese);
+        if (data) {
+            renderizarSintese(data);
         }
     } catch (error) {
         console.error("Erro ao carregar dados de síntese:", error);
@@ -52,6 +57,12 @@ export async function iniciarAplicacao() {
 
         if (isHomepage) {
             renderizarHomepage(data); 
+        } else if (path.endsWith('/contato')) {
+            // NOVA CONDIÇÃO: Se for a página de contato, não faça nada.
+            // O conteúdo já foi carregado pelo Nginx.
+            // Apenas renderizamos o FAQ que existe nessa página.
+            const { renderFaq } = await import('../renderizadores/renderComponentes.js');
+            renderFaq(data.faq);
         } else if (iframePage) {
             renderizarPaginaIframe(slug, data.iframes);
         } else if (dynamicPageData) {

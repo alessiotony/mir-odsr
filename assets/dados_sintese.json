@@ -1,39 +1,37 @@
 {
-  "sintese": {
-    "titulo": "Nível de Progresso Médio dos Indicadores por Grupo Étnico-Racial",
-    "indicadorRadial": [
-      {"label": "Amarelos", "valor": 59.2, "cor": "#e7dd4c"},
-      {"label": "Brancos", "valor": 53.1, "cor": "#1d4ed8"},
-      {"label": "Indígenas", "valor": 39.2, "cor": "#15803d"},
-      {"label": "Pardos", "valor": 51.2, "cor": "#b91c1c"},
-      {"label": "Pretos", "valor": 48.3, "cor": "#4A2712"}      
-    ],
-    "serieTemporal": {
-      "titulo": "Evolução do Nível de Progresso por Grupo",
-      "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
-      "series": [
-        {
-          "name": "Pretos",
-          "data": [40.0, 41.0, 46.0, 43.0, 45.0, 48.0, 50.0, 48.0, 53.1]
-        },
-        {
-          "name": "Brancos",
-          "data": [51.9, 52.9, 53.9, 56.9, 59.9, 60.9, 67.9, 69.9, 72.0]
-        },
-        
-        {
-          "name": "Indígenas",
-          "data": [30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 39.2]
-        },
-        {
-          "name": "Pardos",
-          "data": [50.0, 50.0, 50.0, 50.0, 30.0, 40.0, 45.0, 53.0, 60.0]
-        },
-        {
-          "name": "Amarelos",
-          "data": [50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 60.0, 60.5, 65.9]
-        }
-      ]
-    }
+  "titulo": "Nível de Progresso Médio dos Indicadores por Grupo Étnico-Racial",
+  "indicadorRadial": [
+    {"label": "Amarelos", "valor": 59.2, "cor": "#e7dd4c"},
+    {"label": "Brancos", "valor": 53.1, "cor": "#1d4ed8"},
+    {"label": "Indígenas", "valor": 39.2, "cor": "#15803d"},
+    {"label": "Pardos", "valor": 51.2, "cor": "#b91c1c"},
+    {"label": "Pretos", "valor": 48.3, "cor": "#4A2712"}      
+  ],
+  "serieTemporal": {
+    "titulo": "Evolução do Nível de Progresso por Grupo",
+    "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    "series": [
+      {
+        "name": "Pretos",
+        "data": [40.0, 41.0, 46.0, 43.0, 45.0, 48.0, 50.0, 48.0, 53.1]
+      },
+      {
+        "name": "Brancos",
+        "data": [51.9, 52.9, 53.9, 56.9, 59.9, 60.9, 67.9, 69.9, 72.0]
+      },
+      
+      {
+        "name": "Indígenas",
+        "data": [30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 39.2]
+      },
+      {
+        "name": "Pardos",
+        "data": [50.0, 50.0, 50.0, 50.0, 30.0, 40.0, 45.0, 53.0, 60.0]
+      },
+      {
+        "name": "Amarelos",
+        "data": [50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 60.0, 60.5, 65.9]
+      }
+    ]
   }
 }

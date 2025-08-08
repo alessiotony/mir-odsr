@@ -1,5 +1,3 @@
-// /assets/js/renderizadores/renderHeader.js (VERSÃO CORRIGIDA)
-
 export function renderizarHeader(headerData, isHomepage = false) {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) return;
