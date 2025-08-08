@@ -20,6 +20,6 @@ docker stop odsr || true
 docker rm odsr || true
 
 echo ">>> Iniciando novo container..."
-docker run -d -p 8081:80 --name odsr --restart always odsr-app
+docker run -d -p 8091:80 --name odsr --restart always odsr-app
 
 echo ">>> Deploy concluído com sucesso!"

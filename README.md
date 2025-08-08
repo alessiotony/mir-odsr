@@ -41,9 +41,13 @@ O Fluxo de Atualização Correto é:
 
 ```bash
 sudo git clone https://github.com/alessiotony/mir-odsr.git odsr
+sudo chown -R codeinfo:codeinfo /var/www/html/odsr 
+sudo chmod -R 755 /var/www/html/odsr
+
 # 1. Baixe as últimas atualizações do código
 cd /var/www/html/odsr
 git pull
+
 # 2. Construa a nova imagem Docker com o código atualizado
 sudo docker build -t odsr-app .
 # 3. Pare o container antigo que está em execução
@@ -52,6 +56,7 @@ sudo docker rm odsr
 # 4. Crie e inicie um NOVO container a partir da NOVA imagem
 sudo docker run -d -p 8091:80 --name odsr --restart always odsr-app
 
+Acesse no browser para checar: http://150.165.130.85/odsr/
 
 ```
 
