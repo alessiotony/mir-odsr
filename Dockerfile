@@ -5,4 +5,5 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 3. Copie todos os arquivos do seu site para a pasta pública do Nginx
+#    A instrução de cópia deve estar em uma única linha.
 COPY . /usr/share/nginx/html
