@@ -42,14 +42,14 @@ header {
 }
 .hero-section {
     background: linear-gradient(rgba(10, 34, 64, 0.6), rgba(10, 34, 64, 0.7)),
-    url('/assets/background.jpeg') no-repeat center center;
+    url('assets/background.jpeg') no-repeat center center;
     background-size: cover;
     /* Adicione um padding-top aqui para o conteúdo não ficar colado no topo */
     padding-top: 8rem; /* Ajuste conforme necessário */
 }
 .hero-section-library {
     background: linear-gradient(rgba(10, 34, 64, 0.6), rgba(10, 34, 64, 0.7)),
-    url('/assets/biblioteca.jpg') no-repeat center center;
+    url('assets/biblioteca.jpg') no-repeat center center;
     background-size: cover;
 }
 .card {

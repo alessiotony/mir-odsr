@@ -1,4 +1,4 @@
-// /assets/js/map.js (VERSÃO FINAL CORRIGIDA)
+// assets/js/map.js (VERSÃO FINAL CORRIGIDA)
 
 export class MapController {
     constructor(containerId) {
@@ -201,7 +201,7 @@ export class MapController {
     // ... (O restante das funções: getIndicatorData, getGeoJson, getColor, etc. permanecem iguais) ...
     async getIndicatorData() {
         if (!this.allIndicatorData) {
-            const response = await fetch('/assets/mapa_dados.json');
+            const response = await fetch('assets/mapa_dados.json');
             if (!response.ok) throw new Error('Falha ao carregar mapa_dados.json');
             this.allIndicatorData = await response.json();
         }
@@ -212,7 +212,7 @@ export class MapController {
     }
 
     async getGeoJson() {
-        const path = this.state.uf === 'br' ? '/assets/maps/brazil-states.json' : `/assets/maps/${this.state.uf}-municipalities.json`;
+        const path = this.state.uf === 'br' ? 'assets/maps/brazil-states.json' : `assets/maps/${this.state.uf}-municipalities.json`;
         if (!this.geoJsonCache[path]) {
             const response = await fetch(path);
             if (!response.ok) throw new Error(`Falha ao carregar geometria de ${path}`);

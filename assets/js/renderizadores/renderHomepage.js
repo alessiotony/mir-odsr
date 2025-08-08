@@ -1,4 +1,4 @@
-// /assets/js/renderizadores/renderHomepage.js
+// assets/js/renderizadores/renderHomepage.js
 
 import { renderizarEstatisticas, renderizarPaineis, renderizarPilares } from './renderComponentes.js';
 

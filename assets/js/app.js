@@ -1,4 +1,4 @@
-// /assets/js/app.js - PONTO DE ENTRADA PRINCIPAL (VERSÃO CORRIGIDA)
+// assets/js/app.js - PONTO DE ENTRADA PRINCIPAL (VERSÃO CORRIGIDA)
 
 import { iniciarAplicacao } from './core/inicializacao.js';
 import { setupMobileMenuAndNav } from './core/navegacao.js';
