@@ -40,8 +40,6 @@ Este guia descreve o processo completo para configurar um servidor Linux Ubuntu 
 O Fluxo de Atualização Correto é:
 
 ```bash
-ssh usuario@IP_DO_SERVIDOR
-
 sudo git clone https://github.com/alessiotony/mir-odsr.git odsr
 sudo chown -R codeinfo:codeinfo /var/www/html/odsr 
 sudo chmod -R 755 /var/www/html/odsr
@@ -51,39 +49,170 @@ cd /var/www/html/odsr
 git pull
 
 # 2. Construa a nova imagem Docker com o código atualizado
-sudo docker build --no-cache -t odsr-app .
+sudo docker build -t odsr-app .
 # 3. Pare o container antigo que está em execução
 sudo docker stop odsr
 sudo docker rm odsr
 # 4. Crie e inicie um NOVO container a partir da NOVA imagem
 sudo docker run -d -p 8091:80 --name odsr --restart always odsr-app
 
-# No seu servidor
-docker run --rm -it odsr-app sh
-# Dentro do container
-ls -la /usr/share/nginx/html
+Acesse no browser para checar: http://150.165.130.85/odsr/
 
-Abra outra sessão SSH no servidor e execute:
-```bash
-curl http://localhost:8091
 ```
-- Acesse no browser para checar: http://localhost:8091/
-- Acesse no browser para checar: http://150.165.130.85:8091/
+
+## 📁 1. Preparar o Servidor e Enviar o Projeto
+
+1.  **Conecte-se ao servidor via SSH:**
+    ```bash
+    ssh usuario@IP_DO_SERVIDOR
+    ```
+
+2.  **Crie o diretório do projeto e clone o repositório:**
+    ```bash
+    sudo mkdir -p /var/www/html/odsr
+    cd /var/www/html/odsr
+    sudo git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git) . # Substitua pelo URL real do seu repositório
+    ```
+    *O ponto `.` no final do `git clone` garante que o conteúdo seja clonado diretamente para o diretório atual `/var/www/html/odsr`.*
+
+3.  **Defina as permissões corretas para o diretório do projeto:**
+    ```bash
+    sudo chown -R codeinfo:codeinfo /var/www/html/odsr 
+    sudo chmod -R 755 /var/www/html/odsr
+    ```
+    *Isso garante que o usuário que gerencia os arquivos (`codeinfo`) e o servidor web (Apache, que roda como `codeinfo`) tenham as permissões necessárias para ler os arquivos.*
+
+---
+
+## 🐍 2. Configurar o Ambiente Python e Servir a Aplicação
+
+1.  **Instale o pacote para ambiente virtual:**
+    ```bash
+    sudo apt update
+    sudo apt install python3-venv
+    ```
+
+2.  **Crie e ative o ambiente virtual para o projeto `odsr`:**
+    ```bash
+    cd /var/www/html/odsr
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+    *Se o seu projeto Python tiver dependências (ex: `Flask`, `Django`, `FastAPI`), instale-as aqui:*
+    ```bash
+    pip install -r requirements.txt # Se você tiver um arquivo requirements.txt
+    ```
+
+3.  **Teste a execução manual do servidor HTTP em Python:**
+    ```bash
+    # Certifique-se de que o ambiente virtual está ativo
+    source venv/bin/activate
+    python3 -m http.server 8081 --bind 0.0.0.0
+    ```
+    *Este comando manterá a aplicação rodando no terminal. Use `Ctrl+C` para parar.*
+
+4.  **Verifique o acesso local ao serviço Python:**
+    Abra outra sessão SSH no servidor e execute:
+    ```bash
+    curl http://localhost:8081
+    ```
+    *Você deverá ver o conteúdo HTML do seu painel.*
+
+---
+
+## 🔥 3. Configurar Firewall Local (UFW)
+
+Para permitir acesso externo às portas necessárias (8081 para o Python, 80 e 443 para o Apache/Certbot).
+
+1.  **Verifique o status do UFW:**
+    ```bash
+    
+    ```
+
+2.  **Adicione as regras para as portas necessárias:**
+    *Se as portas 80, 443 e 8081 não estiverem listadas como `ALLOW IN`, adicione as regras:*
+    ```bash
+    sudo ufw allow 8081/tcp       # Para o serviço Python
+    sudo ufw allow 'Apache Full'  # Libera 80 (HTTP) e 443 (HTTPS) para o Apache
+    sudo ufw reload               # Recarregue as regras para aplicar
+    ```
+    *Evite usar regras `iptables` diretamente se você já usa `ufw`, pois podem gerar conflitos.*
+
+---
 
 
-## 🔄 NOVO: Docker + Nginx na provisão do Site
-Instale o Docker no seu servidor, se ainda não tiver.
+## 🔄 4. NOVO: Docker + Nginx na provisão do Site
+1. Instale o Docker no seu servidor, se ainda não tiver.
+2. Copie todo o seu projeto (incluindo os novos nginx.conf e Dockerfile) para o diretório /var/www/html/odsr.
+3. Pare e desabilite seu antigo serviço Systemd, pois o Docker irá substituí-lo.
 
+
+---
 ```bash
+# Parar serviço antigo (python http.server)
+sudo systemctl stop odsr-static
+sudo systemctl disable odsr-static
+
 cd /var/www/html/odsr
 sudo docker build -t odsr-app .
 
 # Inicie o container
-sudo docker run -d -p 8091:80 --name odsr --restart always odsr-app
-```
+sudo docker run -d -p 8081:80 --name odsr --restart always odsr-app
 
-## 🌐 A Arquitetura: Apache como "Porteiro", Nginx como "Roteador"
-### 🔒 Configurar Apache como Proxy Reverso (HTTP e HTTPS)
+docker stop odsr-dev-container
+docker build -t odsr-dev .
+docker run -d -p 8082:80 --rm -v "$(pwd):/usr/share/nginx/html:ro" --name odsr-dev-container odsr-dev
+```
+## 🔄 4. OLD Tornar o Serviço Python Permanente com Systemd
+
+Para que sua aplicação Python rode em segundo plano e inicie automaticamente com o servidor.
+
+1.  **Crie o arquivo de serviço Systemd:**
+    ```bash
+    sudo nano /etc/systemd/system/odsr-static.service
+    ```
+
+2.  **Cole o seguinte conteúdo no arquivo `odsr-static.service`:**
+
+    ```ini
+    [Unit]
+    Description=Servidor HTTP estático ODS Racial UFPB
+    After=network.target
+
+    [Service]
+    WorkingDirectory=/var/www/html/odsr
+    ExecStart=/var/www/html/odsr/venv/bin/python3 -m http.server 8081 --bind 0.0.0.0
+    Restart=always
+    User=codeinfo # Substitua 'codeinfo' pelo usuário do sistema que roda o serviço
+    Group=codeinfo # Substitua 'codeinfo' pelo grupo correspondente
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    * **Observação:** `ExecStart` aponta para o interpretador Python dentro do seu ambiente virtual (`/var/www/html/odsr/venv/bin/python3`). Isso garante que ele use as dependências corretas.*
+
+3.  **Ative e inicie o serviço:**
+    ```bash
+    sudo systemctl daemon-reload # Recarrega as configurações do systemd
+    sudo systemctl enable odsr-static # Habilita o serviço para iniciar com o boot
+    sudo systemctl start odsr-static # Inicia o serviço agora
+    ```
+
+4.  **Verifique o status do serviço Python:**
+    ```bash
+    sudo systemctl status odsr-static
+    ```
+    *O status deve ser `active (running)`.*
+
+---
+
+Acesse no browser para checar: http://150.165.130.85/odsr/
+
+---
+
+
+## 🌐 5. A Arquitetura: Apache como "Porteiro", Nginx como "Roteador"
+### 🔒 5.1. Configurar Apache como Proxy Reverso (HTTP e HTTPS)
 
 O Apache será o ponto de entrada principal para o domínio `odsr.ufpb.br`, encaminhando as requisições para sua aplicação Python.
 
@@ -104,65 +233,61 @@ O Apache será o ponto de entrada principal para o domínio `odsr.ufpb.br`, enca
 
 3.  **Crie o arquivo de configuração do VirtualHost para o seu domínio:**
     ```bash
-    sudo nano /etc/apache2/sites-available/sigov.ufpb.br.conf
+    sudo nano /etc/apache2/sites-available/odsr.ufpb.br.conf
     ```
     *É uma boa prática usar o nome do domínio no arquivo `.conf` para fácil identificação.*
 
 4.  **Cole o seguinte conteúdo no arquivo. **Mantenha as linhas SSL COMENTADAS neste momento** (o Certbot as preencherá depois):**
 
-```apache
-# Este bloco VirtualHost lida com requisições HTTP (porta 80)
+    ```apache
+    # Este bloco VirtualHost lida com requisições HTTP (porta 80)
 <VirtualHost *:80>
-    ServerName sigov.ufpb.br
-    ServerAlias www.sigov.ufpb.br
+    ServerName odsr.ufpb.br
+    ServerAlias www.odsr.ufpb.br
 
     # Ativa o módulo de reescrita de URLs
     RewriteEngine on
-    # Condições para o redirecionamento: se o ServerName for sigov.ufpb.br ou www.sigov.ufpb.br
-    RewriteCond %{SERVER_NAME} =sigov.ufpb.br [OR]
-    RewriteCond %{SERVER_NAME} =www.sigov.ufpb.br
+    # Condições para o redirecionamento: se o ServerName for odsr.ufpb.br ou www.odsr.ufpb.br
+    RewriteCond %{SERVER_NAME} =odsr.ufpb.br [OR]
+    RewriteCond %{SERVER_NAME} =www.odsr.ufpb.br
     # Regra de reescrita: redireciona para HTTPS com o mesmo host e URI
     RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 
-    ErrorLog ${APACHE_LOG_DIR}/sigov.ufpb.br-error.log
-    CustomLog ${APACHE_LOG_DIR}/sigov.ufpb.br-access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/odsr.ufpb.br-error.log
+    CustomLog ${APACHE_LOG_DIR}/odsr.ufpb.br-access.log combined
 </VirtualHost>
 
 # Este bloco VirtualHost é para requisições HTTPS (porta 443)
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
-    ServerName sigov.ufpb.br
-    ServerAlias www.sigov.ufpb.br
+    ServerName odsr.ufpb.br
+    ServerAlias www.odsr.ufpb.br
 
     # As diretivas SSL são INSERIDAS AQUI PELO CERTBOT.
     # Elas NÃO devem estar comentadas e NÃO devem ser duplicadas.
     # Se você já rodou o Certbot, ele já deve ter preenchido essas linhas corretamente.
     SSLEngine On
-    SSLCertificateFile /etc/letsencrypt/live/sigov.ufpb.br/fullchain.pem
-    SSLCertificateKeyFile /etc/letsencrypt/live/sigov.ufpb.br/privkey.pem
+    SSLCertificateFile /etc/letsencrypt/live/odsr.ufpb.br/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/odsr.ufpb.br/privkey.pem
     Include /etc/letsencrypt/options-ssl-apache.conf
 
     # Configurações gerais de proxy
     ProxyPreserveHost On
     ProxyRequests Off
 
-    # REGRAS MAIS ESPECÍFICAS PRIMEIRO
-    #ODSR
-    ProxyPass /odsr/ http://127.0.0.1:8091/
-    ProxyPassReverse /odsr/ http://127.0.0.1:8091/
-
-    # Encaminha https://sigov.ufpb.br/uen/ para o serviço Python na porta 8080
+    # REGRA MAIS ESPECÍFICA PRIMEIRO: Para o painel "UFPB em Números" (porta 8080)
+    # Encaminha https://odsr.ufpb.br/uen/ para o serviço Python na porta 8080
     ProxyPass /uen/ http://127.0.0.1:8080/
     ProxyPassReverse /uen/ http://127.0.0.1:8080/
 
     # REGRA MAIS GENÉRICA DEPOIS: Para a aplicação da raiz do domínio (porta 8081)
-    # Encaminha https://sigov.ufpb.br/ (e qualquer outra coisa não pega por /uen/)
+    # Encaminha https://odsr.ufpb.br/ (e qualquer outra coisa não pega por /uen/)
     # para o serviço Python na porta 8081
     ProxyPass / http://127.0.0.1:8081/
     ProxyPassReverse / http://127.0.0.1:8081/
 
-    ErrorLog ${APACHE_LOG_DIR}/sigov.ufpb.br-error.log
-    CustomLog ${APACHE_LOG_DIR}/sigov.ufpb.br-access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/odsr.ufpb.br-error.log
+    CustomLog ${APACHE_LOG_DIR}/odsr.ufpb.br-access.log combined
 
     # Garante que o Apache permita o proxy para todos os caminhos
     <Location />
@@ -171,13 +296,13 @@ O Apache será o ponto de entrada principal para o domínio `odsr.ufpb.br`, enca
 
 </VirtualHost>
 </IfModule>
-```
+    ```
 
 5.  **Salve o arquivo e ative a configuração do site:**
     ```bash
     systemctl reload apache2 # Recarrega as configurações do Apache
     sudo systemctl status apache2.service # Verifique se está ativo
-    sudo a2ensite sigov.ufpb.br.conf # Ativa seu novo VirtualHost
+    sudo a2ensite odsr.ufpb.br.conf # Ativa seu novo VirtualHost
     sudo a2dissite 000-default.conf # Desative o site padrão do Apache (se ainda estiver ativo e causar conflito)
     ```
 
