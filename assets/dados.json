@@ -1,10 +1,10 @@
 {
   "header": {
     "logos": [
-      { "href": "https://www.ufpb.br", "src": "img/logo-ufpb-w.png", "alt": "Logo UFPB" },
-      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "img/mir-w.png", "alt": "Logo MIR" },
-      { "href": "https://gov.br/", "src": "img/logo-gov-w.png", "alt": "Logo GovBR" },
-      { "href": "/", "src": "img/icon-odsr.png", "alt": "Logo ODS Racial" }
+      { "href": "https://www.ufpb.br", "src": "assets/img/logo-ufpb-w.png", "alt": "Logo UFPB" },
+      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "assets/img/mir-w.png", "alt": "Logo MIR" },
+      { "href": "https://gov.br/", "src": "assets/img/logo-gov-w.png", "alt": "Logo GovBR" },
+      { "href": "/", "src": "assets/img/icon-odsr.png", "alt": "Logo ODS Racial" }
     ],
     "navActions": [
       { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
