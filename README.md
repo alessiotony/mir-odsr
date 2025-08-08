@@ -40,6 +40,7 @@ Este guia descreve o processo completo para configurar um servidor Linux Ubuntu 
 O Fluxo de Atualização Correto é:
 
 ```bash
+sudo git clone https://github.com/alessiotony/mir-odsr.git odsr
 # 1. Baixe as últimas atualizações do código
 cd /var/www/html/odsr
 git pull
@@ -49,7 +50,7 @@ sudo docker build -t odsr-app .
 sudo docker stop odsr
 sudo docker rm odsr
 # 4. Crie e inicie um NOVO container a partir da NOVA imagem
-sudo docker run -d -p 8081:80 --name odsr --restart always odsr-app
+sudo docker run -d -p 8091:80 --name odsr --restart always odsr-app
 
 
 ```

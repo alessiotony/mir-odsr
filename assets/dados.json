@@ -1,8 +1,9 @@
 {
   "header": {
     "logos": [
-      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "/assets/mir-w.png", "alt": "Logo SECTIES" },
-      { "href": "https://gov.br/", "src": "/assets/logo-gov-w.png", "alt": "Logo Governo da Paraíba" },
+      { "href": "https://www.ufpb.br", "src": "/assets/logo-ufpb-w.png", "alt": "Logo UFPB" },
+      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "/assets/mir-w.png", "alt": "Logo MIR" },
+      { "href": "https://gov.br/", "src": "/assets/logo-gov-w.png", "alt": "Logo GovBR" },
       { "href": "/", "src": "/assets/icon-odsr.png", "alt": "Logo ODS Racial" }
     ],
     "navActions": [
@@ -39,7 +40,7 @@
     {"question": "O que é o ODS Racial?", "answer": "O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> é a plataforma central de Business Intelligence (BI) e Analytics da UFPB..."},
     {"question": "Quem desenvolveu o sistema?", "answer": "A Equipe de desenvolvimento do ODS Racial é liderada pelo docente..."},
     {"question": "De onde vêm os dados apresentados nos painéis?", "answer": "Os dados dos painéis, em geral, são extraídos dos sistemas institucionais da UFPB..."},
-    {"question": "Como posso solicitar correção de algum link ou informação incorreta?", "answer": "Pode ser enviado um e-mail direcionado à <strong> <a href='mailto:codeinfo@proplan.ufpb.br' ...>Coordenação de Informação (Codeinfo)</a></strong>..."}
+    {"question": "Como posso solicitar correção de algum link ou informação incorreta?", "answer": "Pode ser enviado um e-mail direcionado à <strong> <a href='mailto:contato@lema.ufpb.br' ...>Laboratório de Estudos em Modelagem Aplicada (LEMA)</a></strong>..."}
   ],
   "pages": [
     { "Avaliação pelo Discente": [{"slug": "avaliacao-discente", "text": "...", "icon":"fas fa-users", "cols": 5}, {"title": "Ensino Básico...", "source": "SEBTT", "url": "...", "cardIcon": "fas fa-user" } ]},
