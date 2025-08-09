@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
+    
+    <!-- <base> seja configurado automaticamente com base na URL onde a aplicação está rodando -->
+    <!-- dominio/base -->
+    <base id="dynamic-base" href="/">
+    <script>
+    (function() {
+        // Descobre o caminho base (primeiro segmento da URL, se houver)
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        let basePath = '/';
+        if (pathParts.length > 0) {
+        basePath = '/' + pathParts[0] + '/';
+        }
+        document.getElementById('dynamic-base').setAttribute('href', basePath);
+    })();
+    </script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ODS Racial - Inteligência de Dados por Grupos Raciais </title>
