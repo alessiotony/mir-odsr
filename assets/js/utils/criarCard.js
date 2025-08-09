@@ -6,6 +6,10 @@
 export function criarCard(cardData) {
     // Links externos abrem em nova aba, links internos não.
     const isExternal = cardData.url.startsWith('http');
+    if (!isExternal && cardData.url.startsWith('/')) {
+        cardData.url = '.' + cardData.url; // força respeitar <base>
+    }
+    
     const target = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
 
     return `

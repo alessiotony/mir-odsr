@@ -4,8 +4,12 @@
  * @returns {string} O HTML do pilar.
  */
 export function criarPillar(pillar) {
-    // Usa o ID do pilar para criar a âncora do link
-    const href = `${pillar.href}`;
+    let href = pillar.href;
+
+    // Só converte se for um caminho absoluto do site
+    if (href.startsWith('/') && !href.startsWith('//')) {
+        href = '.' + href; // força respeitar <base>
+    }
 
     return `
         <a href="${href}" class="block p-4 rounded-lg hover:bg-fundo-medio transition-colors duration-300">
