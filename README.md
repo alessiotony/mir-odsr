@@ -8,11 +8,11 @@ docker build --no-cache -t odsr-app .
 docker stop odsr
 docker rm odsr
 # 4. Crie e inicie um NOVO container a partir da NOVA imagem
-docker run -d -p 8085:80 --name odsr --restart always odsr-app
+docker run -d -p 8091:80 --name odsr --restart always odsr-app
 
 ```bash
 # Rodar a aplicação Python no terminal
-python3 -m http.server 8086 --bind 0.0.0.0
+python3 -m http.server 8090 --bind 0.0.0.0
 
 ```
 Este projeto consiste em um web interativo de página única que apresenta os principais módulos do ODS Racial.
