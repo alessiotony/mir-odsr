@@ -103,75 +103,52 @@ O Apache será o ponto de entrada principal para o domínio `odsr.ufpb.br`, enca
     ```
 
 3.  **Crie o arquivo de configuração do VirtualHost para o seu domínio:**
-    ```bash
-    sudo nano /etc/apache2/sites-available/sigov.ufpb.br.conf
-    ```
-    *É uma boa prática usar o nome do domínio no arquivo `.conf` para fácil identificação.*
-
-4.  **Cole o seguinte conteúdo no arquivo. **Mantenha as linhas SSL COMENTADAS neste momento** (o Certbot as preencherá depois):**
+```bash
+sudo nano /etc/apache2/sites-available/odsr.sigov.ufpb.br.conf
+```
+    
+1.  **Cole o seguinte conteúdo no arquivo. **Mantenha as linhas SSL COMENTADAS neste momento** (o Certbot as preencherá depois):**
 
 ```apache
-# Este bloco VirtualHost lida com requisições HTTP (porta 80)
+# Redireciona HTTP (porta 80) para HTTPS
 <VirtualHost *:80>
-    ServerName sigov.ufpb.br
-    ServerAlias www.sigov.ufpb.br
+    ServerName odsr.sigov.ufpb.br
+    ServerAlias www.odsr.sigov.ufpb.br
 
-    # Ativa o módulo de reescrita de URLs
-    RewriteEngine on
-    # Condições para o redirecionamento: se o ServerName for sigov.ufpb.br ou www.sigov.ufpb.br
-    RewriteCond %{SERVER_NAME} =sigov.ufpb.br [OR]
-    RewriteCond %{SERVER_NAME} =www.sigov.ufpb.br
-    # Regra de reescrita: redireciona para HTTPS com o mesmo host e URI
-    RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
-
-    ErrorLog ${APACHE_LOG_DIR}/sigov.ufpb.br-error.log
-    CustomLog ${APACHE_LOG_DIR}/sigov.ufpb.br-access.log combined
+    Redirect permanent / https://odsr.sigov.ufpb.br/
 </VirtualHost>
 
-# Este bloco VirtualHost é para requisições HTTPS (porta 443)
+# Configuração principal para HTTPS (porta 443)
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
-    ServerName sigov.ufpb.br
-    ServerAlias www.sigov.ufpb.br
-
-    # As diretivas SSL são INSERIDAS AQUI PELO CERTBOT.
-    # Elas NÃO devem estar comentadas e NÃO devem ser duplicadas.
-    # Se você já rodou o Certbot, ele já deve ter preenchido essas linhas corretamente.
-    SSLEngine On
-    SSLCertificateFile /etc/letsencrypt/live/sigov.ufpb.br/fullchain.pem
-    SSLCertificateKeyFile /etc/letsencrypt/live/sigov.ufpb.br/privkey.pem
-    Include /etc/letsencrypt/options-ssl-apache.conf
+    ServerName odsr.sigov.ufpb.br
+    ServerAlias www.odsr.sigov.ufpb.br
 
     # Configurações gerais de proxy
     ProxyPreserveHost On
     ProxyRequests Off
 
-    # REGRAS MAIS ESPECÍFICAS PRIMEIRO
-    #ODSR
-    ProxyPass /odsr/ http://127.0.0.1:8091/
-    ProxyPassReverse /odsr/ http://127.0.0.1:8091/
+    # Proxy para a aplicação ODSR na porta 8091
+    ProxyPass / http://127.0.0.1:8091/
+    ProxyPassReverse / http://127.0.0.1:8091/
 
-    # Encaminha https://sigov.ufpb.br/uen/ para o serviço Python na porta 8080
-    ProxyPass /uen/ http://127.0.0.1:8080/
-    ProxyPassReverse /uen/ http://127.0.0.1:8080/
+    # ---- CERTIFICADO SSL (Será preenchido pelo Certbot) ----
+    # Você ainda não tem os certificados, o Certbot vai criar isso.
+    # Deixe comentado por enquanto ou rode o Certbot antes de ativar o site.
+    # SSLEngine On
+    # SSLCertificateFile /etc/letsencrypt/live/odsr.sigov.ufpb.br/fullchain.pem
+    # SSLCertificateKeyFile /etc/letsencrypt/live/odsr.sigov.ufpb.br/privkey.pem
+    # Include /etc/letsencrypt/options-ssl-apache.conf
 
-    # REGRA MAIS GENÉRICA DEPOIS: Para a aplicação da raiz do domínio (porta 8081)
-    # Encaminha https://sigov.ufpb.br/ (e qualquer outra coisa não pega por /uen/)
-    # para o serviço Python na porta 8081
-    ProxyPass / http://127.0.0.1:8081/
-    ProxyPassReverse / http://127.0.0.1:8081/
-
-    ErrorLog ${APACHE_LOG_DIR}/sigov.ufpb.br-error.log
-    CustomLog ${APACHE_LOG_DIR}/sigov.ufpb.br-access.log combined
-
-    # Garante que o Apache permita o proxy para todos os caminhos
-    <Location />
-        Require all granted
-    </Location>
-
+    ErrorLog ${APACHE_LOG_DIR}/odsr.sigov.ufpb.br-error.log
+    CustomLog ${APACHE_LOG_DIR}/odsr.sigov.ufpb.br-access.log combined
 </VirtualHost>
 </IfModule>
 ```
+
+## Obter o Certificado SSL com Certbot
+`sudo certbot --apache -d odsr.sigov.ufpb.br`
+
 
 5.  **Salve o arquivo e ative a configuração do site:**
     ```bash
