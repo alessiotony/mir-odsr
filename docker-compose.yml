@@ -1,16 +1,15 @@
 version: '3.8'
 
 services:
+  # O serviço da sua aplicação agora expõe a porta diretamente.
   odsr-app:
     build: .
     image: odsr-app
-  proxy:
-    image: nginx:alpine
-    volumes:
-      # Mapeia nosso arquivo de configuração do proxy para dentro do container
-      - ./nginx-proxy.conf:/etc/nginx/conf.d/odsr-proxy.conf
+    restart: always
     ports:
-      # Expõe a porta 80 do proxy para a porta 8080 do seu computador
-      - "8091:80" 
-    depends_on:
-      - odsr-app
+      # Mapeia a porta 8091 do seu servidor (host) para a porta 80
+      # dentro do container da aplicação.
+      - "8091:80"
+
+# O serviço de proxy foi removido para simplificar a arquitetura
+# e resolver o erro de montagem de volume.
