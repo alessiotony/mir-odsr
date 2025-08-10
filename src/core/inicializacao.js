@@ -50,7 +50,7 @@ export async function iniciarAplicacao() {
         
         renderizarHeader({ logos: data.header.logos, pilares: data.pilares, 
             navActions: data.header.navActions }, isHomepage);
-        await loadComponent('components/footer.html', 'footer-placeholder');
+        await loadComponent('./components/footer.html', 'footer-placeholder');
 
         const slug = path.substring(1).replace('.html', '');
         const iframePage = data.iframes.find(p => p.slug === slug);

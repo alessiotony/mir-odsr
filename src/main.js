@@ -11,7 +11,9 @@ function setupHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
 
-    const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+    // CORREÇÃO: Define a base do Vite e faz a verificação correta
+    const basePath = '/odsr/';
+    const isHomepage = window.location.pathname === basePath;
 
     const handleScroll = () => {
         if (isHomepage) {

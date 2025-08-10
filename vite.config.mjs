@@ -1,4 +1,4 @@
-// vite.config.mjs (VERSÃO PROFISSIONAL E DEFINITIVA)
+// vite.config.mjs (VERSÃO COM O PLUGIN CORRIGIDO)
 
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
@@ -25,21 +25,27 @@ export default defineConfig({
         },
     },
 
-    // A MÁGICA PARA O SERVIDOR DE DESENVOLVIMENTO
+    // Plugin com a correção para ignorar os caminhos internos do Vite
     plugins: [
         {
             name: 'mpa-dev-server-rewrite',
             configureServer(server) {
-                // Adiciona um middleware que roda antes de todos os outros
                 server.middlewares.use((req, res, next) => {
                     const baseUrl = '/odsr/';
-                    // Verifica se a URL começa com a base e não é um arquivo (não tem '.')
+
+                    // ---> INÍCIO DA CORREÇÃO <---
+                    // Ignora os pedidos internos do Vite para evitar o erro 404.
+                    if (req.url.includes('/@vite/') || req.url.includes('/@fs/')) {
+                        return next();
+                    }
+                    // ---> FIM DA CORREÇÃO <---
+
+                    // A lógica de reescrita para as nossas páginas continua a mesma.
                     if (req.url.startsWith(baseUrl) && !req.url.includes('.')) {
-                        // Constrói o caminho para o arquivo HTML correspondente
                         const pageName = req.url.substring(baseUrl.length);
                         req.url = `${baseUrl}pages/${pageName}.html`;
                     }
-                    next(); // Passa a requisição (modificada ou não) para o próximo middleware
+                    next();
                 });
             },
         },
