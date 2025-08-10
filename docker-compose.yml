@@ -8,7 +8,7 @@ services:
     image: nginx:alpine
     volumes:
       # Mapeia nosso arquivo de configuração do proxy para dentro do container
-      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx-proxy.conf:/etc/nginx/conf.d/odsr-proxy.conf
     ports:
       # Expõe a porta 80 do proxy para a porta 8080 do seu computador
       - "8091:80" 
