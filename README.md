@@ -17,6 +17,9 @@ npm install glob --save-dev
 
 ```bash
 # 2. Construa a nova imagem Docker com o código atualizado
+cd /var/www/html/odsr
+docker-compose up --build
+
 docker build --no-cache -t odsr-app .
 # 3. Pare o container antigo que está em execução
 docker stop odsr

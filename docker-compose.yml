@@ -1,16 +1,23 @@
 version: '3.8'
 
 services:
+  # Este é o serviço da sua aplicação. Ele não precisa expor portas
+  # para o exterior, pois o 'proxy' falará com ele internamente.
   odsr-app:
     build: .
     image: odsr-app
+    restart: always # É uma boa prática adicionar o restart
+
+  # Este é o serviço que atua como "porteiro" (Proxy Reverso)
   proxy:
     image: nginx:alpine
+    restart: always
     volumes:
-      # Mapeia nosso arquivo de configuração do proxy para dentro do container
+      # Mapeia o arquivo de configuração do proxy para dentro do container
       - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf
     ports:
-      # Expõe a porta 80 do proxy para a porta 8080 do seu computador
-      - "8095:80" 
+      # Mapeia a porta 8091 do seu servidor (host) para a porta 80
+      # dentro do container do proxy.
+      - "8091:80"
     depends_on:
       - odsr-app
