@@ -1,0 +1,52 @@
+{
+  "header": {
+    "logos": [
+      { "href": "https://www.ufpb.br", "src": "./img/logo-ufpb-w.png", "alt": "Logo UFPB" },
+      { "href": "https://www.gov.br/igualdaderacial/pt-br", "src": "./img/mir-w.png", "alt": "Logo MIR" },
+      { "href": "https://gov.br/", "src": "./img/logo-gov-w.png", "alt": "Logo GovBR" },
+      { "href": "/", "src": "./img/icon-odsr.png", "alt": "Logo ODS Racial" }
+    ],
+    "navActions": [
+      { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
+      { "id": "mapa", "href": "/odsr/mapa", "label": "Mapa Exploratório", "icon": "fas fa-map-location-dot", "extraClass": "ml-2"},
+      { "href": "/odsr/contato", "label": "Contato", "icon": "fas fa-envelope", "extraClass": "ml-2" }
+    ]
+  },
+  "estatisticas": [
+    {"icon": "fas fa-users-viewfinder", "value": "83 indicadores", "label": "por Grupos Raciais e Localidades"},
+    {"icon": "fas fa-seedling", "value": "11 objetivos", "label": "de Desenvolvimento Sustentável"},
+    {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"},
+    {"icon": "fas fa-bullseye", "value": "7 metas", "label": "do ODS 18 com indicadores monitorados"},
+    {"icon": "fas fa-database", "value": "+20 fontes de dados", "label": "usados para o desenvolvimento dos indicadores"},
+    {"icon": "fas fa-users", "value": "5 grupos raciais", "label": "pretos, pardos, indígenas, brancos e amarelos "}
+  ],
+  "pilares": [
+    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/contato",
+    "text": "Seu ponto de partida com os principais insights e métricas da plataforma"},
+    { "id": "indicadores", "label": "Indicadores por Grupo", "icon": "fas fa-users-viewfinder", "href": "/contato",
+    "text": "Explore os dados segmentados por diferentes grupos raciais e localidades"},
+    { "id": "comparativo", "label": "Análise Comparativa", "icon": "fas fa-scale-balanced", "href": "/contato",
+    "text": "Compare indicadores lado a lado para analisar disparidades e tendências"},
+    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "/contato",
+    "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável"},
+    { "id": "observatorio", "label": "Documentação e Tutorial", "icon": "fas fa-book-open-reader", "href": "/contato",
+    "text": "Encontre notas técnicas, guias de uso e vídeos tutoriais sobre a plataforma"},
+    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "/contato",
+    "text": "Baixe dados e indicadores por grupos raciais"},
+    { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "href": "#sobre",
+    "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }
+  ],
+  "faq": [
+    {"question": "O que é o ODS Racial?", "answer": "O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> é a plataforma central de Business Intelligence (BI) e Analytics da UFPB..."},
+    {"question": "Quem desenvolveu o sistema?", "answer": "A Equipe de desenvolvimento do ODS Racial é liderada pelo docente..."},
+    {"question": "De onde vêm os dados apresentados nos painéis?", "answer": "Os dados dos painéis, em geral, são extraídos dos sistemas institucionais da UFPB..."},
+    {"question": "Como posso solicitar correção de algum link ou informação incorreta?", "answer": "Pode ser enviado um e-mail direcionado à <strong> <a href='mailto:contato@lema.ufpb.br' ...>Laboratório de Estudos em Modelagem Aplicada (LEMA)</a></strong>..."}
+  ],
+  "pages": [
+    { "Avaliação pelo Discente": [{"slug": "avaliacao-discente", "text": "...", "icon":"fas fa-users", "cols": 5}, {"title": "Ensino Básico...", "source": "SEBTT", "url": "...", "cardIcon": "fas fa-user" } ]},
+    { "Acompanhamento de Egressos": [{"slug": "acompanhamento-egressos", "text": "...", "icon":"fas fa-briefcase", "cols": 3}, { "title": "Ensino Básico...", "source": "SEBTT", "url": "...", "cardIcon": "fas fa-user" } ]}
+  ],
+  "iframes": [
+    {"slug": "monitoramento-pdi", "url": "https://app.powerbi.com/view?r=eyJrIjoiNjJjOWI2NWYtNDcyMS00MmY1LTljZDUtMmJhN2NhM2Y4MTQ4IiwidCI6IjAzNGEzN2ViLWFkYTYtNGI4ZS05NzZkLTViMDQwYjIyZWQwNSJ9"}
+  ]
+}

@@ -1,0 +1,14 @@
+# .dockerignore
+
+# Ignora dependências do Node.js (serão instaladas dentro do container)
+node_modules
+
+# Ignora a pasta de build local (se existir)
+dist
+
+# Ignora logs do npm
+npm-debug.log*
+
+# Ignora arquivos do Docker
+Dockerfile
+docker-compose.yml
