@@ -1,0 +1,5 @@
+[
+  { "id": "nao_ativa", "nome": "Não Ativa" },
+  { "id": "ano", "nome": "Ano" },
+  { "id": "raca_cor", "nome": "Raça/Cor" }
+]

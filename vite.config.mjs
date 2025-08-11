@@ -50,4 +50,14 @@ export default defineConfig({
             },
         },
     ],
+    server: {
+    proxy: {
+      // Qualquer requisição que comece com /api será redirecionada
+      '/api': {
+        target: 'http://127.0.0.1:8000', // O endereço da sua API Python
+        changeOrigin: true, // Necessário para o proxy funcionar corretamente
+        rewrite: (path) => path.replace(/^\/api/, ''), // Remove /api do caminho final da requisição
+      },
+    },
+  },
 });

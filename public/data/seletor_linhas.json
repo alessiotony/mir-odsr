@@ -1,0 +1,5 @@
+[
+  { "id": "localidade", "nome": "Localidade (UF/Município)" },
+  { "id": "raca_cor", "nome": "Raça/Cor" },
+  { "id": "indicador", "nome": "Indicador" }
+]

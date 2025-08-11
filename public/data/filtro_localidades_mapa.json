@@ -1,0 +1,5 @@
+[
+  { "uf": "br", "nome": "Brasil por UF" },
+  { "uf": "pb", "nome": "Municípios da Paraíba" },
+  { "uf": "pe", "nome": "Municípios de Pernambuco" }
+]

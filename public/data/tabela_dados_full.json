@@ -1,0 +1,10 @@
+[
+  { "ano": 2022, "codigo_uf": 25, "uf": "pb", "nome": "Paraíba - UF", "raca_cor": "negros", "indicador": "IDS", "valor": 3.5 },
+  { "ano": 2022, "codigo_uf": 25, "uf": "pb", "nome": "Paraíba - UF", "raca_cor": "brancos", "indicador": "IDS", "valor": 4.1 },
+  { "ano": 2022, "codigo_uf": 26, "uf": "pe", "nome": "Pernambuco - UF", "raca_cor": "negros", "indicador": "IDS", "valor": 4.3 },
+  { "ano": 2022, "codigo_uf": 26, "uf": "pe", "nome": "Pernambuco - UF", "raca_cor": "brancos", "indicador": "IDS", "valor": 4.6 },
+  { "ano": 2021, "codigo_uf": 25, "uf": "pb", "nome": "Paraíba - UF", "raca_cor": "negros", "indicador": "IDS", "valor": 3.2 },
+  { "ano": 2021, "codigo_uf": 25, "uf": "pb", "nome": "Paraíba - UF", "raca_cor": "brancos", "indicador": "IDS", "valor": 3.9 },
+  { "ano": 2021, "codigo_uf": 26, "uf": "pe", "nome": "Pernambuco - UF", "raca_cor": "negros", "indicador": "ODS1", "valor": 15.2 },
+  { "ano": 2021, "codigo_uf": 26, "uf": "pe", "nome": "Pernambuco - UF", "raca_cor": "brancos", "indicador": "ODS1", "valor": 9.8 }
+]

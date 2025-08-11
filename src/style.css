@@ -85,3 +85,101 @@ header {
         display: inline-block;
     }
 }
+
+/* ========================================================================== */
+/* ESTILIZAÇÃO FINAL E UNIFICADA PARA CHOICES.JS                    */
+/* ========================================================================== */
+
+/* --- Contêiner Principal (A caixa visível) --- */
+.choices__inner {
+  background-color: white;
+  padding: 0;
+  padding-left: 0.75rem; /* 12px */
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.375rem; /* rounded-md */
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  min-height: 42px; /* Garante altura consistente */
+}
+
+/* Destaca a borda quando o seletor está aberto */
+.is-open .choices__inner {
+  border-color: #E2893A; /* Cor primária */
+}
+
+/* --- Itens Selecionados (Tags para seleção múltipla) --- */
+.choices__list--multiple .choices__item {
+    background-color: #E2893A; /* Cor primária */
+    border-color: #c5722a;     /* Tom mais escuro */
+    color: white;
+    border-radius: 0.25rem;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+/* Estiliza o botão de remover (o "x" na tag) */
+.choices[data-type*="select-multiple"] .choices__button {
+    filter: invert(100%) grayscale(100%) brightness(200%);
+    opacity: 0.75;
+    border-left: 1px solid rgba(197, 114, 42, 0.8); /* Tom mais escuro com transparência */
+    margin-left: 8px;
+}
+.choices[data-type*="select-multiple"] .choices__button:hover {
+    opacity: 1;
+    background-color: #c5722a;
+}
+
+
+/* --- Lista Suspensa (Dropdown) --- */
+.choices__list--dropdown {
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    margin-top: 4px;
+}
+
+.choices__list--dropdown .choices__list {
+  max-height: 50px;
+  overflow-y: auto;
+}
+
+/* Caixa de busca DENTRO do dropdown */
+.choices__list--dropdown .choices__input {
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    margin: 8px;
+    width: calc(100% - 16px);
+    background-color: #f9fafb;
+    font-size: 0.875rem;
+}
+
+/* Itens na lista suspensa */
+.choices__list--dropdown .choices__item {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Efeito de HOVER e item SELECIONADO na lista */
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: #f3f4f6; /* Cinza-100, para um hover sutil */
+    color: #1f2937;
+}
+
+
+/* --- Barra de Rolagem --- */
+.choices__list--dropdown .choices__list::-webkit-scrollbar {
+  width: 8px;
+}
+.choices__list--dropdown .choices__list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.choices__list--dropdown .choices__list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+.choices__list--dropdown .choices__list::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

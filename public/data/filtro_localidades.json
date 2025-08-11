@@ -1,0 +1,9 @@
+[
+  { "uf": "br", "nome": "Brasil - País" },
+  { "uf": "pb", "nome": "Paraíba - UF" },
+  { "uf": "pe", "nome": "Pernambuco - UF" },
+  { "uf": "sp", "nome": "São Paulo - UF" },
+  { "uf": "jpa", "nome": "João Pessoa - Município" },
+  { "uf": "rec", "nome": "Recife - Município" },
+  { "uf": "spc", "nome": "São Paulo - Município" }
+]

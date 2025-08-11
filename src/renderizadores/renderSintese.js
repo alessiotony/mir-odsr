@@ -24,7 +24,7 @@ export function renderizarSintese(sinteseData) {
 
         const radialOptions = {
             chart: { type: 'radialBar', height: 200 },
-            series: [item.valor],
+            series: [item.valor*100],
             colors: [item.cor],
             plotOptions: {
                 radialBar: {
@@ -65,7 +65,7 @@ export function renderizarSintese(sinteseData) {
         },
         yaxis: {
             title: { text: 'Nível de Progresso (%)' },
-            labels: { formatter: (value) => value.toFixed(1) + '%' }
+            labels: { formatter: (value) => value.toFixed(3)*100 + '%' }
         },
         colors: coresSeries,
         stroke: { curve: 'smooth', width: 3 },

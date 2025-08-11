@@ -1,0 +1,8 @@
+[
+  { "id": "negros", "nome": "Negros (Pretos + Pardos)" },
+  { "id": "brancos", "nome": "Brancos" },
+  { "id": "pretos", "nome": "Pretos" },
+  { "id": "pardos", "nome": "Pardos" },
+  { "id": "amarelos", "nome": "Amarelos" },
+  { "id": "indigenas", "nome": "Indígenas" }
+]

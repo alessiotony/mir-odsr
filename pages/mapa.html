@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css" />
+    
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind.config.js"></script>
-    <link rel="stylesheet" href="/src/style.css">
+    
     <style>
-        #map-container { height: 75vh; }
+        #map-container { height: 60vh; }
     </style>
 </head>
 <body class="bg-fundo-claro">
@@ -32,21 +34,67 @@
                     <h3 class="font-bold text-lg mb-4 text-texto-principal">Filtros</h3>
 
                     <div class="mb-4">
-                        <label for="uf-selector" class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+                        <span class="block text-sm font-medium text-gray-700 mb-1">Métrica</span>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <input id="nivel-progresso" name="metrica" type="radio" value="value_eff" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300" checked>
+                                <label for="nivel-progresso" class="ml-2 block text-sm text-gray-900">Progresso</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="valor-indicador" name="metrica" type="radio" value="value" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="valor-indicador" class="ml-2 block text-sm text-gray-900">Valor Observado</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <span class="block text-sm font-medium text-gray-700 mb-1">Raça/Cor</span>
+                        <div class="grid grid-cols-3 gap-x-4 gap-y-2">
+                            <div class="flex items-center">
+                                <input id="negros" name="raca-cor" type="radio" value="0" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300" checked>
+                                <label for="negros" class="ml-2 block text-sm text-gray-900">Negros</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="brancos" name="raca-cor" type="radio" value="1" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="brancos" class="ml-2 block text-sm text-gray-900">Brancos</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="amarelos" name="raca-cor" type="radio" value="2" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="amarelos" class="ml-2 block text-sm text-gray-900">Amarelos</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="indigenas" name="raca-cor" type="radio" value="3" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="indigenas" class="ml-2 block text-sm text-gray-900">Indígenas</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="pretos" name="raca-cor" type="radio" value="4" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="pretos" class="ml-2 block text-sm text-gray-900">Pretos</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="pardos" name="raca-cor" type="radio" value="5" class="focus:ring-primaria h-4 w-4 text-primaria border-gray-300">
+                                <label for="pardos" class="ml-2 block text-sm text-gray-900">Pardos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="mb-4">
+                        <label for="indicador-selector" class="block text-sm font-medium text-gray-700 mb-1">Indicador</label>
+                        <select id="indicador-selector" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primaria focus:border-primaria">
+                            <option>Carregando...</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="uf-selector" class="block text-sm font-medium text-gray-700 mb-1">Abrangência Geográfica</label>
                         <select id="uf-selector" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primaria focus:border-primaria">
-                            <option value="br" selected>Brasil</option>
-                            <option value="pb">Paraíba</option>
-                            <option value="pe">Pernambuco</option>
-                            <option value="rj">Rio de Janeiro</option>
-                            <option value="sp">São Paulo</option>
-                            </select>
+                            <option>Carregando...</option>
+                        </select>
                     </div>
 
                     <div class="mb-6">
-                        <label for="ano-selector" class="block text-sm font-medium text-gray-700 mb-1">Selecionar Ano</label>
-                        <select id="ano-selector" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primaria focus:border-primaria">
-                            <option value="2022" selected>2022</option>
-                            <option value="2021">2021</option>
+                        <label for="ano-selector" class="block text-sm font-medium text-gray-700 mb-1">Período</label>
+                        <select id="ano-selector" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-primaria focus:border-primaria" disabled>
+                            <option>Selecione acima</option>
                         </select>
                     </div>
                     
@@ -54,15 +102,71 @@
                          <h4 class="font-semibold text-md mb-2 text-texto-secundario">Outras Opções</h4>
                          <button id="open-table-modal-btn" class="w-full text-left p-2 mb-2 bg-primaria text-white hover:bg-opacity-90 rounded-md text-sm font-semibold flex items-center">
                             <i class="fas fa-table mr-2"></i>Ver Dados em Tabela</button>
-                         <button class="w-full text-left p-2 mb-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm text-gray-700 disabled:opacity-50" disabled>Visão Histórica</button>
-                         <button class="w-full text-left p-2 mb-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm text-gray-700 disabled:opacity-50" disabled>Limpar Filtros</button>
+                         <button id="download-csv-btn" class="w-full text-left p-2 mb-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-semibold flex items-center text-gray-700">
+                            <i class="fas fa-download mr-2"></i>Download dos Dados
+                        </button>
+                        
+                        <button id="limpar-filtros-btn" class="w-full text-left p-2 mb-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm text-gray-700">
+                            <i class="fas fa-filter-circle-xmark mr-2"></i>Limpar Filtros
+                        </button>
                     </div>
                 </div>
             </aside>
             <section class="w-full md:w-3/4 lg:w-4/5 relative">
                 <div class="bg-white p-4 rounded-lg shadow h-full flex flex-col">
-                    <h2 id="map-title" class="text-2xl font-bold text-texto-principal mb-2">Índice de Desempenho Global</h2>
+                    <div class="flex items-center gap-x-2 mb-2"> <h2 id="map-title" class="text-2xl font-bold text-texto-principal">Nível de Progresso Médio dos Indicadores</h2>
+                        <button id="info-indicador-btn" class="text-gray-400 hover:text-primaria transition-colors" title="Sobre este indicador">
+                            <i class="fas fa-info-circle text-xl"></i>
+                        </button>
+                    </div>
                     <p id="map-subtitle" class="text-texto-secundario mb-4">Carregando...</p>
+                    
+                    <!-- Modal de Metadados -->
+                    <div id="metadata-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center" style="z-index: 10000;">
+                    <div class="bg-white rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col p-6 m-4">
+                        <div class="flex justify-between items-center border-b pb-3 mb-4">
+                            <h3 class="text-2xl font-bold text-texto-principal flex items-center">
+                                <i class="fas fa-info-circle text-primaria mr-3"></i>
+                                Metadados do Indicador
+                            </h3>
+                            <button id="close-metadata-modal-btn" class="text-gray-500 hover:text-gray-800 text-2xl">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="overflow-auto">
+                            <dl>
+                                <dt class="font-bold text-lg text-texto-principal">Nome:</dt>
+                                <dd id="metadata-nome" class="mb-4 text-texto-secundario"></dd>
+
+                                <dt class="font-bold text-lg text-texto-principal">Descrição Detalhada:</dt>
+                                <dd id="metadata-descricao" class="mb-4 text-texto-secundario leading-relaxed"></dd>
+
+                                <dt class="font-bold text-lg text-texto-principal">Fonte:</dt>
+                                <dd id="metadata-fonte" class="text-texto-secundario"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <!-- Cards -->
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm text-center">
+                        <h4 class="text-sm font-semibold text-gray-500">Valor Máximo</h4>
+                        <p id="valor-maximo" class="text-2xl font-bold text-green-600">--</p>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm text-center">
+                        <h4 class="text-sm font-semibold text-gray-500">Valor Médio</h4>
+                        <p id="valor-medio" class="text-2xl font-bold text-blue-600">--</p>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg shadow-sm text-center">
+                        <h4 class="text-sm font-semibold text-gray-500">Valor Mínimo</h4>
+                        <p id="valor-minimo" class="text-2xl font-bold text-red-600">--</p>
+                    </div>
+                </div>
                     <div id="map-container" class="bg-gray-200 rounded flex-grow"></div>
                     <div id="map-legend" class="mt-4"></div>
                 </div>
@@ -80,7 +184,7 @@
         <div class="bg-white rounded-lg shadow-2xl w-11/12 max-w-5xl h-[90vh] flex flex-col p-6">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
                 <div>
-                    <h3 class="text-2xl font-bold text-texto-principal">Índice de Desempenho Global</h3>
+                    <h3 class="text-2xl font-bold text-texto-principal">Nível de Progresso Médio dos Indicadores</h3>
                     <p id="modal-table-subtitle" class="text-texto-secundario">Municípios paraibanos - 2020</p>
                 </div>
                 <button id="close-table-modal-btn" class="text-gray-500 hover:text-gray-800 text-2xl">
@@ -91,7 +195,9 @@
         </div>
     </div>    
 
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.easyprint/2.1.9/leaflet.easyPrint.js"></script> -->
     <!-- Grid.js -->
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />

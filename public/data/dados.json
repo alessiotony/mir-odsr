@@ -8,7 +8,9 @@
     ],
     "navActions": [
       { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
-      { "id": "mapa", "href": "/odsr/mapa", "label": "Mapa Exploratório", "icon": "fas fa-map-location-dot", "extraClass": "ml-2"},
+      { "id": "mapa", "href": "/odsr/mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "extraClass": "ml-2"},
+      { "id": "linha", "href": "/odsr/linha", "label": "Trajetórias", "icon": "fas fa-line-chart", "extraClass": "ml-2"},
+      { "id": "tabela", "href": "/odsr/tabela", "label": "Tabela", "icon": "fas fa-table", "extraClass": "ml-2"},
       { "href": "/odsr/contato", "label": "Contato", "icon": "fas fa-envelope", "extraClass": "ml-2" }
     ]
   },
@@ -18,20 +20,20 @@
     {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"},
     {"icon": "fas fa-bullseye", "value": "7 metas", "label": "do ODS 18 com indicadores monitorados"},
     {"icon": "fas fa-database", "value": "+20 fontes de dados", "label": "usados para o desenvolvimento dos indicadores"},
-    {"icon": "fas fa-users", "value": "5 grupos raciais", "label": "pretos, pardos, indígenas, brancos e amarelos "}
+    {"icon": "fas fa-users", "value": "4 grupos raciais", "label": "negros, indígenas, brancos e amarelos "}
   ],
   "pilares": [
     { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/contato",
     "text": "Seu ponto de partida com os principais insights e métricas da plataforma"},
-    { "id": "indicadores", "label": "Indicadores por Grupo", "icon": "fas fa-users-viewfinder", "href": "/contato",
-    "text": "Explore os dados segmentados por diferentes grupos raciais e localidades"},
-    { "id": "comparativo", "label": "Análise Comparativa", "icon": "fas fa-scale-balanced", "href": "/contato",
-    "text": "Compare indicadores lado a lado para analisar disparidades e tendências"},
-    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "/contato",
+    { "id": "mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "href": "/odsr/mapa",
+    "text": "Explore os dados segmentados por diferentes grupos raciais e abrangências geográficas"},
+    { "id": "linha", "label": "Séries Temporais", "icon": "fas fa-line-chart", "href": "/odsr/linha",
+    "text": "Veja séries temporais dos indicadores por grupos raciais"},
+    { "id": "tabela", "label": "Construtor de Tabelas", "icon": "fas fa-table", "href": "/odsr/tabela",
+    "text": "Crie tabelas personalizadas cruzando diferentes variáveis e filtros"},
+    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "#",
     "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável"},
-    { "id": "observatorio", "label": "Documentação e Tutorial", "icon": "fas fa-book-open-reader", "href": "/contato",
-    "text": "Encontre notas técnicas, guias de uso e vídeos tutoriais sobre a plataforma"},
-    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "/contato",
+    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "#",
     "text": "Baixe dados e indicadores por grupos raciais"},
     { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "href": "#sobre",
     "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }

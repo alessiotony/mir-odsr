@@ -1,9 +1,13 @@
 // /src/main.js - PONTO DE ENTRADA PRINCIPAL (VERSÃO CORRIGIDA)
 
+import './style.css';
+
 import { iniciarAplicacao } from './core/inicializacao.js';
 import { setupMobileMenuAndNav } from './core/navegacao.js';
 // ALTERADO: Importa a CLASSE MapController em vez da função initMap
 import { MapController } from './map.js';
+import { LineChartController } from './linha.js';
+import { TableController } from './tabela.js';
 
 // --- FUNÇÕES DE EFEITOS VISUAIS ---
 
@@ -101,6 +105,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error("Erro durante a inicialização da classe MapController:", error);
                     alert("Ocorreu um erro crítico ao tentar renderizar o mapa.");
                 }
+            }
+            // Chart Line
+            if (document.getElementById('chart-container')) {
+                console.log("Container do gráfico encontrado. Inicializando LineChartController...");
+                try {
+                    const chartApp = new LineChartController();
+                    chartApp.init();
+                } catch (error) {
+                    console.error("Erro na inicialização da classe LineChartController:", error);
+                }
+            }
+            // Table
+            if (document.getElementById('table-wrapper')) {
+                const tableApp = new TableController();
+                tableApp.init();
             }
         } else {
             console.error("A função iniciarAplicacao() falhou e retornou false.");

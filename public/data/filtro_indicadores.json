@@ -1,0 +1,38 @@
+[
+  { 
+    "id": "IDS", 
+    "nome": "Nível de Progresso Médio dos Indicadores",
+    "descricao": "O Índice de Desempenho Global (IDG) é um indicador sintético que agrega as pontuações dos 18 Objetivos de Desenvolvimento Sustentável (ODS) adaptados à realidade racial. Ele oferece uma visão macro do progresso em direção à equidade.",
+    "fonte": "PNAD Contínua (IBGE), Censo Escolar (INEP), SIM (Ministério da Saúde)"
+  },
+  { 
+    "id": "ODS1", 
+    "nome": "Objetivo 1: Erradicação da Pobreza",
+    "descricao": "Este objetivo mede a proporção da população vivendo abaixo da linha da pobreza, com desagregação por raça/cor. O indicador principal é a porcentagem de pessoas com renda domiciliar per capita inferior a US$ 5,50 por dia (PPC).",
+    "fonte": "PNAD Contínua (IBGE)"
+  },
+  { 
+    "id": "ODS2", 
+    "nome": "Objetivo 2: Fome Zero",
+    "descricao": "Mede a prevalência de insegurança alimentar moderada ou grave. Os dados são coletados através de suplementos específicos da PNAD Contínua e analisados sob a ótica da raça/cor do chefe de família.",
+    "fonte": "PNAD Contínua (IBGE), Pesquisa de Orçamentos Familiares (POF)"
+  },
+  { 
+    "id": "ODS3", 
+    "nome": "Objetivo 3: Saúde",
+    "descricao": "Mede a prevalência de insegurança alimentar moderada ou grave. Os dados são coletados através de suplementos específicos da PNAD Contínua e analisados sob a ótica da raça/cor do chefe de família.",
+    "fonte": "PNAD Contínua (IBGE), Pesquisa de Orçamentos Familiares (POF)"
+  },
+  { 
+    "id": "ODS4", 
+    "nome": "Objetivo 4: Educação",
+    "descricao": "Mede a prevalência de insegurança alimentar moderada ou grave. Os dados são coletados através de suplementos específicos da PNAD Contínua e analisados sob a ótica da raça/cor do chefe de família.",
+    "fonte": "PNAD Contínua (IBGE), Pesquisa de Orçamentos Familiares (POF)"
+  },
+  { 
+    "id": "ODS5", 
+    "nome": "Objetivo 5: Igualdade de Gênero",
+    "descricao": "Mede a prevalência de insegurança alimentar moderada ou grave. Os dados são coletados através de suplementos específicos da PNAD Contínua e analisados sob a ótica da raça/cor do chefe de família.",
+    "fonte": "PNAD Contínua (IBGE), Pesquisa de Orçamentos Familiares (POF)"
+  }
+]
