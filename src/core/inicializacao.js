@@ -18,12 +18,12 @@ async function carregarSintese() {
     try {
         
         // ALTERAÇÃO: Mudar o endpoint de carregamento para a API
-        // const response = await fetch('./data/dados_sintese.json');
+        const response = await fetch('./data/dados_sintese.json');
         
         // const url = 'http://127.0.0.1:8000/sintese/dados';
-        const url = '/api/sintese/dados';
-        console.log(`Tentando carregar dados de síntese de: ${url}`);
-        const response = await fetch(url);
+        // const url = '/api/sintese/dados';
+        // console.log(`Tentando carregar dados de síntese de: ${url}`);
+        // const response = await fetch(url);
         
         if (!response.ok) throw new Error('Falha ao carregar dados de síntese');
         
