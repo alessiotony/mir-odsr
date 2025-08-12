@@ -1,0 +1,49 @@
+{
+  "kpis": {
+    "indicadores": 83,
+    "objetivos": 11,
+    "metas": 7,
+    "populacao": "+212 mi"
+  },
+  "indicadorRadial": {
+    "titulo": "Nível de Progresso por Grupo Racial",
+    "data": [
+      { "label": "Negros",    "valor": 0.41,  "cor": "#4A2712" },
+      { "label": "Amarelos",  "valor": 0.488, "cor": "#e7dd4c" },
+      { "label": "Indígenas", "valor": 0.337, "cor": "#15803d" },
+      { "label": "Brancos",   "valor": 0.478, "cor": "#1d4ed8" }
+    ]
+  },
+  "serieTemporal": {
+    "titulo": "Evolução do Nível de Progresso por Grupo",
+    "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    "series": [
+      { "name": "Negros",    "data": [0.399, 0.4, 0.396, 0.442, 0.446, 0.462, 0.45, 0.405, 0.41] },
+      { "name": "Brancos",   "data": [0.421, 0.438, 0.426, 0.467, 0.469, 0.491, 0.471, 0.444, 0.478] },
+      { "name": "Indígenas", "data": [0.311, 0.298, 0.289, 0.342, 0.34, 0.369, 0.357, 0.31, 0.337] },
+      { "name": "Amarelos",  "data": [0.397, 0.412, 0.413, 0.433, 0.423, 0.427, 0.445, 0.44, 0.488] }
+    ]
+  },
+  "graficoOds": {
+    "categories": ["ODS 1", "ODS 2", "ODS 3", "ODS 4", "ODS 5", "ODS 8", "ODS 10", "ODS 13"],
+    "series": [
+      { "name": "Brancos",    "data": [88, 75, 92, 60, 70, 85, 78, 82] },
+      { "name": "Negros",     "data": [72, 65, 80, 50, 62, 77, 68, 74] },
+      { "name": "Indígenas",  "data": [60, 55, 70, 45, 50, 68, 58, 64] },
+      { "name": "Amarelos",   "data": [90, 85, 94, 75, 80, 88, 85, 90] }
+    ]
+  },
+  "tabelaIndicadores": {
+    "titulo": "Nível de Progresso por Indicadores e Grupos Raciais (Ano Mais Recente)",
+    "colunas": ["Indicador / ODS", "Brancos", "Negros", "Indígenas", "Amarelos"],
+    "linhas": [
+      { "indicador": "Taxa de Pobreza (2023)", "brancos": 80, "negros": 55, "indigenas": 60, "amarelos": 88 },
+      { "indicador": "Taxa de pessoas em extrema pobreza (2022)", "brancos": 80, "negros": 20, "indigenas": 30, "amarelos": 90 },
+      { "indicador": "Acesso à educação básica (ODS 4)", "brancos": 92, "negros": 85, "indigenas": 78, "amarelos": 95 },
+      { "indicador": "Participação no mercado de trabalho (ODS 8)", "brancos": 75, "negros": 60, "indigenas": 55, "amarelos": 80 },
+      { "indicador": "Acesso à saúde de qualidade (ODS 3)", "brancos": 88, "negros": 72, "indigenas": 65, "amarelos": 90 },
+      { "indicador": "Representação política (ODS 10)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      { "indicador": "Uso sustentável da terra (ODS 15)", "brancos": 65, "negros": 55, "indigenas": 50, "amarelos": 70 }
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visão Geral - ODS Racial</title>
+    <link rel="icon" type="image/png" href="/img/favicon.ico">    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.config.js"></script> </head>
+<body class="bg-fundo-claro">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero-section text-texto-contraste pt-24 pb-12 md:pt-30 md:pb-14 relative bg-gray-800">
+        <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" style="background-image: url('/img/background.jpeg');"></div>
+        <div class="container mx-auto px-6 text-center relative">
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-1">
+                Selecione uma localidade para explorar o progresso dos Objetivos de Desenvolvimento Sustentável por grupos raciais.
+            </p>
+            
+            <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-2 flex items-center mb-4">
+                <i class="fas fa-map-marker-alt text-gray-400 mx-3"></i>
+                <select id="seletor-localidade" class="w-full bg-transparent text-gray-700 text-lg border-none focus:ring-0">
+                    <option>Carregando...</option>
+                </select>
+            </div>
+
+            <section id="sintese-kpis" class="mt-0">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-center justify-center max-w-xl mx-auto">
+                <div class="bg-transparent p-4 rounded-lg">
+                    <i class="fas fa-chart-simple text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">53</p>
+                    <p class="text-sm text-texto-contraste">Indicadores</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-bullseye text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">11</p>
+                    <p class="text-sm text-texto-contraste">Objetivos</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-flag-checkered text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">7</p>
+                    <p class="text-sm text-texto-contraste">Metas</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">+212 mi</p>
+                    <p class="text-sm text-texto-contraste">População</p>
+                </div>
+            </div>
+        </section>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-12">
+  <section id="visao-geral-graficos" class="space-y-8">
+
+    <!-- Radial (maior) -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso Médio por Grupo Étnico-Racial</h3>
+      <div id="grafico-progresso-racial" class="w-full min-h-[360px]"></div>
+    </div>
+
+    <!-- Série temporal -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h3 class="font-bold text-lg mb-4 text-texto-principal">Evolução do Nível de Progresso por Grupo</h3>
+      <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>
+    </div>
+
+    <!-- Texto interpretativo da seção racial (radial + série) -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div id="texto-sintese-racial" class="prose max-w-none"></div>
+    </div>
+
+    <!-- ODS (full width) -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por ODS</h3>
+      <div id="grafico-progresso-ods" class="w-full min-h-[400px]"></div>
+    </div>
+
+    <!-- Texto interpretativo do ODS -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div id="texto-sintese-ods" class="prose max-w-none"></div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="bg-white p-6 rounded-lg shadow" id="tabela-indicadores-container"></div>
+
+    <!-- Texto interpretativo da tabela -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div id="texto-sintese-tabela" class="prose max-w-none"></div>
+    </div>
+
+  </section>
+</main>
+
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
       { "href": "/", "src": "./img/icon-odsr.png", "alt": "Logo ODS Racial" }
     ],
     "navActions": [
-      { "href": "/", "label": "Página Principal", "icon": "fas fa-home" },
+      { "href": "/odsr/", "label": "Página Principal", "icon": "fas fa-home" },
       { "id": "mapa", "href": "/odsr/mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "extraClass": "ml-2"},
       { "id": "linha", "href": "/odsr/linha", "label": "Trajetórias", "icon": "fas fa-line-chart", "extraClass": "ml-2"},
       { "id": "tabela", "href": "/odsr/tabela", "label": "Tabela", "icon": "fas fa-table", "extraClass": "ml-2"},
@@ -23,7 +23,7 @@
     {"icon": "fas fa-users", "value": "4 grupos raciais", "label": "negros, indígenas, brancos e amarelos "}
   ],
   "pilares": [
-    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/contato",
+    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/#",
     "text": "Seu ponto de partida com os principais insights e métricas da plataforma"},
     { "id": "mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "href": "/odsr/mapa",
     "text": "Explore os dados segmentados por diferentes grupos raciais e abrangências geográficas"},
@@ -35,8 +35,9 @@
     "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável"},
     { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "#",
     "text": "Baixe dados e indicadores por grupos raciais"},
+    { "id": "home", "label": "Página Principal", "icon": "fas fa-house", "href": "/odsr/",  "extraClass": "ml-8" },
     { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "href": "#sobre",
-    "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial", "extraClass": "ml-8" }
+    "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial"}
   ],
   "faq": [
     {"question": "O que é o ODS Racial?", "answer": "O <strong>Sistema de Governança de Dados Institucionais (ODS Racial)</strong> é a plataforma central de Business Intelligence (BI) e Analytics da UFPB..."},

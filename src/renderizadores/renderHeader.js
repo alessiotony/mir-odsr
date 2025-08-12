@@ -19,14 +19,14 @@ export function renderizarHeader(headerData, isHomepage = false) {
     `).join('');
     
     // 3. Gera HTML para os links de ação (Home/Contato)
-    const actionLinksHtml = navActions.map(link => `
-        <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
-            <i class="${link.icon} fa-xl text-texto-contraste hover:text-primaria transition-colors"></i>
-        </a>
-    `).join('');
+    // const actionLinksHtml = navActions.map(link => `
+    //     <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
+    //         <i class="${link.icon} fa-xl text-texto-contraste hover:text-primaria transition-colors"></i>
+    //     </a>
+    // `).join('');
 
     // **CORREÇÃO AQUI**: Combina corretamente os links para Desktop
-    const desktopNavLinks = sectionLinksHtml + '<div class="w-px h-6 bg-gray-500 opacity-50 mx-2"></div>' + actionLinksHtml;
+    const desktopNavLinks = sectionLinksHtml + '<div class="w-px h-6 bg-gray-500 opacity-50 mx-2"></div>';
 
     // 4. Gera HTML para o menu mobile
     const mobileSectionLinks = pilares.map(link => `

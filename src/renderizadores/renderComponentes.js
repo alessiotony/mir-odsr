@@ -5,7 +5,7 @@ import { criarPillar } from '../utils/criarPillar.js';
 
 export function renderizarPilares(pilares, container) {
     if (!container || !pilares) return;
-    container.innerHTML = pilares.filter(p => p.id !== 'sobre').map(criarPillar).join('');
+    container.innerHTML = pilares.filter(p => p.id !== 'sobre' && p.id !== 'home').map(criarPillar).join('');
 }
 
 export function renderizarEstatisticas(stats, container) {

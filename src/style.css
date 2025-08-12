@@ -1,18 +1,17 @@
 :root {
-  /* Cores Principais (Verdes) */
-  --cor-primaria: #783C00;         /* Equivalente a 'green-700' do Tailwind */
-  --cor-primaria-hover: #783C00;  /* Equivalente a 'green-800' */
+  --cor-primaria: #783C00;        
+  --cor-primaria-hover: #783C00;  
 
   /* Tons de Cinza para Texto e Fundo */
-  --cor-texto-principal: #1f2937; /* Equivalente a 'gray-800' */
-  --cor-texto-secundario: #4b5563;/* Equivalente a 'gray-600' */
-  --cor-texto-sutil: #FFDCC5;     /* Equivalente a 'gray-400' */
-  --cor-texto-contraste: #ffffff;     /* Equivalente a 'gray-400' */
-  --cor-fundo-header: #ffffff;     /* Equivalente a 'gray-50' */
+  --cor-texto-principal: #1f2937; 
+  --cor-texto-secundario: #4b5563;
+  --cor-texto-sutil: #FFDCC5; 
+  --cor-texto-contraste: #ffffff; 
+  --cor-fundo-header: #ffffff; 
   --cor-fundo-escuro: #4A2712;    
-  --cor-fundo-claro: #f9fafb;     /* Equivalente a 'gray-50' para o corpo da página */
-  --cor-fundo-medio: #f3f4f6;     /* Equivalente a 'gray-100' para cards/seções */
-  --cor-borda: #e5e7eb;           /* Equivalente a 'gray-200' */
+  --cor-fundo-claro: #f9fafb;  
+  --cor-fundo-medio: #f3f4f6;  
+  --cor-borda: #e5e7eb;
 
   /* Cores de Feedback (opcional, mas útil) */
   --cor-erro: #dc2626;            /* red-600 */

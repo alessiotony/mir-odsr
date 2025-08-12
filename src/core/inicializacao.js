@@ -18,12 +18,12 @@ async function carregarSintese() {
     try {
         
         // ALTERAÇÃO: Mudar o endpoint de carregamento para a API
-        const response = await fetch('./data/dados_sintese.json');
+        // const response = await fetch('./data/dados_sintese.json');
         
         // const url = 'http://127.0.0.1:8000/sintese/dados';
-        // const url = '/api/sintese/dados';
-        // console.log(`Tentando carregar dados de síntese de: ${url}`);
-        // const response = await fetch(url);
+        const url = '/api/sintese/dados';
+        console.log(`Tentando carregar dados de síntese de: ${url}`);
+        const response = await fetch(url);
         
         if (!response.ok) throw new Error('Falha ao carregar dados de síntese');
         
@@ -80,14 +80,27 @@ export async function iniciarAplicacao() {
         } else if (dynamicPageData) {
             renderizarPaginaDinamica(slug, data.pages);
         } else if (path.includes('/mapa')) {
-            // CORRETO: Nenhuma ação é tomada aqui.
-            // A inicialização do mapa é 100% delegada para o app.js,
-            // que já está ouvindo o evento DOMContentLoaded.
-            console.log("Página de mapa detectada. app.js cuidará da inicialização.");
+            console.log("Página de mapa detectada. Iniciando MapController...");
+            // 1. Importa o MapController dinamicamente
+            const { MapController } = await import('../map.js');
+            
+            // 2. Cria a instância
+            const mapController = new MapController('map-container');
+            
+            // 3. Inicia o controlador e ESPERA que ele termine
+            await mapController.init();
+            console.log("MapController inicializado com sucesso.");
         } else if (path.includes('/linha')) {
             console.log("Página de linha detectada. app.js cuidará da inicialização.");
         } else if (path.includes('/tabela')) {
             console.log("Página de tabela detectada. app.js cuidará da inicialização.");
+        } else if (path.includes('/visao-geral')) {
+            console.log("Página de Visão Geral detectada. Iniciando VisaoGeralController...");
+            const { VisaoGeralController } = await import('../visao-geral.js');
+            const visaoGeralController = new VisaoGeralController();
+            await visaoGeralController.init();
+            console.log("VisaoGeralController inicializado com sucesso.");
+        // FIM DO NOVO BLOCO
         } else {
             const main = document.querySelector('main');
             if (main) main.innerHTML = `<div class="text-center py-20"><h1 class="text-3xl font-bold">Erro 404</h1><p>Página não encontrada.</p></div>`;

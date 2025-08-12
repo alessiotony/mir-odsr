@@ -1,31 +1,47 @@
 {
-  "titulo": "Nível de Progresso Médio dos Indicadores por Grupo Étnico-Racial",
-  "indicadorRadial": [
-    {"label": "Amarelos", "valor": 0.59, "cor": "#e7dd4c"},
-    {"label": "Brancos", "valor": 0.531, "cor": "#1d4ed8"},
-    {"label": "Indígenas", "valor": 0.392, "cor": "#15803d"},
-    {"label": "Negros", "valor": 0.512, "cor": "#b91c1c"}     
-  ],
+  "indicadorRadial": {
+    "titulo": "Nível de Progresso Médio dos Indicadores por Grupo Étnico-Racial",
+    "data": [
+      {
+        "label": "negra",
+        "valor": 0.41,
+        "cor": "#4A2712"
+        },
+      {
+        "label": "amarela",
+        "valor": 0.488,
+        "cor": "#e7dd4c"
+      },
+      {
+        "label": "indigena",
+        "valor": 0.337,
+        "cor": "#15803d"
+      },
+      {
+        "label": "branca",
+        "valor": 0.478,
+        "cor": "#1d4ed8"
+      }]
+  },
   "serieTemporal": {
     "titulo": "Evolução do Nível de Progresso por Grupo",
     "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
     "series": [
       {
-        "name": "Brancos",
-        "data": [0.519, 0.529, 0.53, 0.569, 0.599, 0.609, 0.679, 0.699, 0.720]
-      },
-      
-      {
-        "name": "Indígenas",
-        "data": [0.300, 0.300, 0.300, 0.300, 0.300, 0.300, 0.300, 0.300, 0.392]
+        "name": "negra",
+        "data": [0.399, 0.4, 0.396, 0.442, 0.446, 0.462, 0.45, 0.405, 0.41]
       },
       {
-        "name": "Negros",
-        "data": [0.500, 0.500, 0.500, 0.500, 0.300, 0.400, 0.450, 0.530, 0.600]
+        "name": "branca",
+        "data": [0.421, 0.438, 0.426, 0.467, 0.469, 0.491, 0.471, 0.444, 0.478]
       },
       {
-        "name": "Amarelos",
-        "data": [0.500, 0.500, 0.500, 0.500, 0.500, 0.500, 0.600, 0.605, 0.659]
+        "name": "indigena",
+        "data": [0.311, 0.298, 0.289, 0.342, 0.34, 0.369, 0.357, 0.31, 0.337]
+      },
+      {
+        "name": "amarela",
+        "data": [0.397, 0.412, 0.413, 0.433, 0.423, 0.427, 0.445, 0.44, 0.488]
       }
     ]
   }
