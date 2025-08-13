@@ -74,10 +74,10 @@ export function renderizarSintese(sinteseData, opts = {}) {
     // layout simples: cria um bloco por indicador
     indicadorRadial.forEach(item => {
         const chartDiv = document.createElement('div');
-        chartDiv.style.display = 'inline-block';
-        chartDiv.style.width = '320px';
-        chartDiv.style.margin = '2px';
-        chartDiv.style.verticalAlign = 'center';
+        // chartDiv.style.display = 'inline-block';
+        // chartDiv.style.width = '320px';
+        // chartDiv.style.margin = '2px';
+        // chartDiv.style.verticalAlign = 'center';
         radialContainer.appendChild(chartDiv);
 
         const valor = Number(item.valor) || 0;
@@ -91,13 +91,13 @@ export function renderizarSintese(sinteseData, opts = {}) {
             colors: [ color ],
             plotOptions: {
                 radialBar: {
-                    hollow: { size: '65%' },
+                    hollow: { size: '50%' },
                     track: { background: '#f3f4f6' },
                     dataLabels: {
-                        name: { offsetY: 20, fontSize: '12px', color: '#6b7280' },
+                        name: { offsetY: 30, fontSize: '18px', color: '#6b7280' },
                         value: {
                             offsetY: -10,
-                            fontSize: '16px',
+                            fontSize: '30px',
                             color: '#111827',
                             formatter: function (val) { return `${Math.round(val)}%`; }
                         }
@@ -146,7 +146,7 @@ export function renderizarSintese(sinteseData, opts = {}) {
             markers: { size: 4 },
             legend: { position: 'top' },
             grid: { borderColor: '#e5e7eb' },
-            title: { text: serieTemporal.titulo || '', align: 'center', style: { fontSize: '16px' } }
+            title: { text: '', align: 'center', style: { fontSize: '16px' } }
         };
 
         try {

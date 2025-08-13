@@ -7,6 +7,7 @@ import { renderizarHomepage } from '../renderizadores/renderHomepage.js';
 import { renderizarPaginaDinamica } from '../renderizadores/renderPaginaDinamica.js';
 import { renderizarPaginaIframe } from '../renderizadores/renderPaginaIframe.js';
 import { renderizarSintese } from '../renderizadores/renderSintese.js';
+import { Ods18Controller } from '../renderizadores/renderOds18.js'; 
 
 /**
  * Função dedicada a carregar e renderizar a seção de síntese.
@@ -100,6 +101,12 @@ export async function iniciarAplicacao() {
             const visaoGeralController = new VisaoGeralController();
             await visaoGeralController.init();
             console.log("VisaoGeralController inicializado com sucesso.");
+        } else if (path.includes('/ods18')) {
+            console.log("Página ODS 18 detectada. Iniciando Ods18Controller...");
+            const { Ods18Controller } = await import('../renderizadores/renderOds18.js');
+            const ods18Controller = new Ods18Controller();
+            await ods18Controller.init();
+            console.log("Ods18Controller inicializado com sucesso.");
         // FIM DO NOVO BLOCO
         } else {
             const main = document.querySelector('main');

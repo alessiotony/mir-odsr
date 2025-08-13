@@ -23,18 +23,20 @@
     {"icon": "fas fa-users", "value": "4 grupos raciais", "label": "negros, indígenas, brancos e amarelos "}
   ],
   "pilares": [
-    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/#",
+    { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/odsr/visao-geral",
     "text": "Seu ponto de partida com os principais insights e métricas da plataforma"},
+    { "id": "ods18", "label": "Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "/odsr/ods18",
+    "text": "Acompanhe os indicadores relacionados ao 18º ODS assumido pelo Brasil"},
+    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-table", "href": "/odsr/tabela",
+    "text": "Construtor de tabelas para visualização e download de dados por grupos raciais"},
+    
     { "id": "mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "href": "/odsr/mapa",
     "text": "Explore os dados segmentados por diferentes grupos raciais e abrangências geográficas"},
     { "id": "linha", "label": "Séries Temporais", "icon": "fas fa-line-chart", "href": "/odsr/linha",
     "text": "Veja séries temporais dos indicadores por grupos raciais"},
-    { "id": "tabela", "label": "Construtor de Tabelas", "icon": "fas fa-table", "href": "/odsr/tabela",
-    "text": "Crie tabelas personalizadas cruzando diferentes variáveis e filtros"},
-    { "id": "ods18", "label": "ODS 18: Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "#",
-    "text": "Acompanhe os indicadores relacionados ao proposto 18º Objetivo de Desenvolvimento Sustentável"},
-    { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-download", "href": "#",
-    "text": "Baixe dados e indicadores por grupos raciais"},
+    { "id": "analitico", "label": "Modelo Analítico", "icon": "fas fa-bar-chart", "href": "#",
+    "text": "Faça análises com matrizes de correlação, grafos e regressão"},
+    
     { "id": "home", "label": "Página Principal", "icon": "fas fa-house", "href": "/odsr/",  "extraClass": "ml-8" },
     { "id": "sobre", "label": "Sobre", "icon": "fas fa-question-circle", "href": "#sobre",
     "text": "Conheça a equipe, a metodologia e os objetivos da iniciativa ODS Racial"}

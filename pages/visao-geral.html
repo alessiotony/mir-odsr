@@ -59,42 +59,29 @@
         </div>
     </section>
 
-    <main class="container mx-auto px-6 py-12">
-  <section id="visao-geral-graficos" class="space-y-8">
-
-    <!-- Radial (maior) -->
+    <main class="container mx-auto px-6 py-2">
+    <section id="visao-geral-graficos" class="space-y-8">    
     <div class="bg-white p-6 rounded-lg shadow">
-      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso Médio por Grupo Étnico-Racial</h3>
-      <div id="grafico-progresso-racial" class="w-full min-h-[360px]"></div>
-    </div>
-
+      <!-- Radial (maior) -->
+      <h3 class="font-bold text-lg mb-4 mt-6 text-texto-principal">Nível de Progresso Médio dos ODS por Raça/Cor</h3>
+      <div id="texto-introducao-visao-geral" class="prose max-w-none"></div>
+      <div id="grafico-progresso-racial" class="w-full flex justify-center items-center flex-wrap gap-8 py-4"></div>
     <!-- Série temporal -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h3 class="font-bold text-lg mb-4 text-texto-principal">Evolução do Nível de Progresso por Grupo</h3>
-      <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>
-    </div>
-
-    <!-- Texto interpretativo da seção racial (radial + série) -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <div id="texto-sintese-racial" class="prose max-w-none"></div>
-    </div>
-
+      <h3 class="font-bold text-lg mb-0 text-texto-principal">Evolução do Nível de Progresso por Raça/Cor</h3>
+      <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>      
+      <div id="texto-sintese-serie-temporal" class="text-gray-700 leading-relaxed space-y-2 mb-12"></div>
+    
     <!-- ODS (full width) -->
-    <div class="bg-white p-6 rounded-lg shadow">
-      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por ODS</h3>
+      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso dos Indicadores por ODS e Raça/Cor</h3>
       <div id="grafico-progresso-ods" class="w-full min-h-[400px]"></div>
-    </div>
-
+    
     <!-- Texto interpretativo do ODS -->
-    <div class="bg-white p-6 rounded-lg shadow">
       <div id="texto-sintese-ods" class="prose max-w-none"></div>
-    </div>
-
+    
     <!-- Tabela -->
     <div class="bg-white p-6 rounded-lg shadow" id="tabela-indicadores-container"></div>
 
     <!-- Texto interpretativo da tabela -->
-    <div class="bg-white p-6 rounded-lg shadow">
       <div id="texto-sintese-tabela" class="prose max-w-none"></div>
     </div>
 

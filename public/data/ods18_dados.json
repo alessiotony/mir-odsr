@@ -1,0 +1,271 @@
+{
+    "global": {
+        "nIndicadores": 86,
+        "nMetasMonitoradas": 6,
+        "progresso": 0.77,
+        "amplitude": 0.205,
+        "indice": 0.612
+    },
+    "metas": [
+        {
+            "idTarget": 1,
+            "nameTarget": "Trabalho Decente",
+            "nIndicadores": 13,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.85
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.72
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.65
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.88
+                }
+            ],
+            "amplitude": 0.23,
+            "progressoMedio": 0.775,
+            "indice": 0.597
+        },
+        {
+            "idTarget": 2,
+            "nameTarget": "Eliminar Violências",
+            "nIndicadores": 19,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.78
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.65
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.58
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.82
+                }
+            ],
+            "amplitude": 0.24,
+            "progressoMedio": 0.708,
+            "indice": 0.538
+        },
+        {
+            "idTarget": 3,
+            "nameTarget": "Proteção e Acesso à Justiça",
+            "nIndicadores": 9,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.92
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.85
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.78
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.95
+                }
+            ],
+            "amplitude": 0.17,
+            "progressoMedio": 0.875,
+            "indice": 0.726
+        },
+        {
+            "idTarget": 4,
+            "nameTarget": "Representatividade Equitativa",
+            "nIndicadores": 2,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.88
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.81
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.79
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.9
+                }
+            ],
+            "amplitude": 0.11,
+            "progressoMedio": 0.845,
+            "indice": 0.752
+        },
+        {
+            "idTarget": 5,
+            "nameTarget": "Reparação de Perdas Territoriais",
+            "nIndicadores": null,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": null
+                },
+                {
+                    "raca": "Negra",
+                    "valor": null
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": null
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": null
+                }
+            ],
+            "amplitude": null,
+            "progressoMedio": null,
+            "indice": null
+        },
+        {
+            "idTarget": 6,
+            "nameTarget": "Moradia Adequada",
+            "nIndicadores": null,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": null
+                },
+                {
+                    "raca": "Negra",
+                    "valor": null
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": null
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": null
+                }
+            ],
+            "amplitude": null,
+            "progressoMedio": null,
+            "indice": null
+        },
+        {
+            "idTarget": 7,
+            "nameTarget": "Saúde e Bem-Estar",
+            "nIndicadores": 15,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.82
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.69
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.61
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.85
+                }
+            ],
+            "amplitude": 0.24,
+            "progressoMedio": 0.742,
+            "indice": 0.564
+        },
+        {
+            "idTarget": 8,
+            "nameTarget": "Educação de Qualidade",
+            "nIndicadores": 28,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": 0.76
+                },
+                {
+                    "raca": "Negra",
+                    "valor": 0.6
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": 0.55
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": 0.79
+                }
+            ],
+            "amplitude": 0.24,
+            "progressoMedio": 0.675,
+            "indice": 0.513
+        },
+        {
+            "idTarget": 9,
+            "nameTarget": "Exploração Econômica e Comercial",
+            "nIndicadores": null,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": null
+                },
+                {
+                    "raca": "Negra",
+                    "valor": null
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": null
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": null
+                }
+            ],
+            "amplitude": null,
+            "progressoMedio": null,
+            "indice": null
+        },
+        {
+            "idTarget": 10,
+            "nameTarget": "Eliminação de Xenofobia",
+            "nIndicadores": null,
+            "dadosRaciais": [
+                {
+                    "raca": "Branca",
+                    "valor": null
+                },
+                {
+                    "raca": "Negra",
+                    "valor": null
+                },
+                {
+                    "raca": "Indígena",
+                    "valor": null
+                },
+                {
+                    "raca": "Amarela",
+                    "valor": null
+                }
+            ],
+            "amplitude": null,
+            "progressoMedio": null,
+            "indice": null
+        }
+    ]
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODS 18 • Igualdade Étnico‑Racial</title>
+  <link rel="icon" type="image/png" href="/img/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/tailwind.config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+    /* Paleta fixa por grupo racial (consistente em todo o app) */
+    :root{
+      --cor-amarela:#f2b705;
+      --cor-branca:#5c88c4;
+      --cor-indigena:#c14040;
+      --cor-negra:#352012;
+      --cor-cinza:#9aa3af;
+    }
+    .pill{border-radius:9999px;padding:.20rem .6rem;font-weight:600;font-size:.80rem}
+    .pill-ok{background:#e8f5e9;color:#2e7d32}
+    .pill-mid{background:#fff7e6;color:#8a5a00}
+    .pill-bad{background:#fdecea;color:#b00020}
+    .pill-nd{background:#f3f4f6;color:#6b7280}
+    /* Radial com ícone central */
+    .radial-wrapper{position:relative; display:inline-block}
+    /* Tabela */
+    table{width:100%;border-collapse:separate;border-spacing:0 .5rem}
+    td,th{padding:.75rem 1rem;background:#fff}
+    thead th{color:#374151;font-weight:700;background:transparent;padding:.25rem 1rem}
+    tbody td:first-child{border-radius:.75rem 0 0 .75rem}
+    tbody td:last-child{border-radius:0 .75rem .75rem 0}
+    tr[data-nd="true"] td{background:#f3f4f6;color:#6b7280}
+  </style>
+</head>
+<body class="bg-fundo-claro">
+
+  <div id="header-placeholder"></div>
+
+  <!-- hero com seletor de localidade (seguindo padrão da visão geral) -->
+  <section class="hero-section text-texto-contraste pt-12 pb-8 md:pt-28 md:pb-14 relative">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold">ODS 18 • Igualdade Étnico‑Racial</h1>
+          <p class="text-base md:text-lg mt-1 opacity-90">
+            Monitoramento do <strong>progresso</strong> e da <strong>desigualdade entre grupos raciais</strong>.
+          </p>
+        </div>
+        <div class="w-full md:w-80">
+          <label class="block text-sm font-medium mb-1">Localidade</label>
+          <select id="ods18-localidade" class="w-full border rounded-lg p-2.5 bg-white">
+            <option value="BR">Brasil (geral)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards resumo (2 colunas) -->
+<section class="py-2">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Índice (radial) -->
+    <div class="bg-transparent rounded-2xl p-6">
+      <h3 class="font-semibold text-lg mb-2"> <i class="fa-solid fa-scale-balanced"></i> Índice Sintético de Igualdade Racial (ISIR)</h3>
+      <div class="flex items-center gap-6">
+        <div class="radial-wrapper w-44 h-44 relative">
+          <div id="ods18-radial" class="w-44 h-44"></div>
+          <!-- ícone central, levemente acima do valor -->
+        </div>
+        <div class="text-sm">
+          <p>Combinação de paridade e progresso</p>
+          <div class="mt-3 grid grid-cols-3 gap-3 text-center">
+            <div><div class="text-xs uppercase opacity-70">Progresso</div><div id="kpi-progresso" class="text-xl font-bold">—</div></div>
+            <div><div class="text-xs uppercase opacity-70">Amplitude</div><div id="kpi-amplitude" class="text-xl font-bold">—</div></div>
+            <div><div class="text-xs uppercase opacity-70">Indicadores</div><div id="kpi-indicadores" class="text-xl font-bold">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interpretação -->
+    <div class="bg-transparent rounded-2xl p-6">
+      <h3 class="font-semibold text-lg mb-2">Interpretação rápida</h3>
+      <p class="text-sm mt-4 opacity-80" id="ods18-texto-resumo"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Card “Sobre o ODS 18” (vem abaixo, largura total) -->
+<section class="pb-2">
+  <div class="container mx-auto px-6">
+    <div class="bg-transparent rounded-2xl p-6 shadow">
+      <h3 class="font-semibold text-lg mb-2">Sobre o ODS 18</h3>
+      <p class="text-sm opacity-90">
+        Esta página usa os metadados das metas para contextualização e boas práticas de comunicação.
+      </p>
+
+      <!-- Mais detalhes colapsável -->
+      <details class="mt-4 group">
+        <summary class="cursor-pointer text-primaria font-semibold">
+          Mais detalhes <span class="opacity-70">(clique para expandir)</span>
+        </summary>
+        <div class="mt-3 text-sm leading-relaxed">
+          <p>
+            O índice principal é calculado por <code>(1 − Amplitude) × Progresso</code>, variando de 0 a 1.
+            Isso combina igualdade interna (baixa amplitude entre grupos) com efetividade geral (progresso médio).
+          </p>
+          <p class="mt-2">
+            As metas com ausência de dados são sinalizadas em cinza; os gráficos preservam os vazios sem distorcer a interpretação.
+          </p>
+        </div>
+      </details>
+
+      <a href="#metas" class="inline-block mt-4 text-primaria font-semibold">Ver metas e análises ↓</a>
+    </div>
+  </div>
+</section>
+
+  <!-- Metas -->
+  <section id="metas" class="py-10">
+    <div class="container mx-auto px-6">
+      <div class="flex items-end justify-between mb-4">
+        <h2 class="text-2xl md:text-3xl font-bold">Metas do ODS 18</h2>
+        <div class="text-sm opacity-80">
+          Quanto <strong>maior a amplitude</strong>, pior (mais desigual). Quanto <strong>maior o progresso</strong>, melhor.
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th class="text-left w-[36%]">Meta</th>
+              <th class="text-right">Progresso</th>
+              <th class="text-right">Amplitude</th>
+              <th class="text-right">Índice (principal)</th>
+              <th class="text-left">Situação</th>
+            </tr>
+          </thead>
+          <tbody id="ods18-tabela-metas"></tbody>
+        </table>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-10 mb-3">Distribuição por grupo racial (por meta)</h3>
+      <div id="ods18-distribuicao" class="bg-white rounded-2xl p-4 shadow"></div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Seu bootstrap geral carrega tudo -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

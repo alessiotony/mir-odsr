@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "description": "Eliminar o racismo e a discriminação, tanto direta ou indireta, bem como nas formas múltipla ou agravada, e a intolerância correlata contra os povos indígenas e afrodescendentes nos ambientes públicos e privados de trabalho.",
+        "idGoal": 8,
+        "idTarget": 1,
+        "name": "Trabalho Decente",
+        "slug": "trabalho-decente-ods18-1"
+    },
+    {
+        "id": 2,
+        "description": "Eliminar todas as formas de violência contra povos indígenas e afrodescendentes nas esferas pública e privada, levando em conta suas interseccionalidades, em particular o homicídio das juventudes, feminicídio e os resultantes de homofobia e transfobia.",
+        "idGoal": 16,
+        "idTarget": 2,
+        "name": "Eliminação de Violências",
+        "slug": "eliminação-de-violencias-ods18-2"
+    },
+    {
+        "id": 3,
+        "description": "Garantir aos povos indígenas e afrodescendentes a efetivação e a ampliação do acesso à justiça, o devido processo legal e tratamento digno, justo e equânime perante os sistemas de justiça e de segurança pública.",
+        "idGoal": 16,
+        "idTarget": 3,
+        "name": "Proteção e Acesso à Justiça",
+        "slug": "protecao-e-acesso-a-justica-ods18-3"
+    },
+    {
+        "id": 4,
+        "description": "Garantir a representatividade equitativa dos povos indígenas e afrodescendentes nas instâncias, colegiados e órgãos de Estado e no quadro de pessoal de empresas públicas e privadas, levando em conta a interseccionalidade.",
+        "idGoal": 10,
+        "idTarget": 4,
+        "name": "Representatividade Equitativa",
+        "slug": "representatividade-equitativa-ods18-4"
+    },
+    {
+        "id": 5,
+        "description": "Promover a reparação integral das violações socioeconômica e cultural, das perdas territoriais e dos impactos ambientais nos territórios dos povos indígenas e afrodescendentes, especialmente os integrantes de comunidades tradicionais, favelas e comunidades urbanas, garantindo o direito à memória, verdade e justiça",
+        "idGoal": 15,
+        "idTarget": 5,
+        "name": "Reparação de Perdas Territoriais",
+        "slug": "reparacao-de-perdas-territoriais-ods18-5"
+    },
+    {
+        "id": 6,
+        "description": "Assegurar moradias adequadas, seguras e sustentáveis aos povos indígenas e afrodescendentes, incluindo comunidades tradicionais, favelas e comunidades urbanas, com garantia de equipamentos e serviços públicos de qualidade, com especial atenção à população em situação de rua.",
+        "idGoal": 11,
+        "idTarget": 6,
+        "name": "Moradia Adequada",
+        "slug": "moradia-adequada-ods18-6"
+    },
+    {
+        "id": 7,
+        "description": "Assegurar o acesso à atenção à saúde de qualidade, não discriminatória, para os povos indígenas e afrodescendentes, bem como o respeito às suas culturas e saberes ancestrais, garantido o fortalecimento do sistema público de saúde.",
+        "idGoal": 3,
+        "idTarget": 7,
+        "name": "Saúde e Bem-Estar",
+        "slug": "saude-e-bem-estar-ods18-7"
+    },
+    {
+        "id": 8,
+        "description": "Assegurar a educação de qualidade e não discriminatória aos povos indígenas e afrodescendentes, bem como o respeito às suas culturas e histórias, garantido o fortalecimento da educação pública.",
+        "idGoal": 4,
+        "idTarget": 8,
+        "name": "Educação de Qualidade",
+        "slug": "educacao-de-qualidade-ods18-8"
+    },
+    {
+        "id": 9,
+        "description": "Garantir, na exploração econômica e comercial de bens genéticos e na execução de grandes obras e empreendimentos em territórios historicamente ocupados por essas populações, a implementação de processos de consulta livre, prévia e informada a povos indígenas e afrodescendentes, assim como a repartição de benefícios, quando aplicável, preservando a sua ampla autonomia e autodeterminação.",
+        "idGoal": 12,
+        "idTarget": 9,
+        "name": "Exploração Econômica e Comercial",
+        "slug": "exploracao-economica-e-comercial-ods18-9"
+    },
+    {
+        "id": 10,
+        "description": "Eliminar a xenofobia e assegurar que todas as metas anteriores, quando cabíveis, sejam refletidas também no tratamento de imigrantes indígenas e afrodescendentes.",
+        "idGoal": 16,
+        "idTarget": 10,
+        "name": "Eliminação de Xenofobia",
+        "slug": "eliminacao-de-xenofobia-ods18-10"
+    }
+]
