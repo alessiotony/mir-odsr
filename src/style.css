@@ -182,3 +182,52 @@ header {
 .choices__list--dropdown .choices__list::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
+
+
+/* Estilo para os ícones Font Awesome (provavelmente você já tem algo assim) */
+/* Em seu arquivo de estilos (style.css, etc.) */
+
+/* NOVO ESTILO para ícones SVG usando a técnica de máscara */
+
+.pilar a .icone-svg {
+  width: 60px;
+  height: 60px;
+  background-color: var(--cor-primaria); /* Cor primária do ícone */
+  
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  transition: background-color 0.3s ease;
+}
+
+
+/* EFEITO HOVER UNIFICADO */
+.pilar a:hover i {
+  color: #A0522D; /* Nova cor no hover */
+}
+
+.pilar a:hover .icone-svg {
+  background-color: #A0522D; /* Nova cor no hover */
+}
+
+.icone-svg-header {
+  display: inline-block;
+  vertical-align: middle; /* Alinha o ícone com o texto ao lado, se houver */
+  
+  /* A MÁGICA: O ícone assume a cor do texto do link pai */
+  
+  
+  /* Propriedades da máscara que já conhecemos */
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}

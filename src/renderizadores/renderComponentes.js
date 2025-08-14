@@ -5,7 +5,10 @@ import { criarPillar } from '../utils/criarPillar.js';
 
 export function renderizarPilares(pilares, container) {
     if (!container || !pilares) return;
-    container.innerHTML = pilares.filter(p => p.id !== 'sobre' && p.id !== 'home').map(criarPillar).join('');
+    container.innerHTML = pilares
+        .filter(p => p.id !== 'sobre' && p.id !== 'home')
+        .map(pilar => `<div class="pilar">${criarPillar(pilar)}</div>`) // Envolve o resultado em <div class="pilar">
+        .join('');
 }
 
 export function renderizarEstatisticas(stats, container) {

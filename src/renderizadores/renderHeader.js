@@ -12,12 +12,23 @@ export function renderizarHeader(headerData, isHomepage = false) {
     `).join('');
 
     // 2. Gera HTML para os links de navegação (pilares)
-    const sectionLinksHtml = pilares.map(link => `
-        <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
-            <i class="${link.icon} fa-xl pl-2 text-texto-contraste hover:text-primaria transition-colors"></i>
-        </a>
-    `).join('');
-    
+     const sectionLinksHtml = pilares.map(link => {
+        let iconeHtml = '';
+        if (link.icon_type === 'svg') {
+            const style = `--mask-image: url(${link.icon})`;
+            // Usamos h-6 w-6 para um bom tamanho no header e pl-2 para o espaçamento
+            iconeHtml = `<div class="icone-svg-header h-6 w-6 pl-2 bg-white group-hover:bg-primaria transition-colors duration-300" style="${style}" role="img" aria-label="${link.label}"></div>`;
+        } else {
+            iconeHtml = `<i class="${link.icon} fa-xl pl-2 text-texto-contraste hover:text-primaria transition-colors"></i>`;
+        }
+        
+        return `
+            <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">
+                ${iconeHtml}
+            </a>
+        `;
+    }).join('');    
+        
     // 3. Gera HTML para os links de ação (Home/Contato)
     // const actionLinksHtml = navActions.map(link => `
     //     <a href="${link.href}" class="nav-link ${link.extraClass || ''}" aria-label="${link.label}">

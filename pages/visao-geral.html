@@ -8,9 +8,9 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.2/dist/css/tom-select.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/tailwind.config.js"></script> </head>
@@ -21,8 +21,11 @@
     <section class="hero-section text-texto-contraste pt-24 pb-12 md:pt-30 md:pb-14 relative bg-gray-800">
         <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" style="background-image: url('/img/background.jpeg');"></div>
         <div class="container mx-auto px-6 text-center relative">
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-1">
-                Selecione uma localidade para explorar o progresso dos Objetivos de Desenvolvimento Sustentável por grupos raciais.
+            <h1 class="text-6xl md:text-3xl font-bold mb-0">
+                <i class="fas fa-chart-pie fa-1x text-contraste mb-3" aria-hidden="true"></i>
+                Visão Geral</h1>
+            <p class="text-lg mx-auto mb-1">
+                Selecione uma unidade territorial para explorar o progresso dos ODS por raça/cor
             </p>
             
             <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-2 flex items-center mb-4">
@@ -36,7 +39,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-center justify-center max-w-xl mx-auto">
                 <div class="bg-transparent p-4 rounded-lg">
                     <i class="fas fa-chart-simple text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">53</p>
+                    <p class="text-2xl font-bold text-texto-contraste">86</p>
                     <p class="text-sm text-texto-contraste">Indicadores</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
@@ -46,13 +49,33 @@
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-flag-checkered text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">7</p>
-                    <p class="text-sm text-texto-contraste">Metas</p>
+                    <p class="text-2xl font-bold text-texto-contraste">9</p>
+                    <p class="text-sm text-texto-contraste">Períodos</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-users text-3xl text-texto-contraste mb-2"></i>
                     <p class="text-2xl font-bold text-texto-contraste">+212 mi</p>
                     <p class="text-sm text-texto-contraste">População</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-fundo-escuro mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">41%</p>
+                    <p class="text-sm text-texto-contraste">Negros</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-yellow-300 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">49%</p>
+                    <p class="text-sm text-texto-contraste">Amarelos</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-green-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">34%</p>
+                    <p class="text-sm text-texto-contraste">Indígenas</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-blue-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">48%</p>
+                    <p class="text-sm text-texto-contraste">Brancos</p>
                 </div>
             </div>
         </section>
@@ -84,6 +107,8 @@
     <!-- Texto interpretativo da tabela -->
       <div id="texto-sintese-tabela" class="prose max-w-none"></div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.2/dist/js/tom-select.complete.min.js"></script>
 
   </section>
 </main>

@@ -336,7 +336,7 @@ export class MapController {
         this.selectors.tableWrapper.innerHTML = '';
         const tableData = data.map(item => ({
             ano: this.state.year,
-            localidade: item.nome || `Código ${item.codigo_mun || item.codigo_uf}`,
+            localidade: item.nome || `Código ${item.id || item.codigo_uf}`,
             alerta: this.getAlerta(item.valor),
             valor: item.valor
         }));
@@ -407,7 +407,7 @@ export class MapController {
 
     styleFeature(feature, data) {
         const code = feature.properties.CD_MUN || feature.properties.CD_UF;
-        const entry = data.find(d => (d.codigo_uf == code || d.codigo_mun == code));
+        const entry = data.find(d => (d.codigo_uf == code || d.id == code));
         const value = entry ? entry.valor : null;
         return {
             fillColor: this.getColor(value),
@@ -428,7 +428,7 @@ export class MapController {
             click: (e) => {
                 const props = e.target.feature.properties;
                 const code = props.CD_MUN || props.CD_UF;
-                const entry = data.find(d => (d.codigo_uf == code || d.codigo_mun == code));
+                const entry = data.find(d => (d.codigo_uf == code || d.id == code));
                 const value = entry ? entry.valor.toFixed(2) : 'N/D';
                 const popupContent = `<b>${props.NM_MUN || props.NM_UF}</b><br>Índice: ${value}`;
                 L.popup().setLatLng(e.latlng).setContent(popupContent).openOn(this.map);

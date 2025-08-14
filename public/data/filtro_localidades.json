@@ -1,12 +1,12 @@
 [
-  { "codigo_mun": "BR", "nome": "Brasil", "uf": "BR", "nivel": 0 },
-  { "codigo_mun": "NE", "nome": "Nordeste", "uf": "NE", "nivel": 1 },
-  { "codigo_mun": "25", "nome": "Paraíba (UF)", "uf": "PB", "nivel": 2 },
-  { "codigo_mun": "250150", "nome": "Bananeiras, PB", "uf": "PB", "nivel": 3 },
-  { "codigo_mun": "250750", "nome": "João Pessoa, PB", "uf": "PB", "nivel": 3 },
-  { "codigo_mun": "26", "nome": "Pernambuco (UF)", "uf": "PE", "nivel": 2 },
-  { "codigo_mun": "261160", "nome": "Recife, PE", "uf": "PE", "nivel": 3 },
-  { "codigo_mun": "SE", "nome": "Sudeste", "uf": "SE", "nivel": 1 },
-  { "codigo_mun": "35", "nome": "São Paulo (UF)", "uf": "SP", "nivel": 2 },
-  { "codigo_mun": "355030", "nome": "São Paulo, SP", "uf": "SP", "nivel": 3 }
+  { "id": "BR", "nome": "Brasil", "uf": "BR", "nivel": 0 },
+  { "id": "NE", "nome": "Nordeste", "uf": "NE", "nivel": 1 },
+  { "id": "25", "nome": "Paraíba (UF)", "uf": "PB", "nivel": 2 },
+  { "id": "250150", "nome": "Bananeiras, PB", "uf": "PB", "nivel": 3 },
+  { "id": "250750", "nome": "João Pessoa, PB", "uf": "PB", "nivel": 3 },
+  { "id": "26", "nome": "Pernambuco (UF)", "uf": "PE", "nivel": 2 },
+  { "id": "261160", "nome": "Recife, PE", "uf": "PE", "nivel": 3 },
+  { "id": "SE", "nome": "Sudeste", "uf": "SE", "nivel": 1 },
+  { "id": "35", "nome": "São Paulo (UF)", "uf": "SP", "nivel": 2 },
+  { "id": "355030", "nome": "São Paulo, SP", "uf": "SP", "nivel": 3 }
 ]

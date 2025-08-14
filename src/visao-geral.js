@@ -5,6 +5,7 @@ export class VisaoGeralController {
     constructor() {
         this.selectors = {};
         this.fullDataObject = null;
+        this.defaultLocalidadeId = 'BR';
         console.log("VisaoGeralController adaptado com layout e tabela.");
     }
 
@@ -51,21 +52,66 @@ export class VisaoGeralController {
     }
 
     async populateFilters() {
-        const response = await fetch('./data/filtro_localidades.json');
-        if (!response.ok) throw new Error('Falha ao carregar filtro_localidades.json');
+        // Carrega a lista grande (5k+)
+        const response = await fetch('./data/localidades_from_mongo.json');
+        if (!response.ok) throw new Error('Falha ao carregar localidades_from_mongo.json');
         const localidades = await response.json();
-        const optionsHtml = localidades.map(loc => {
-            const indentacao = '&nbsp;'.repeat(loc.nivel * 4);
-            return `<option value="${loc.codigo_mun}">${indentacao}${loc.nome}</option>`;
-        }).join('');
-        this.selectors.localidade.innerHTML = optionsHtml;
+
+        // Gera texto com indentação por nível (mantém hierarquia visual)
+        const toText = (loc) => `${'\u00A0'.repeat((loc.nivel || 0) * 4)}${loc.nome}`;
+
+        // Destroi instância anterior se o usuário voltar pra página
+        if (this.tomSelect) {
+            this.tomSelect.destroy();
+            this.tomSelect = null;
+        }
+          // Garante que o <select> esteja vazio e com uma opção vazia (placeholder)
+  this.selectors.localidade.innerHTML = `<option value=""></option>`;
+
+  // Inicializa Tom Select com opções e busca
+  this.tomSelect = new TomSelect(this.selectors.localidade, {
+    // Passa as opções já carregadas (mais rápido que addOptions em loop)
+    options: localidades.map(loc => ({
+      value: String(loc.id),
+      text: toText(loc),
+      nome: loc.nome,
+      uf: loc.uf || '',
+      nivel: loc.nivel || 0
+    })),
+    valueField: 'value',
+    labelField: 'text',
+    searchField: ['nome', 'uf', 'text'], // busca por nome, UF e texto com indentação
+    placeholder: 'Brasil',
+    allowEmptyOption: true,
+    // Performance para listas grandes
+    maxOptions: 200,      // quantos itens renderiza por vez
+    maxItems: 1,          // seleção simples
+    create: false,
+    diacritics: true,
+    // Mantém o visual mais “clean” na hero
+    dropdownParent: 'body', // evita overflow dentro do card
+    render: {
+      option: (data) => {
+        // Mantém indentação e um sufixo com UF quando existir
+        const uf = data.uf ? ` · ${data.uf}` : '';
+        return `<div class="text-sm">${data.text}${uf}</div>`;
+      },
+      item: (data) => {
+        const uf = data.uf ? ` · ${data.uf}` : '';
+        return `<div class="text-base">${data.nome}${uf}</div>`;
+      }
     }
+  });
+}
 
     addEventListeners() {
-        if (this.selectors.localidade) {
+        // Se existir Tom Select, ouve nele; senão, cai pro <select> nativo
+        if (this.tomSelect) {
+            this.tomSelect.on('change', () => this.updateView());
+        } else if (this.selectors.localidade) {
             this.selectors.localidade.addEventListener('change', () => this.updateView());
         }
-    }
+        }
 
     async updateView() {
         // 1) Radial + Série (renderSintese)

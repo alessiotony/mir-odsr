@@ -1,6 +1,6 @@
 {
   "kpis": {
-    "indicadores": 83,
+    "indicadores": 86,
     "objetivos": 11,
     "metas": 7,
     "populacao": "+212 mi"
@@ -25,12 +25,12 @@
     ]
   },
   "graficoOds": {
-    "categories": ["ODS 1", "ODS 2", "ODS 3", "ODS 4", "ODS 5", "ODS 8", "ODS 10", "ODS 13"],
+    "categories": ["ODS 1", "ODS 2", "ODS 3", "ODS 4", "ODS 5", "ODS 8", "ODS 10", "ODS 13", "ODS 14", "ODS 15", "ODS 16"],
     "series": [
-      { "name": "Brancos",    "data": [88, 75, 92, 60, 70, 85, 78, 82] },
-      { "name": "Negros",     "data": [72, 65, 80, 50, 62, 77, 68, 74] },
-      { "name": "Indígenas",  "data": [60, 55, 70, 45, 50, 68, 58, 64] },
-      { "name": "Amarelos",   "data": [90, 85, 94, 75, 80, 88, 85, 90] }
+      { "name": "Brancos",    "data": [88, 75, 92, 60, 70, 85, 78, 82, 85, 78, 82] },
+      { "name": "Negros",     "data": [72, 65, 80, 50, 62, 77, 68, 74, 77, 68, 74] },
+      { "name": "Indígenas",  "data": [60, 55, 70, 45, 50, 68, 58, 64, 68, 58, 64] },
+      { "name": "Amarelos",   "data": [90, 85, 94, 75, 80, 88, 85, 90, 88, 85, 90] }
     ]
   },
   "tabelaIndicadores": {

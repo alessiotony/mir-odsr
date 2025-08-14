@@ -37,26 +37,45 @@
 <body class="bg-fundo-claro">
 
   <div id="header-placeholder"></div>
+  <section class="hero-section text-texto-contraste pt-24 pb-12 md:pt-30 md:pb-14 relative bg-gray-800">
+        <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" style="background-image: url('/img/background.jpeg');"></div>
+        <div class="container mx-auto px-6 text-center relative">
+            <h1 class="text-6xl md:text-3xl font-bold mb-0">
+              <div class="icone-svg-header h-20 w-20 pl-2 bg-white group-hover:bg-primaria transition-colors duration-300" style="mask-image: url('/img/icon-ods18.svg')" role="img" aria-label="ODS 18"></div>
+                ODS 18 • Igualdade Étnico‑Racial</h1>
+            <p class="text-lg mx-auto mb-1">
+                Selecione uma unidade territorial para o monitoramento do progresso e da paridade entre grupos raciais</strong>.
+            </p>
+            
+            <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-2 flex items-center mb-4">
+                <i class="fas fa-map-marker-alt text-gray-400 mx-3"></i>
+                <select id="seletor-localidade" class="w-full bg-transparent text-gray-700 text-lg border-none focus:ring-0">
+                    <option>Brasil</option>
+                </select>
+            </div>
 
-  <!-- hero com seletor de localidade (seguindo padrão da visão geral) -->
-  <section class="hero-section text-texto-contraste pt-12 pb-8 md:pt-28 md:pb-14 relative">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold">ODS 18 • Igualdade Étnico‑Racial</h1>
-          <p class="text-base md:text-lg mt-1 opacity-90">
-            Monitoramento do <strong>progresso</strong> e da <strong>desigualdade entre grupos raciais</strong>.
-          </p>
+            <section id="sintese-kpis" class="mt-0">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 text-center justify-center max-w-xl mx-auto">
+                <div class="bg-transparent p-4 rounded-lg">
+                    <i class="fas fa-chart-simple text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">86</p>
+                    <p class="text-sm text-texto-contraste">Indicadores</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-flag-checkered text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">6</p>
+                    <p class="text-sm text-texto-contraste">Metas</p>
+                </div>
+                <div class="bg-transparent p-4 rounded-lg ">
+                    <i class="fas fa-users text-3xl text-texto-contraste mb-2"></i>
+                    <p class="text-2xl font-bold text-texto-contraste">+212 mi</p>
+                    <p class="text-sm text-texto-contraste">População</p>
+                </div>
+            </div>
+        </section>
         </div>
-        <div class="w-full md:w-80">
-          <label class="block text-sm font-medium mb-1">Localidade</label>
-          <select id="ods18-localidade" class="w-full border rounded-lg p-2.5 bg-white">
-            <option value="BR">Brasil (geral)</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+
 
   <!-- Cards resumo (2 colunas) -->
 <section class="py-2">
@@ -93,24 +112,151 @@
   <div class="container mx-auto px-6">
     <div class="bg-transparent rounded-2xl p-6 shadow">
       <h3 class="font-semibold text-lg mb-2">Sobre o ODS 18</h3>
-      <p class="text-sm opacity-90">
-        Esta página usa os metadados das metas para contextualização e boas práticas de comunicação.
-      </p>
+      <div class="space-y-3">
+  <h3 class="sr-only">Destaques do ODS 18</h3>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <!-- 1 -->
+    <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
+        <i class="fa-solid fa-star text-emerald-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">ODS 18 — Igualdade Étnico-Racial</p>
+        <p class="text-sm opacity-80">Iniciativa pioneira do Brasil. Mostrando o compromisso nacional por um país mais justo e próspero.</p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100">
+        <i class="fa-solid fa-bullseye text-indigo-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">Propósito</p>
+        <p class="text-sm opacity-80">Reconhecer e combater, de forma estruturada, as desigualdades étnico-raciais históricas.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-100">
+        <i class="fa-solid fa-microphone-lines text-amber-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">Anúncio</p>
+        <p class="text-sm opacity-80">A proposta foi anunciada em setembro de 2023, pelo Presidente Luiz Inácio Lula da Silva, em discurso na abertura da 78ª Assembleia da ONU.</p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-100">
+        <i class="fa-solid fa-diagram-project text-sky-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">Governança</p>
+        <p class="text-sm opacity-80">Institucionalização via Comissão Nacional para os ODS (CNODS), com a Câmara Temática específica <strong>CT-ODS 18</strong>. <a href="https://www.gov.br/secretariageral/pt-br/cnods" target="_blank" rel="noopener noreferrer" class="text-primaria">
+          <i class="fas fa-square-arrow-up-right mr-0"></i> Mais informações</a>
+        </p>
+        
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-100">
+        <i class="fa-solid fa-people-group text-rose-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">Coordenação e construção</p>
+        <p class="text-sm opacity-80">Ministérios da Igualdade Racial e dos Povos Indígenas, 
+          com governo e sociedade civil, definindo metas e indicadores. <a href="https://www.gov.br/igualdaderacial/pt-br/assuntos/ods18" target="_blank" rel="noopener noreferrer" class="text-primaria">
+          <i class="fas fa-square-arrow-up-right mr-0"></i> Mais informações</a></p>
+      </div>
+    </div>
+    <!-- 6 -->
+     <div class="flex items-start gap-3 rounded-xl bg-white/70 backdrop-blur p-3 ring-1 ring-black/5">
+      <span class="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-rose-100">
+        <i class="fa-solid fa-eye text-brown-700 text-xs"></i>
+      </span>
+      <div>
+        <p class="text-sm font-semibold">Observatório do ODS 18</p>
+        <p class="text-sm opacity-80">Espaço acadêmico da UFSB dedicado à formação, pesquisa e monitoramento do ODS 18.
+          <a href="https://observeods18.com.br/" target="_blank" rel="noopener noreferrer" class="text-primaria">
+          <i class="fas fa-square-arrow-up-right mr-0"></i> Mais informações</a>
+      </div>
+    </div>
+  </div>
+</div>
 
       <!-- Mais detalhes colapsável -->
-      <details class="mt-4 group">
+      <details class="mt-4 group" open>
         <summary class="cursor-pointer text-primaria font-semibold">
           Mais detalhes <span class="opacity-70">(clique para expandir)</span>
         </summary>
-        <div class="mt-3 text-sm leading-relaxed">
-          <p>
-            O índice principal é calculado por <code>(1 − Amplitude) × Progresso</code>, variando de 0 a 1.
-            Isso combina igualdade interna (baixa amplitude entre grupos) com efetividade geral (progresso médio).
-          </p>
-          <p class="mt-2">
-            As metas com ausência de dados são sinalizadas em cinza; os gráficos preservam os vazios sem distorcer a interpretação.
-          </p>
+        <div class="space-y-6 text-base leading-relaxed text-gray-700">
+
+    <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">O que é o Índice Sintético de Igualdade Racial (ISIR)?</h2>
+        <p>
+            O <strong>Índice Sintético de Igualdade Racial (ISIR)</strong> é um novo indicador desenhado para mensurar de forma integrada o avanço socioeconômico e a redução das desigualdades raciais no Brasil. Diante da persistência histórica das disparidades, que são amplamente documentadas na literatura em suas múltiplas dimensões, torna-se imperativo o desenvolvimento de uma ferramenta que seja ao mesmo tempo robusta e de fácil comunicação para orientar políticas públicas e mobilizar a sociedade.
+        </p>
+    </div>
+
+    <div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-3">Metodologia e Componentes</h3>
+        <p class="mb-6">
+            A metodologia se inspira em modelos de sucesso no país, como o IDEB. O ISIR é concebido a partir da multiplicação de dois componentes essenciais, que medem o desenvolvimento socioeconômico e o grau de paridade racial:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <p class="font-semibold text-gray-900">1. Progresso</p>
+                <p class="text-sm text-gray-600">Mede o nível médio de desenvolvimento socioeconômico alcançado, com base nos indicadores dos ODS estratificados por raça/cor.</p>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <p class="font-semibold text-gray-900">2. Paridade Interna</p>
+                <p class="text-sm text-gray-600">Afere o grau de paridade média entre os grupos raciais, capturando a amplitude da disparidade em cada indicador.</p>
+            </div>
         </div>
+    </div>
+    
+    <div class="bg-amber-50 border border-amber-300 rounded-lg p-6 text-center shadow-sm">
+        <p class="text-lg font-semibold text-amber-900 mb-2">Fórmula Essencial do ISIR</p>
+        <div class="text-xl">
+             <kbd class="px-3 py-1 bg-primaria text-white rounded-md font-mono shadow-inner">ISIR</kbd>
+             <span class="mx-2 font-light text-gray-500">=</span>
+             <kbd class="px-3 py-1 bg-white border border-gray-300 rounded-md font-mono">Progresso</kbd>
+             <span class="mx-2 font-bold text-amber-800">×</span>
+             <kbd class="px-3 py-1 bg-white border border-gray-300 rounded-md font-mono">Paridade Interna</kbd>
+        </div>
+        <p class="text-xs text-amber-700 mt-3">Onde "Paridade Interna" é calculada como <code>(1 - Amplitude da Desigualdade)</code>.</p>
+    </div>
+
+    <div>
+        <p>
+            Esta abordagem garante que o índice só atinja valores elevados quando ambas as dimensões são positivas. Um progresso geral que não reduz as desigualdades será penalizado, assim como uma redução da disparidade em um contexto de estagnação ou retrocesso social. A fórmula se mostra não apenas conceitualmente sólida, mas também intuitiva.
+        </p>
+
+        <blockquote class="my-6 border-l-4 border-amber-500 pl-4 italic text-gray-800">
+            "O quão bem estamos combinando o avanço geral da sociedade com a redução efetiva das desigualdades?"
+        </blockquote>
+
+        <p>
+            O ISIR é, portanto, uma ferramenta poderosa para o monitoramento e a comunicação de resultados, pois sua lógica responde diretamente à questão central da política de equidade racial. Este documento detalha sua fundamentação, metodologia e uso, posicionando-o como um instrumento estratégico para a Plataforma ODS Racial e para o avanço da agenda de igualdade étnico-racial no Brasil.
+        </p>
+    </div>
+
+    <div class="mt-8 flex items-start space-x-3 bg-gray-100 p-4 rounded-lg text-sm">
+        <svg class="h-5 w-5 flex-shrink-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+        </svg>
+        <p class="text-gray-600">
+            Na visualização dos dados, metas com ausência de dados são sinalizadas em cinza. Os gráficos são construídos para preservar os vazios, garantindo uma interpretação fiel da realidade sem criar distorções.
+        </p>
+    </div>
+</div>
       </details>
 
       <a href="#metas" class="inline-block mt-4 text-primaria font-semibold">Ver metas e análises ↓</a>

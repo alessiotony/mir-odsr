@@ -15,7 +15,7 @@
     ]
   },
   "estatisticas": [
-    {"icon": "fas fa-users-viewfinder", "value": "83 indicadores", "label": "por Grupos Raciais e Localidades"},
+    {"icon": "fas fa-users-viewfinder", "value": "86 indicadores", "label": "por Grupos Raciais e Localidades"},
     {"icon": "fas fa-seedling", "value": "11 objetivos", "label": "de Desenvolvimento Sustentável"},
     {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"},
     {"icon": "fas fa-bullseye", "value": "7 metas", "label": "do ODS 18 com indicadores monitorados"},
@@ -25,7 +25,8 @@
   "pilares": [
     { "id": "geral", "label": "Visão Geral", "icon": "fas fa-chart-pie", "href": "/odsr/visao-geral",
     "text": "Seu ponto de partida com os principais insights e métricas da plataforma"},
-    { "id": "ods18", "label": "Igualdade Étnico-Racial", "icon": "fas fa-fist-raised", "href": "/odsr/ods18",
+    { "id": "ods18", "label": "Igualdade Étnico-Racial", "icon": "./img/icon-ods18.svg", 
+    "icon_type": "svg", "href": "/odsr/ods18",
     "text": "Acompanhe os indicadores relacionados ao 18º ODS assumido pelo Brasil"},
     { "id": "dados", "label": "Dados Abertos", "icon": "fas fa-table", "href": "/odsr/tabela",
     "text": "Construtor de tabelas para visualização e download de dados por grupos raciais"},

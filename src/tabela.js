@@ -35,7 +35,7 @@ export class TableController {
                 fetch('./data/seletor_colunas.json'),
                 fetch('./data/filtro_indicadores.json'),
                 fetch('./data/filtro_periodo.json'),
-                fetch('./data/filtro_localidades.json'),
+                fetch('./data/localidades_from_mongo.json'),
                 fetch('./data/filtro_raca_cor.json'),
                 fetch('./data/tabela_dados_full.json')
             ]);

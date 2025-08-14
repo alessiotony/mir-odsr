@@ -47,7 +47,7 @@ export class LineChartController {
         try {
             const [indicadoresRes, localidadesRes] = await Promise.all([
                 fetch('./data/filtro_indicadores.json'),
-                fetch('./data/filtro_localidades.json')
+                fetch('./data/localidades_from_mongo.json')
             ]);
             this.allIndicatorData = await indicadoresRes.json();
             this.allLocalidadeData = await localidadesRes.json();
