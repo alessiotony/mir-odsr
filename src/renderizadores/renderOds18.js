@@ -28,7 +28,7 @@ export class Ods18Controller {
     this.$ = {
       radial:       document.querySelector('#ods18-radial'),
       kProgresso:   document.querySelector('#kpi-progresso'),
-      kAmplitude:   document.querySelector('#kpi-amplitude'),
+      kAmplitude:   document.querySelector('#kpi-paridade'),
       kIndicadores: document.querySelector('#kpi-indicadores'),
       textoResumo:  document.querySelector('#ods18-texto-resumo'),
       tabela:       document.querySelector('#ods18-tabela-metas'),
@@ -67,12 +67,12 @@ export class Ods18Controller {
   renderKpis(){
   const g = this.dados?.global || this.dados?.sintese || {};
   const progresso = g.progresso ?? g.progresso_medio ?? 0;
-  const amplitude = g.amplitude ?? 0;
+  const paridade = g.paridade ?? 0;
   const indice = g.indice ?? 0;
   const nIndicadores = g.nIndicadores ?? g.indicadores ?? '—';
 
   if (this.$.kProgresso)   this.$.kProgresso.textContent   = this.pct(progresso);
-  if (this.$.kAmplitude)   this.$.kAmplitude.textContent   = this.pct(amplitude);
+  if (this.$.kAmplitude)   this.$.kAmplitude.textContent   = this.pct(paridade);
   if (this.$.kIndicadores) this.$.kIndicadores.textContent = String(nIndicadores);
 
   if (this.$.textoResumo) {
@@ -88,12 +88,12 @@ export class Ods18Controller {
     let desafio;
     const limiarProgresso = 0.8;
     const limiarParidade = 0.8;
-    if (progresso < limiarProgresso && amplitude < limiarParidade) {
-      desafio = `em ambos: progresso (${this.pct(progresso)}) e paridade (${this.pct(1 - amplitude)})`;
+    if (progresso < limiarProgresso && paridade < limiarParidade) {
+      desafio = `em ambos: progresso (${this.pct(progresso)}) e paridade (${this.pct(1 - paridade)})`;
     } else if (progresso < limiarProgresso) {
       desafio = `no progresso (${this.pct(progresso)})`;
-    } else if (amplitude < limiarParidade) {
-      desafio = `na paridade (${this.pct(1 - amplitude)})`;
+    } else if (paridade < limiarParidade) {
+      desafio = `na paridade (${this.pct(1 - paridade)})`;
     } else {
       desafio = 'nos dois indicadores, embora em níveis menos críticos';
     }
@@ -101,7 +101,7 @@ export class Ods18Controller {
     this.$.textoResumo.textContent =
       `A localidade selecionada apresentou um Índice Sintético de Igualdade Racial (ISIR) de ${valorPct}. ` +
       `Com base nesse valor, podemos destacar que ${msgNivel} ` +
-      `O ISIR é calculado por meio da multiplicação do progresso e da paridade (complemento da amplitude). ` +
+      `O ISIR é calculado por meio da multiplicação do progresso e da paridade (complemento da paridade). ` +
       `No caso em questão, observa-se que o maior desafio está ${desafio}.`;
   }
 }
@@ -110,7 +110,7 @@ export class Ods18Controller {
   renderRadial(){
     if (!this.$.radial) return;
     const g = this.dados?.global || this.dados?.sintese || {};
-    const idx = (g.indice != null) ? g.indice : this.indice(g.amplitude, g.progresso ?? g.progresso_medio);
+    const idx = (g.indice != null) ? g.indice : this.indice(g.paridade, g.progresso ?? g.progresso_medio);
     const valor = this.pctNum(idx) ?? 0;
 
     // destruir instância anterior
@@ -170,7 +170,7 @@ export class Ods18Controller {
 
     metas.forEach(m => {
       const prog = m.progressoMedio ?? m.progresso ?? null;
-      const amp  = m.amplitude ?? null;
+      const amp  = m.paridade ?? null;
       const idx  = (m.indice != null) ? m.indice : this.indice(amp, prog);
       const [rotulo, klass] = this.status(idx);
       const semDados = (prog==null || amp==null);

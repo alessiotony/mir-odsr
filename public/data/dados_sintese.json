@@ -1,46 +1,63 @@
 {
+  "ods18": {
+     "nIndicadores": 86,
+     "nMetasMonitoradas": 6,
+     "progresso": 0.77,
+     "paridade": 0.795,
+     "indice": 0.612
+  },
+  "serieTemporalOds18": {
+    "titulo": "Evolução do Nível de Igualdade Racial no Brasil",
+    "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    "series": [
+      {
+        "name": "total",
+        "data": [0.499, 0.54, 0.596, 0.542, 0.546, 0.562, 0.59, 0.599, 0.612]
+      }
+    ]
+  },
   "indicadorRadial": {
     "titulo": "Nível de Progresso Médio dos Indicadores por Grupo Étnico-Racial",
     "data": [
       {
-        "label": "negra",
+        "label": "Negros",
         "valor": 0.41,
         "cor": "#4A2712"
         },
       {
-        "label": "amarela",
+        "label": "Amarelos",
         "valor": 0.488,
-        "cor": "#e7dd4c"
+        "cor": "#F1C40F"
       },
       {
-        "label": "indigena",
+        "label": "Indígenas",
         "valor": 0.337,
         "cor": "#15803d"
       },
       {
-        "label": "branca",
+        "label": "Brancos",
         "valor": 0.478,
         "cor": "#1d4ed8"
       }]
   },
   "serieTemporal": {
-    "titulo": "Evolução do Nível de Progresso dos ODS por Raça/Cor no Brasil",
+    "titulo": "Evolução do Nível de Progresso dos ODS por Raça e Cor no Brasil",
     "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
     "series": [
       {
-        "name": "negra",
+        "name": "Negros",
         "data": [0.399, 0.4, 0.396, 0.442, 0.446, 0.462, 0.45, 0.405, 0.41]
       },
       {
-        "name": "branca",
+        "name": "Brancos",
         "data": [0.421, 0.438, 0.426, 0.467, 0.469, 0.491, 0.471, 0.444, 0.478]
       },
       {
-        "name": "indigena",
+        "name": "Indígenas",
         "data": [0.311, 0.298, 0.289, 0.342, 0.34, 0.369, 0.357, 0.31, 0.337]
       },
       {
-        "name": "amarela",
+        "name": "Amarelos",
         "data": [0.397, 0.412, 0.413, 0.433, 0.423, 0.427, 0.445, 0.44, 0.488]
       }
     ]

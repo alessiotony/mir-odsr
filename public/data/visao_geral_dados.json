@@ -9,7 +9,7 @@
     "titulo": "Nível de Progresso por Grupo Racial",
     "data": [
       { "label": "Negros",    "valor": 0.41,  "cor": "#4A2712" },
-      { "label": "Amarelos",  "valor": 0.488, "cor": "#e7dd4c" },
+      { "label": "Amarelos",  "valor": 0.488, "cor": "#F1C40F" },
       { "label": "Indígenas", "valor": 0.337, "cor": "#15803d" },
       { "label": "Brancos",   "valor": 0.478, "cor": "#1d4ed8" }
     ]

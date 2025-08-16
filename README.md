@@ -1,6 +1,20 @@
 # Portal ODS Racial UFPB
 Portal ODS Racial PB
 
+# Pilares excluídos de `dados.json` pra serem desenvolvidos em um 2º momento
+```json
+{ "id": "mapa", "label": "Mapa Analítico", "icon": "fas fa-map-location-dot", "href": "/odsr/mapa",
+    "text": "Explore os dados segmentados por diferentes grupos raciais e abrangências geográficas",
+  "detail": "Dos 17 ODS do pacto global, atualmente temos indicadores para 11 deles"},
+    { "id": "linha", "label": "Séries Temporais", "icon": "fas fa-line-chart", "href": "/odsr/linha",
+    "text": "Veja séries temporais dos indicadores por grupos raciais",
+  "detail": "Dos 17 ODS do pacto global, atualmente temos indicadores para 11 deles"},
+    { "id": "analitico", "label": "Modelo Analítico", "icon": "fas fa-bar-chart", "href": "#",
+    "text": "Faça análises com matrizes de correlação, grafos e regressão",
+  "detail": "Dos 17 ODS do pacto global, atualmente temos indicadores para 11 deles"},
+```
+
+
 NPM Node JS
 ```bash
 node -v

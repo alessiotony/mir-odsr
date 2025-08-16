@@ -90,7 +90,7 @@ export class TableController {
         const selectedRacas = this.choices.raca.getValue(true);
 
         if (!selectedIndicators.length || !selectedUFs.length || !selectedYears.length || !selectedRacas.length) {
-            alert("Por favor, selecione ao menos um item em cada filtro: Conteúdo, Períodos, Localidades e Raça/Cor.");
+            alert("Por favor, selecione ao menos um item em cada filtro: Conteúdo, Períodos, Localidades e Raça e Cor.");
             this.toggleLoader(false);
             return;
         }
@@ -105,7 +105,7 @@ export class TableController {
 
         const indicadorInfo = this.choices.conteudo.getValue();
         this.selectors.title.textContent = indicadorInfo.length ? indicadorInfo[0].label : "Tabela de Dados";
-        this.selectors.subtitle.textContent = `Dados para ${selectedUFs.length} localidade(s), ${selectedRacas.length} grupo(s) de raça/cor e ${selectedYears.length} período(s).`;
+        this.selectors.subtitle.textContent = `Dados para ${selectedUFs.length} localidade(s), ${selectedRacas.length} grupo(s) de raça e cor e ${selectedYears.length} período(s).`;
         
         this.renderDynamicTable(filteredData, linhaKey, colunaKey);
         

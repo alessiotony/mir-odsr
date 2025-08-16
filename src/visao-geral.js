@@ -372,7 +372,7 @@ narrarSerieTemporal(serieTemporal) {
         <p>
         Em média, o <strong>${max.cat}</strong> apresenta o maior progresso (${max.media.toFixed(0)}%),
         enquanto o <strong>${min.cat}</strong> tem o menor (${min.media.toFixed(0)}%). A maior disparidade 
-        entre grupos de raça/cor ocorre em <strong>${worstGap.cat}</strong>
+        entre grupos de raça e cor ocorre em <strong>${worstGap.cat}</strong>
         (diferença de <strong>${worstGap.d.toFixed(0)} p.p.</strong> entre o maior e o menor valor).
         </p>
     `;

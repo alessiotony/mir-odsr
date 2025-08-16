@@ -31,13 +31,12 @@
             <img src="/img/icon-odsr.png" alt="Logo ODS Racial" class="h-28 md:h-48 mb-0" onerror="this.onerror=null;this.src='https://placehold.co/240x96/cccccc/ffffff?text=ODS Racial';" style="opacity: 1.0;">
             <h1 class="text-6xl md:text-6xl font-bold mb-0">Plataforma ODS Racial</h1>
             <p class="text-base md:text-lg max-w-3xl mx-auto">
-                Disponibilizando informações para auxiliar na tomada de decisão de políticas que promovam a igualdade étnico-racial no Brasil.
+                Monitoramento da Agenda 2030 com recorte racial, por meio de indicadores em nível municipal
             </p>
-        </div>
         </div>
     </section>
 
-    <!-- Stats and Pillars Section -->
+    <!-- Pillars Section -->
     <section class="pt-0 py-12 bg-white">
         <div class="container mx-auto px-6">
             <!-- Pillars -->
@@ -45,31 +44,68 @@
             </div>      
         </div>
     </section>
+    
+     <!-- <main id="paineis" class="py-2 bg-fundo-claro"> -->
+    <div class="mx-auto w-full max-w-[1280px] xl:max-w-[1400px] px-4">
+        <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12"></div>
+    </div>
 
-    <!-- Panels Section -->
-    <main id="paineis" class="py-2 bg-fundo-claro">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-texto-principal"><i class="fas fa-chart-bar text-primaria"></i> Síntese do ODS Racial no Brasil</h2>
-            </div>
-        <!-- Stats -->
-         <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
-            </div> 
-        <section id="sintese-grafica" class="py-16 bg-transparent">
-        <div class="container mx-auto px-6">
-            <div id="titulo-sintese" class="text-center mb-12">
-                </div>
-            
-            <div id="grafico-radial-container" class="w-full flex justify-center items-center flex-wrap gap-8 py-4">
-                
-                </div>
-
-            <div id="grafico-serie-container">
-                </div>
+    <!-- Síntese em 2 colunas -->
+    <section id="sintese-grafica" class="py-10 bg-transparent">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-10 mx-auto w-full max-w-[1280px] xl:max-w-[1400px]">
+        <h2 class="text-3xl md:text-4xl font-bold text-texto-principal">
+            <i class="fas fa-chart-pie text-primaria"></i> Síntese Analítica
+        </h2>
+        <p class="text-texto-secundario mt-2">Visão geral com interpretação rápida, radiais e evolução no tempo.</p>
         </div>
-    </section>
-    </main>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        <!-- COLUNA ESQ: Visão Geral dos ODS -->
+        <div class="bg-white rounded-xl shadow p-6">
+            <h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+            <div class="icone-svg-header h-6 w-6 pl-2 bg-primaria" style="mask-image: url('/img/icon-sdg.svg')" role="img" aria-label="ODS"></div>
+            Visão Geral dos ODS (Brasil)
+            </h3>
+            <div>
+                <p style="margin-top: 0; margin-bottom: 16px; font-size: 16px;">
+                    O desenvolvimento só é sustentável se for para todos. Por isso, transformamos múltiplos indicadores 
+                    em um <strong>índice de progresso</strong> com <strong>recorte racial</strong> para medir desigualdades e mostrar
+                    possíveis caminhos para um avanço mais justo e sustentável no Brasil.
+                <a href="/odsr/visao-geral" rel="noopener noreferrer" class="text-primaria">
+                <i class="fas fa-square-arrow-up-right mr-0"></i> Explore os Dados</a></p>
+                </div>
+            <div id="titulo-sintese-geral" class="mb-2"></div>
+            <div id="radial-geral" class="w-full grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4"></div>
+            <div id="serie-geral" class="mt-6"></div>
+            <p id="texto-sintese-geral" class="text-sm text-texto-secundario leading-relaxed mb-4"></p>
+        </div>
+
+        <!-- COLUNA DIR: ODS 18 -->
+         <div class="bg-white rounded-xl shadow p-6">
+                <h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+                <div class="icone-svg-header h-6 w-6 pl-2 bg-primaria" style="mask-image: url('/img/icon-ods18.svg')" role="img" aria-label="ODS 18"></div>
+                Síntese do ODS 18 (Brasil)
+                </h3>
+                <div>
+                <p style="margin-top: 0; margin-bottom: 16px; font-size: 16px;">
+                    Como medir a igualdade racial na sua localidade? 
+                    Nosso índice responde a essa pergunta unindo duas análises em uma: 
+                    o <strong>progresso socioeconômico</strong> e o <strong>nível de paridade racial</strong>. 
+                    O progresso só é verdadeiro quando alcança todas as cores.
+                <a href="/odsr/ods18" rel="noopener noreferrer" class="text-primaria">
+                <i class="fas fa-square-arrow-up-right mr-0"></i> Explore os Dados</a></p>
+                </div>
+                <div id="titulo-sintese-ods18" class="mb-6"></div>
+                <div id="radial-ods18" class="w-full flex flex-wrap justify-center gap-6"></div>
+                <div id="serie-ods18" class="mt-6"></div>
+                <p id="texto-sintese-ods18" class="text-sm text-texto-secundario leading-relaxed mb-4"></p>
+            </div>
+            </div>
+        </div>
+    </div>
+    </section>
     
 
     <!-- Seção Sobre -->
@@ -80,14 +116,14 @@
             </div>
             <div class="max-w-4xl mx-auto text-center">
                 <p class="text-lg text-texto-principal mb-10 leading-relaxed">
-                    A <strong>Plataforma ODS Racial (ODSR)</strong> é uma iniciativa do <strong>Laboratório de Estudos em Modelagem Aplicada (LEMA)</strong> da <strong>Universidade Federal da Paraíba (UFPB)</strong>, desenvolvida com o apoio técnico e financeiro do <strong>Ministério da Igualdade Racial (MIR)</strong>.
-                    <br><br>
-                    Atualmente em sua fase inicial de desenvolvimento, a plataforma busca consolidar-se como uma referência em Business Intelligence (BI) e Analytics (BA) na área de desenvolvimento sustentável no país. O objetivo é promover uma cultura de gestão baseada em dados, que subsidie a formulação de políticas públicas eficazes para a promoção da igualdade étnico-racial no Brasil.
-                </p>
+    A <strong>Plataforma ODS Racial (ODSR)</strong> é uma iniciativa do <strong>Laboratório de Estudos em Modelagem Aplicada (LEMA)</strong> da <strong>Universidade Federal da Paraíba (UFPB)</strong>, desenvolvida com o apoio técnico e financeiro do <strong>Ministério da Igualdade Racial (MIR)</strong>.
+    <br><br>
+    Mesmo em sua fase inicial, a plataforma nasce com a missão de se tornar uma referência em dados sobre desenvolvimento sustentável no país, servindo como ferramenta essencial para a formulação de políticas públicas mais eficazes na promoção da igualdade étnico-racial no Brasil.
+</p>
                 </p>
                 <div class="mb-12">
                     <a href="https://drive.google.com/file/d/1OXFEvxeicDWB-fPI8VN10DE01Km1v8jC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-block bg-primaria text-texto-contraste font-bold py-3 px-6 rounded-lg hover:bg-primaria-hover transition-colors duration-300 shadow-lg">
-                        <i class="fas fa-file-pdf mr-2"></i>
+                        <i class="fas fa-book mr-2"></i>
                         Glossário de Indicadores ODS Racial
                     </a>
                 </div>

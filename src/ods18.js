@@ -4,7 +4,7 @@ const COLORS = {
   Branca:  '#1d4ed8',
   Negra:   '#000000',
   'Indígena': '#15803d',
-  Amarela: '#e7dd4c',
+  Amarela: '#F1C40F',
   null:    '#cccccc'
 };
 
@@ -86,10 +86,10 @@ function paintParticles() {
 function kpisGlobais(global) {
   // campos existem no JSON novo
   document.getElementById('kpi-progresso').textContent = fmtPct(global.progresso);
-  document.getElementById('kpi-amplitude').textContent = fmtPct(global.amplitude);
+  document.getElementById('kpi-paridade').textContent = fmtPct(global.paridade);
   document.getElementById('kpi-indicadores').textContent = String(global.nIndicadores ?? '—');
 
-  const idx = global.indice ?? indicePrincipal(global.amplitude, global.progresso);
+  const idx = global.indice ?? indicePrincipal(global.paridade, global.progresso);
 
   new ApexCharts(document.querySelector('#radial-indice'), {
     chart: { type: 'radialBar', height: 275, sparkline: { enabled: true } },
@@ -107,8 +107,8 @@ function kpisGlobais(global) {
     colors: ['#16a34a']
   }).render();
 
-  const risco = global.amplitude > 0.25 ? 'atenção: desigualdades relevantes entre grupos.' :
-                global.amplitude > 0.15 ? 'há diferença entre grupos que merece cuidado.' :
+  const risco = global.paridade > 0.25 ? 'atenção: desigualdades relevantes entre grupos.' :
+                global.paridade > 0.15 ? 'há diferença entre grupos que merece cuidado.' :
                 'boa convergência entre grupos.';
   document.getElementById('texto-global').innerHTML =
     `Leitura rápida: ${risco} Manter o foco nos grupos mais atrás eleva o índice sem perder progresso.`;
@@ -122,12 +122,12 @@ function tabelaMetas(metas, metasMetaJson) {
   const ordenadas = sortByKey18(metas);
 
   ordenadas.forEach(meta => {
-    const idx = meta.indice ?? (meta.amplitude != null && meta.progressoMedio != null
-      ? indicePrincipal(meta.amplitude, meta.progressoMedio) : null);
+    const idx = meta.indice ?? (meta.paridade != null && meta.progressoMedio != null
+      ? indicePrincipal(meta.paridade, meta.progressoMedio) : null);
 
     const k = keyFromMeta(meta);
     const extra = metaDict.get(k);
-    const semDados = (meta.progressoMedio == null) || (meta.amplitude == null);
+    const semDados = (meta.progressoMedio == null) || (meta.paridade == null);
 
     const tr = document.createElement('tr');
     tr.className = semDados ? 'opacity-60' : '';
@@ -137,7 +137,7 @@ function tabelaMetas(metas, metasMetaJson) {
         ${extra?.desc ? `<div class="text-xs text-texto-sutil max-w-prose mt-1">${extra.desc}</div>` : ''}
       </td>
       <td class="px-4 py-3">${fmtPct(meta.progressoMedio)}</td>
-      <td class="px-4 py-3">${fmtPct(meta.amplitude)}</td>
+      <td class="px-4 py-3">${fmtPct(meta.paridade)}</td>
       <td class="px-4 py-3">${fmtPct(idx)}</td>
       <td class="px-4 py-3">
         ${semDados

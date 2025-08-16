@@ -3,7 +3,7 @@
         "nIndicadores": 86,
         "nMetasMonitoradas": 6,
         "progresso": 0.77,
-        "amplitude": 0.205,
+        "paridade": 0.205,
         "indice": 0.612
     },
     "metas": [
@@ -29,7 +29,7 @@
                     "valor": 0.88
                 }
             ],
-            "amplitude": 0.23,
+            "paridade": 0.23,
             "progressoMedio": 0.775,
             "indice": 0.597
         },
@@ -55,7 +55,7 @@
                     "valor": 0.82
                 }
             ],
-            "amplitude": 0.24,
+            "paridade": 0.24,
             "progressoMedio": 0.708,
             "indice": 0.538
         },
@@ -81,7 +81,7 @@
                     "valor": 0.95
                 }
             ],
-            "amplitude": 0.17,
+            "paridade": 0.17,
             "progressoMedio": 0.875,
             "indice": 0.726
         },
@@ -107,7 +107,7 @@
                     "valor": 0.9
                 }
             ],
-            "amplitude": 0.11,
+            "paridade": 0.11,
             "progressoMedio": 0.845,
             "indice": 0.752
         },
@@ -133,7 +133,7 @@
                     "valor": null
                 }
             ],
-            "amplitude": null,
+            "paridade": null,
             "progressoMedio": null,
             "indice": null
         },
@@ -159,7 +159,7 @@
                     "valor": null
                 }
             ],
-            "amplitude": null,
+            "paridade": null,
             "progressoMedio": null,
             "indice": null
         },
@@ -185,7 +185,7 @@
                     "valor": 0.85
                 }
             ],
-            "amplitude": 0.24,
+            "paridade": 0.24,
             "progressoMedio": 0.742,
             "indice": 0.564
         },
@@ -211,7 +211,7 @@
                     "valor": 0.79
                 }
             ],
-            "amplitude": 0.24,
+            "paridade": 0.24,
             "progressoMedio": 0.675,
             "indice": 0.513
         },
@@ -237,7 +237,7 @@
                     "valor": null
                 }
             ],
-            "amplitude": null,
+            "paridade": null,
             "progressoMedio": null,
             "indice": null
         },
@@ -263,7 +263,7 @@
                     "valor": null
                 }
             ],
-            "amplitude": null,
+            "paridade": null,
             "progressoMedio": null,
             "indice": null
         }

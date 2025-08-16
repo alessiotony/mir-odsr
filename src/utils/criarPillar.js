@@ -26,7 +26,7 @@ export function criarPillar(pillar) {
         <a href="${href}" class="block p-4 rounded-lg hover:bg-fundo-medio transition-colors duration-300 flex flex-col items-center text-center">
             ${iconeHTML}
             <h3 class="text-lg font-semibold text-texto-principal">${pillar.label}</h3>
-            <p class="text-texto-secundario mt-1 text-sm">${pillar.text}</p>
+            <p class="text-texto-secundario mt-1 text-sm mb-0">${pillar.text}</p>            
         </a>
     `;
 }

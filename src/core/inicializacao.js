@@ -31,7 +31,32 @@ async function carregarSintese() {
         const data = await response.json();
         
         if (data) {
-            renderizarSintese(data);
+        // 1) Coluna: Visão Geral dos ODS
+        renderizarSintese(data, {
+            ids: {
+            title: 'titulo-sintese-geral',
+            radial: 'radial-geral',
+            serie:  'serie-geral'
+            }
+        });
+
+        // 2) Coluna: ODS 18
+        // monta um pequeno "radial" a partir dos campos do ODS18
+        const ods18Radiais = [
+            { label: 'Índice',   valor: data.ods18?.indice ?? 0.0,  cor: '#1f2937' },
+            { label: 'Progresso',valor: data.ods18?.progresso ?? 0.0, cor: '#16a34a' },
+            { label: 'Amplitude',valor: data.ods18?.paridade ?? 0.0, cor: '#ef4444' },
+        ];
+        renderizarSintese({
+            indicadorRadial: ods18Radiais,
+            serieTemporal: data.serieTemporalOds18
+        }, {
+            ids: {
+            title: 'titulo-sintese-ods18',
+            radial: 'radial-ods18',
+            serie:  'serie-ods18'
+            }
+        });
         }
     } catch (error) {
         console.error("Erro ao carregar dados de síntese:", error);
@@ -47,11 +72,14 @@ export async function iniciarAplicacao() {
         if (!response.ok) throw new Error('Falha ao carregar dados.json');
         const data = await response.json();
 
-        carregarSintese();
-
         const path = window.location.pathname;
         const basePath = '/odsr/'; // Ou importe de vite.config.mjs se quiser ser mais elegante
         const isHomepage = (path === basePath || path === `${basePath}index.html`);
+
+        // a homepage usa a SÍNTESE DUPLA via renderHomepage, então não chame aqui
+        if (!isHomepage) {
+        carregarSintese();
+        }
         
         renderizarHeader({ logos: data.header.logos, pilares: data.pilares, 
             navActions: data.header.navActions }, isHomepage);
