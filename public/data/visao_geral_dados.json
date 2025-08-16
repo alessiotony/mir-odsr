@@ -3,7 +3,11 @@
     "indicadores": 86,
     "objetivos": 11,
     "metas": 7,
-    "populacao": "+212 mi"
+    "populacao": 212325000,
+    "pop_negra": 0.555,
+    "pop_amarela": 0.004,
+    "pop_indigena": 0.008,
+    "pop_branca": 0.435
   },
   "indicadorRadial": {
     "titulo": "Nível de Progresso por Grupo Racial",
@@ -26,6 +30,7 @@
   },
   "graficoOds": {
     "categories": ["ODS 1", "ODS 2", "ODS 3", "ODS 4", "ODS 5", "ODS 8", "ODS 10", "ODS 13", "ODS 14", "ODS 15", "ODS 16"],
+    "labels": ["Erradicação da Pobreza", "Fome Zero e Agricultura Sustentável", "Saúde e Bem-Estar", "Educação de Qualidade", "Igualdade de Gênero", "Trabalho Decente e Crescimento Econômico", "Redução das Desigualdades", "Ação Contra a Mudança Global do Clima", "Vida Debaixo d'Água", "Vida Sobre a Terra", "Paz, Justiça e Instituições Eficazes"],
     "series": [
       { "name": "Brancos",    "data": [88, 75, 92, 60, 70, 85, 78, 82, 85, 78, 82] },
       { "name": "Negros",     "data": [72, 65, 80, 50, 62, 77, 68, 74, 77, 68, 74] },
@@ -37,13 +42,25 @@
     "titulo": "Nível de Progresso por Indicadores e Grupos Raciais (Ano Mais Recente)",
     "colunas": ["Indicador / ODS", "Brancos", "Negros", "Indígenas", "Amarelos"],
     "linhas": [
-      { "indicador": "Taxa de Pobreza (2023)", "brancos": 80, "negros": 55, "indigenas": 60, "amarelos": 88 },
-      { "indicador": "Taxa de pessoas em extrema pobreza (2022)", "brancos": 80, "negros": 20, "indigenas": 30, "amarelos": 90 },
-      { "indicador": "Acesso à educação básica (ODS 4)", "brancos": 92, "negros": 85, "indigenas": 78, "amarelos": 95 },
-      { "indicador": "Participação no mercado de trabalho (ODS 8)", "brancos": 75, "negros": 60, "indigenas": 55, "amarelos": 80 },
-      { "indicador": "Acesso à saúde de qualidade (ODS 3)", "brancos": 88, "negros": 72, "indigenas": 65, "amarelos": 90 },
-      { "indicador": "Representação política (ODS 10)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
-      { "indicador": "Uso sustentável da terra (ODS 15)", "brancos": 65, "negros": 55, "indigenas": 50, "amarelos": 70 }
+      {"ods": "1", "id": "1-1", "indicador": "Paridade Racial da Massa Salarial de Vínculos Formais Ativos em Relação à População (2023)", "brancos": 80, "negros": 55, "indigenas": 60, "amarelos": 88 },
+      {"ods": "1", "id": "1-2", "indicador": "Paridade Racial de Pessoas no CadÚnico em em Relação à População (2022)", "brancos": 80, "negros": 20, "indigenas": 30, "amarelos": 90 },
+      {"ods": "1", "id": "1-3", "indicador": "Paridade Racial no Emprego Formal em Relação à População (2023)", "brancos": 92, "negros": 85, "indigenas": 78, "amarelos": 95 },
+      {"ods": "1", "id": "1-4", "indicador": "Participação na Renda com Emprego das Pessoas no CadÚnico (2023)", "brancos": 75, "negros": 60, "indigenas": 55, "amarelos": 80 },
+      {"ods": "1", "id": "1-5", "indicador": "Renda Média do Trabalho entre Empregados Cadastrados no CadÚnico (2023)", "brancos": 88, "negros": 72, "indigenas": 65, "amarelos": 90 },
+      {"ods": "1", "id": "1-6", "indicador": "Taxa de Emprego entre Cadastrados no CadÚnico (2023)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "2", "id": "2-1", "indicador": "Paridade Racial dos Vínculos Formais no Setor Agropecuário em Relação à População (2020)", "brancos": 65, "negros": 55, "indigenas": 50, "amarelos": 70 },
+      {"ods": "2", "id": "2-2", "indicador": "Paridade Racial nos Vínculos em Médias e Grandes Empresas em Relação à População no Mercado Formal de Trabalho", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "2", "id": "2-3", "indicador": "Paridade Racial nos Vínculos em Pequenas Empresas (Regime Simples) em Relação à População no Mercado Formal de Trabalho", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "2", "id": "2-4", "indicador": "Salário Médio na Agropecuária em Vínculos Formais Ativos", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-1", "indicador": "Percentual de Nascidos de Mães Menores de Idade", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-2", "indicador": "Percentual de Nascidos Vicos de Mães Com Pré-Natal Adequado (7 ou mais consultas)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-3", "indicador": "Percentual de Nascidos Vivos com Baixo Peso (inferior a 2.500g)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-4", "indicador": "Percentual de Nascidos Vivos de Parto Normal", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-5", "indicador": "Razão de Mortalidade Materna por 100 mil nascidos vivos", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-6", "indicador": "Taxa de Mortalidade de Jovens (15 a 29 anos) por 100 mil habitantes", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "3", "id": "3-7", "indicador": "Taxa de Mortalidade Infantil por mil nascidos vivos", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "4", "id": "4-1", "indicador": "Ideb - Ensino Fundamental I (critério de predominância)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 },
+      {"ods": "4", "id": "4-2", "indicador": "Ideb - Ensino Fundamental II (critério de predominância)", "brancos": 40, "negros": 28, "indigenas": 20, "amarelos": 35 }
     ]
   }
 }

@@ -1,402 +1,581 @@
-// src/visao-geral.js - Adaptado para layout e tabelaIndicadores
+// visao-geral.js
 import { renderizarSintese } from './renderizadores/renderSintese.js';
+import { loadJSON } from './data/loaders.js';
 
+/* ========= helpers ========= */
+const toComma = s => String(s).replace(/\./g, ',');
+const fmtInt = x => (typeof x === 'number' ? new Intl.NumberFormat('pt-BR').format(x) : '—');
+const fmtPct01 = (x, dec = 1) => (typeof x === 'number' ? toComma((x * 100).toFixed(dec)) + '%' : '—');
+
+// 2.000 -> 2,0 mil | 200.000.000 -> 200,0 mi | 1,5 bi | 2,1 tri
+function fmtCompactBR(n) {
+  if (n == null || isNaN(n)) return '—';
+  const abs = Math.abs(n);
+  const sign = n < 0 ? '-' : '';
+  const oneDec = v => toComma(v.toFixed(1));
+  if (abs >= 1_000_000_000_000) return `${sign}${oneDec(abs / 1_000_000_000_000)} tri`;
+  if (abs >= 1_000_000_000)     return `${sign}${oneDec(abs / 1_000_000_000)} bi`;
+  if (abs >= 1_000_000)         return `${sign}${oneDec(abs / 1_000_000)} mi`;
+  if (abs >= 1_000)             return `${sign}${oneDec(abs / 1_000)} mil`;
+  return fmtInt(n);
+}
+
+// Classe de cor para célula de % (0..100)
+function pctClass(v){
+  if (v == null || isNaN(v)) return '';
+  if (v < 50) return 'pct-critico';
+  if (v < 75) return 'pct-atencao';
+  if (v < 90) return 'pct-regular';
+  return 'pct-alto';
+}
+
+// mistura cor com branco para “clarear” de acordo com o valor (0–100)
+function mixWithWhite(hex, weight/*0..1*/){
+  const c = hex.replace('#','');
+  const r = parseInt(c.substring(0,2),16), g = parseInt(c.substring(2,4),16), b = parseInt(c.substring(4,6),16);
+  const w = 255;
+  const rr = Math.round(r*(1-weight) + w*weight);
+  const gg = Math.round(g*(1-weight) + w*weight);
+  const bb = Math.round(b*(1-weight) + w*weight);
+  const h = n => n.toString(16).padStart(2,'0');
+  return `#${h(rr)}${h(gg)}${h(bb)}`;
+}
+
+/* ========= controller ========= */
 export class VisaoGeralController {
-    constructor() {
-        this.selectors = {};
-        this.fullDataObject = null;
-        this.defaultLocalidadeId = 'BR';
-        console.log("VisaoGeralController adaptado com layout e tabela.");
-    }
+  constructor() {
+    this.selectors = {};
+    this.data = null;
+    this.localidades = [];
+    this.defaultLocalidadeId = 'BR';
 
-    async init() {
-        try {
-            this.setupSelectors();
-            await this.loadAndProcessData();
-            await this.populateFilters();
-            this.addEventListeners();
-            await this.updateView();
-        } catch (error) {
-            console.error("Erro na inicialização da Visão Geral:", error);
+    this.odsModo = 'heatmap'; // padrão = mapa de calor (transposto)
+    this._tblState = null;
+  }
+
+  async init() {
+    this.setupSelectors();
+    await this.loadData();
+    await this.populateFilters();
+    this.addEventListeners();
+    await this.updateView();
+  }
+
+  setupSelectors() {
+    // KPIs na HERO (inclusive composição por grupo)
+    this.$ = {
+      kIndicadores:  document.querySelector('[data-kpi="indicadores"]'),
+      kObjetivos:    document.querySelector('[data-kpi="objetivos"]'),
+      kMetas:        document.querySelector('[data-kpi="metas"]'),
+      kPopulacao:    document.querySelector('[data-kpi="populacao"]'),
+      kPopNegra:     document.querySelector('[data-kpi="pop_negra"]'),
+      kPopBranca:    document.querySelector('[data-kpi="pop_branca"]'),
+      kPopIndigena:  document.querySelector('[data-kpi="pop_indigena"]'),
+      kPopAmarela:   document.querySelector('[data-kpi="pop_amarela"]'),
+
+      localidade:    document.getElementById('seletor-localidade'),
+
+      graficoRadial: document.getElementById('grafico-progresso-racial'),
+      graficoSerie:  document.getElementById('grafico-evolucao-progresso'),
+      graficoOds:    document.getElementById('grafico-progresso-ods'),
+
+      textoIntro:    document.getElementById('texto-introducao-visao-geral'),
+      textoOds:      document.getElementById('texto-sintese-ods'),
+      textoTab:      document.getElementById('texto-sintese-tabela'),
+      textoSerie:    document.getElementById('texto-sintese-serie-temporal'),
+
+      tabelaWrap:    document.getElementById('tabela-indicadores-container'),
+    };
+  }
+
+  async loadData() {
+    // cacheados (memória + localStorage)
+    [this.data, this.localidades] = await Promise.all([
+      loadJSON('visaoGeral'),
+      loadJSON('localidades')
+    ]);
+
+    // KPIs básicos
+    const k = this.data?.kpis || {};
+    if (this.$.kIndicadores) this.$.kIndicadores.textContent = k.indicadores ?? '—';
+    if (this.$.kObjetivos)   this.$.kObjetivos.textContent   = k.objetivos   ?? '—';
+    if (this.$.kMetas)       this.$.kMetas.textContent       = k.metas       ?? '—';
+    if (this.$.kPopulacao)   this.$.kPopulacao.textContent   = fmtCompactBR(k.populacao);
+
+    // composição por grupo — **na HERO**
+    if (this.$.kPopNegra)    this.$.kPopNegra.textContent    = fmtPct01(k.pop_negra);
+    if (this.$.kPopBranca)   this.$.kPopBranca.textContent   = fmtPct01(k.pop_branca);
+    if (this.$.kPopIndigena) this.$.kPopIndigena.textContent = fmtPct01(k.pop_indigena);
+    if (this.$.kPopAmarela)  this.$.kPopAmarela.textContent  = fmtPct01(k.pop_amarela);
+  }
+
+  async populateFilters() {
+    const toText = (loc) => `${'\u00A0'.repeat((loc.nivel || 0) * 4)}${loc.nome}`;
+    if (this.tomSelect) { this.tomSelect.destroy(); this.tomSelect = null; }
+    if (this.$.localidade) this.$.localidade.innerHTML = `<option value=""></option>`;
+
+    if (typeof TomSelect !== 'undefined' && this.$.localidade) {
+      this.tomSelect = new TomSelect(this.$.localidade, {
+        options: this.localidades.map(loc => ({
+          value: String(loc.id), text: toText(loc),
+          nome: loc.nome, uf: loc.uf || '', nivel: loc.nivel || 0
+        })),
+        valueField: 'value', labelField: 'text',
+        searchField: ['nome','uf','text'],
+        placeholder: 'Brasil', allowEmptyOption: true,
+        maxOptions: 200, maxItems: 1, create: false, diacritics: true,
+        dropdownParent: 'body',
+        render: {
+          option: (d) => `<div class="text-sm">${d.text}${d.uf ? ` · ${d.uf}` : ''}</div>`,
+          item:   (d) => `<div class="text-base">${d.nome}${d.uf ? ` · ${d.uf}` : ''}</div>`,
         }
+      });
+      const hasBR = this.localidades.find(l => String(l.id) === this.defaultLocalidadeId);
+      if (hasBR) this.tomSelect.setValue(this.defaultLocalidadeId, true);
+    }
+  }
+
+  addEventListeners() {
+    if (this.tomSelect) this.tomSelect.on('change', () => this.updateView());
+    else if (this.$.localidade) this.$.localidade.addEventListener('change', () => this.updateView());
+  }
+
+  async updateView() {
+    const d = this.data;
+    if (!d) return;
+
+    // === Radial + Série temporal (mantém paleta) ===
+    try {
+      renderizarSintese({
+        titulo: d.indicadorRadial?.titulo,
+        indicadorRadial: d.indicadorRadial?.data || [],
+        serieTemporal: d.serieTemporal || {}
+      }, {
+        ids: { radial: 'grafico-progresso-racial', serie: 'grafico-evolucao-progresso' }
+      });
+    } catch (e) {
+      console.warn('Falha em renderizarSintese', e);
     }
 
-    setupSelectors() {
-        this.selectors = {
-            localidade: document.getElementById('seletor-localidade'),
-            kpiIndicadores: document.querySelector('#sintese-kpis div:nth-child(1) p.text-2xl'),
-            kpiObjetivos: document.querySelector('#sintese-kpis div:nth-child(2) p.text-2xl'),
-            kpiMetas: document.querySelector('#sintese-kpis div:nth-child(3) p.text-2xl'),
-            kpiPopulacao: document.querySelector('#sintese-kpis div:nth-child(4) p.text-2xl'),
-            graficoOds: document.getElementById('grafico-progresso-ods'),
-            tabelaIndicadores: document.getElementById('tabela-indicadores-container'),
-            textoRacial: document.getElementById('texto-sintese-racial'),
-            textoOds: document.getElementById('texto-sintese-ods'),
-            textoTabela: document.getElementById('texto-sintese-tabela'),
-            textoSerieTemporal: document.getElementById('texto-sintese-serie-temporal')
-        };
+    // === TEXTOS DINÂMICOS (agora realmente atribuídos) ===
+    const radiais = d.indicadorRadial?.data || [];
+    const serie   = d.serieTemporal || {};
+    if (this.$.textoIntro) this.$.textoIntro.innerHTML = this.narrarIntroducao(radiais, serie);
+    if (this.$.textoSerie) this.$.textoSerie.innerHTML = this.narrarSerieTemporal(serie);
+
+    // === ODS (padrão = mapa de calor transposto; toggle para barras) ===
+    this.renderOdsToolbar();
+    this.renderOdsChart();
+    if (this.$.textoOds) this.$.textoOds.innerHTML = this.narrarOds(this.data.graficoOds);
+
+    // === Tabela com busca / filtro por ODS / ordenação ===
+    if (d.tabelaIndicadores && this.$.tabelaWrap) {
+      this.renderTabelaIndicadores(d.tabelaIndicadores);
+      this.attachTabelaInteracao();
+      if (this.$.textoTab) this.$.textoTab.innerHTML = this.narrarTabela(d.tabelaIndicadores);
     }
+  }
 
-    async loadAndProcessData() {
-        const response = await fetch('./data/visao_geral_dados.json');
-        if (!response.ok) throw new Error('Falha ao carregar visao_geral_dados.json');
-        this.fullDataObject = await response.json();
+  /* ---------- ODS ---------- */
 
-        // KPIs
-        if (this.fullDataObject.kpis) {
-            this.selectors.kpiIndicadores.textContent = this.fullDataObject.kpis.indicadores;
-            this.selectors.kpiObjetivos.textContent = this.fullDataObject.kpis.objetivos;
-            this.selectors.kpiMetas.textContent = this.fullDataObject.kpis.metas;
-            this.selectors.kpiPopulacao.textContent = this.fullDataObject.kpis.populacao;
-        }
-    }
+  updateOdsToolbarActive(){
+    const bar = this.$.graficoOds?.previousElementSibling;
+    if (!bar || !bar.classList.contains('ods-toolbar')) return;
+    bar.querySelectorAll('button[data-ods-modo]').forEach(btn=>{
+      const modo = btn.getAttribute('data-ods-modo');
+      const active = (modo === this.odsModo);
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
 
-    async populateFilters() {
-        // Carrega a lista grande (5k+)
-        const response = await fetch('./data/localidades_from_mongo.json');
-        if (!response.ok) throw new Error('Falha ao carregar localidades_from_mongo.json');
-        const localidades = await response.json();
+  renderOdsToolbar() {
+    const host = this.$.graficoOds;
+    if (!host) return;
+    if (host.previousElementSibling && host.previousElementSibling.classList?.contains('ods-toolbar')) return;
 
-        // Gera texto com indentação por nível (mantém hierarquia visual)
-        const toText = (loc) => `${'\u00A0'.repeat((loc.nivel || 0) * 4)}${loc.nome}`;
-
-        // Destroi instância anterior se o usuário voltar pra página
-        if (this.tomSelect) {
-            this.tomSelect.destroy();
-            this.tomSelect = null;
-        }
-          // Garante que o <select> esteja vazio e com uma opção vazia (placeholder)
-  this.selectors.localidade.innerHTML = `<option value=""></option>`;
-
-  // Inicializa Tom Select com opções e busca
-  this.tomSelect = new TomSelect(this.selectors.localidade, {
-    // Passa as opções já carregadas (mais rápido que addOptions em loop)
-    options: localidades.map(loc => ({
-      value: String(loc.id),
-      text: toText(loc),
-      nome: loc.nome,
-      uf: loc.uf || '',
-      nivel: loc.nivel || 0
-    })),
-    valueField: 'value',
-    labelField: 'text',
-    searchField: ['nome', 'uf', 'text'], // busca por nome, UF e texto com indentação
-    placeholder: 'Brasil',
-    allowEmptyOption: true,
-    // Performance para listas grandes
-    maxOptions: 200,      // quantos itens renderiza por vez
-    maxItems: 1,          // seleção simples
-    create: false,
-    diacritics: true,
-    // Mantém o visual mais “clean” na hero
-    dropdownParent: 'body', // evita overflow dentro do card
-    render: {
-      option: (data) => {
-        // Mantém indentação e um sufixo com UF quando existir
-        const uf = data.uf ? ` · ${data.uf}` : '';
-        return `<div class="text-sm">${data.text}${uf}</div>`;
-      },
-      item: (data) => {
-        const uf = data.uf ? ` · ${data.uf}` : '';
-        return `<div class="text-base">${data.nome}${uf}</div>`;
+    const bar = document.createElement('div');
+    bar.className = 'ods-toolbar flex items-center gap-2 mb-2';
+    bar.innerHTML = `
+      <span class="text-sm text-primaria">Visualização:</span>
+      <div class="botoes-modo">
+        <button type="button" data-ods-modo="heatmap" class="px-2 py-1 text-sm rounded border bg-white">Mapa de calor</button>
+        <button type="button" data-ods-modo="barras"   class="px-2 py-1 text-sm rounded border bg-white">Barras</button>
+      </div>
+    `;
+    host.parentNode.insertBefore(bar, host);
+    bar.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-ods-modo]');
+      if (!btn) return;
+      const modo = btn.getAttribute('data-ods-modo');
+      if (modo && modo !== this.odsModo) {
+        this.odsModo = modo;
+        this.renderOdsChart();
       }
-    }
-  });
-}
+    });
+    this.updateOdsToolbarActive();
+  }
 
-    addEventListeners() {
-        // Se existir Tom Select, ouve nele; senão, cai pro <select> nativo
-        if (this.tomSelect) {
-            this.tomSelect.on('change', () => this.updateView());
-        } else if (this.selectors.localidade) {
-            this.selectors.localidade.addEventListener('change', () => this.updateView());
-        }
-        }
+  renderOdsChart() {
+    const host = this.$.graficoOds;
+    if (!host) return;
+    host.innerHTML = '';
 
-    async updateView() {
-        // 1) Radial + Série (renderSintese)
-        const introEl = document.getElementById('texto-introducao-visao-geral');
-        if (introEl) {
-            introEl.innerHTML = this.narrarIntroducao(
-                this.fullDataObject.indicadorRadial.data,
-                this.fullDataObject.serieTemporal
-            );
-        }
-        renderizarSintese({
-            titulo: this.fullDataObject.indicadorRadial.titulo,
-            indicadorRadial: this.fullDataObject.indicadorRadial.data,
-            serieTemporal: this.fullDataObject.serieTemporal
-        }, {
-            ids: { radial: 'grafico-progresso-racial', serie: 'grafico-evolucao-progresso' }
-        });
+    this.updateOdsToolbarActive();
 
-        if (this.selectors.textoSerieTemporal) {
-            this.selectors.textoSerieTemporal.innerHTML = this.narrarSerieTemporal(
-                this.fullDataObject.serieTemporal
-            );
-        }
+    const ods = this.data?.graficoOds || {};
+    const grupos = (ods.series || []).map(s => s.name); // nomes dos grupos
+    const cats   = ods.categories || [];                // ODS1, ODS2, ...
+    const labels = ods.labels || [];                    // Erradicação da Pobreza, ...
 
-        // 2) Texto síntese racial
-        if (this.selectors.textoRacial) {
-            this.selectors.textoRacial.innerHTML = this.narrarRacial(
-            this.fullDataObject.indicadorRadial.data,
-            this.fullDataObject.serieTemporal
-            );
-        }
+    // Paleta por grupo (a mesma do radial)
+    const corPorGrupo = {};
+    (this.data?.indicadorRadial?.data || []).forEach(it => { corPorGrupo[it.label] = it.cor; });
 
-        // 3) ODS
-        if (this.fullDataObject.graficoOds) {
-            this.renderOdsBarChart(this.fullDataObject.graficoOds);
-            if (this.selectors.textoOds) {
-            this.selectors.textoOds.innerHTML = this.narrarOds(this.fullDataObject.graficoOds);
-            }
-        }
+    if (this.odsModo === 'barras') {
+      // BARRAS HORIZONTAIS (ODS no eixo Y; cores por grupo)
+      const cores = (ods.series || []).map(s => corPorGrupo[s.name] || '#999');
+      const catFull = cats.map((c,i) => labels[i] ? `${c} — ${labels[i]}` : c);
 
-        // 4) Tabela + texto
-        if (this.fullDataObject.tabelaIndicadores) {
-            this.renderTabelaIndicadores(this.fullDataObject.tabelaIndicadores);
-            if (this.selectors.textoTabela) {
-            this.selectors.textoTabela.innerHTML = this.narrarTabela(this.fullDataObject.tabelaIndicadores);
-            }
-        }
-        }
-
-    renderOdsBarChart(odsData) {
-        this.selectors.graficoOds.innerHTML = '';
-        
-        
-        // Paleta vinda do indicadorRadial
-        const corPorGrupo = {};
-        this.fullDataObject.indicadorRadial.data.forEach(item => {
-            corPorGrupo[item.label] = item.cor;
-        });
-        
-        // Garante ordem de cores conforme as séries
-        const coresSeries = odsData.series.map(s => corPorGrupo[s.name] || '#999999');
-
-        const options = {
-            chart: { type: 'bar', height: 400 },
-            series: odsData.series,
-            xaxis: { categories: odsData.categories },
-            legend: { position: 'top' },
-            plotOptions: { bar: { horizontal: false, columnWidth: '60%' } },
-            dataLabels: { enabled: true },
-            colors: coresSeries
-        };
-        const odsChart = new ApexCharts(this.selectors.graficoOds, options);
-        odsChart.render();
+      const options = {
+        chart: { type: 'bar', height: 460 },
+        plotOptions: { bar: { horizontal: true, barHeight: '70%' } },
+        dataLabels: { enabled: false, formatter: v => `${v}%` },
+        xaxis: { categories: catFull, max: 100 },
+        series: ods.series || [],
+        colors: cores,
+        legend: { position: 'top' },
+        tooltip: { y: { formatter: v => `${v}%` } }
+      };
+      new ApexCharts(host, options).render();
+      return;
     }
 
-    renderTabelaIndicadores(tabelaData) {
-        const container = this.selectors.tabelaIndicadores;
-        if (!container) return;
-        let html = `<h3 class="font-bold text-lg mb-4 text-texto-principal">${tabelaData.titulo}</h3>`;
-        html += `<div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-200 text-sm text-left">
-            <thead class="bg-gray-100">
-                <tr>${tabelaData.colunas.map(col => `<th class="px-4 py-2 font-medium">${col}</th>`).join('')}</tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">`;
-        tabelaData.linhas.forEach(linha => {
-            html += `<tr>
-                <td class="px-4 py-2">${linha.indicador}</td>
-                <td class="px-4 py-2">${linha.brancos}%</td>
-                <td class="px-4 py-2">${linha.negros}%</td>
-                <td class="px-4 py-2">${linha.indigenas}%</td>
-                <td class="px-4 py-2">${linha.amarelos}%</td>
-            </tr>`;
-        });
-        html += `</tbody></table></div>`;
-        container.innerHTML = html;
-    }
+    // HEATMAP TRANSPOSTO — Linhas = ODS; Colunas = grupos raciais
+    const series = cats.map((cat, i) => {
+      const name = labels[i] ? `${cat} — ${labels[i]}` : cat;
+      const data = grupos.map(g => {
+        const s = (ods.series || []).find(ss => ss.name === g);
+        const v = s?.data?.[i] ?? null; // 0..100
+        const base = corPorGrupo[g] || '#999999';
+        // valor 0 -> claro; 100 -> cor base
+        const weight = v == null ? 0.85 : Math.max(0, Math.min(0.85, 0.85 - 0.85*(v/100)));
+        const fillColor = mixWithWhite(base, weight);
+        return { x: g, y: v, fillColor };
+      });
+      return { name, data };
+    });
 
-    // -----------------------------
-    // 📌 MÉTODOS DE GERAÇÃO DE TEXTO
-    // -----------------------------
+    const options = {
+      chart: { type: 'heatmap', height: 460 },
+      dataLabels: { enabled: true, formatter: v => (v==null ? '—' : `${v}%`) },
+      xaxis: { type: 'category', categories: grupos },
+      tooltip: { y: { formatter: v => (v==null ? '—' : `${v}%`) } },
+      plotOptions: { heatmap: { shadeIntensity: 0.5, colorScale: { ranges: [] } } }, // ranges vazias p/ usarmos fillColor por ponto
+      series
+    };
+    new ApexCharts(host, options).render();
+  }
 
-    formatPct(x, dec=1) { return `${(x*100).toFixed(dec)}%`; }
-
-    narrarRacial(radiais, serieTemporal) {
-    if (!Array.isArray(radiais) || !serieTemporal?.series?.length) return '';
-
-    // maior/menor no radial
-    const sorted = [...radiais].sort((a,b) => b.valor - a.valor);
-    const top = sorted[0], bottom = sorted[sorted.length-1];
-    const diff = ((top.valor - bottom.valor) * 100);
-
-    // tendências (variação 1º->último)
-    const deltas = serieTemporal.series.map(s => {
-        const first = s.data[0], last = s.data[s.data.length-1];
-        return { name: s.name, delta: (last - first) };
-    }).sort((a,b) => b.delta - a.delta);
-    const up = deltas[0], down = deltas[deltas.length-1];
-
-    const anos = `${serieTemporal.categorias?.[0]}–${serieTemporal.categorias?.[serieTemporal.categorias.length-1]}`;
-
-    return `
-        <p>
-        No consolidado do período mais recente, <strong>${top.label}</strong> apresenta o maior nível médio de progresso 
-        (${this.formatPct(top.valor)}), enquanto <strong>${bottom.label}</strong> tem o menor (${this.formatPct(bottom.valor)}), 
-        uma diferença de <strong>${diff.toFixed(1)} p.p.</strong>.
-        </p>
-        <p class="mt-2">
-        Na série temporal (${anos}), o maior avanço foi de <strong>${up.name}</strong> (${(up.delta*100).toFixed(1)} p.p.),
-        enquanto <strong>${down.name}</strong> teve a menor variação (${(down.delta*100).toFixed(1)} p.p.).
-        </p>
-    `;
-    }
-
-    narrarIntroducao(radiais, serieTemporal) {
-        if (!Array.isArray(radiais) || !serieTemporal?.series?.length) return '';
-
-        const sorted = [...radiais].sort((a, b) => b.valor - a.valor);
-        const top = sorted[0];
-        const bottom = sorted[sorted.length - 1];
-        const diff = ((top.valor - bottom.valor) * 100).toFixed(1);
-
-        const ultimoAno = serieTemporal.categorias[serieTemporal.categorias.length - 1];
-        const local = this.selectors.localidade?.selectedOptions?.[0]?.textContent?.trim() || 'Brasil';
-
-        return `
-        <p>
-            O objetivo desta plataforma é monitorar o desenvolvimento sustentável, com foco na igualdade étnico-racial, 
-            garantindo que nenhum grupo fique para trás em termos de bem-estar, oportunidades e qualidade de vida.
-            Na localidade <strong>${local}</strong>, em <strong>${ultimoAno}</strong>, o grupo 
-            <strong>${top.label}</strong> apresentou o maior nível médio de progresso (<strong>${this.formatPct(top.valor)}</strong>), 
-            em termos do cumprimento de metas relacionadas aos ODS para o conjunto de indicadores monitorados até o momento.
-            Enquanto <strong>${bottom.label}</strong> apresentou o menor (<strong>${this.formatPct(bottom.valor)}</strong>).
-            A diferença entre eles é de <strong>${diff} pontos percentuais</strong>.
-        </p>
-        `;
-    }
-
-narrarSerieTemporal(serieTemporal) {
-  if (!serieTemporal?.series?.length) return '';
-
-  const anos = serieTemporal.categorias || serieTemporal.categories || [];
-  const primeiroAno = anos[0];
-  const ultimoAno = anos[anos.length - 1];
-  const anosRestantes = Math.max(0, 2030 - ultimoAno);
-
-  // Classificação por variação acumulada (pontos percentuais do primeiro ao último)
-  const analises = serieTemporal.series.map(s => {
-    const first = s.data[0];
-    const last = s.data[s.data.length - 1];
-    const deltaPP = (last - first) * 100; // p.p. no período
-    const trend = Math.abs(deltaPP) < 1 ? 'estável' : (deltaPP > 0 ? 'em evolução' : 'em queda');
-
-    // slope médio ao ano em unidade (0..1)
-    const slope = (s.data.length > 1) ? (last - first) / (s.data.length - 1) : 0;
-    const proj2030 = last + slope * anosRestantes; // ainda em 0..1
-    const atingira100 = proj2030 >= 1.0;
-
-    return { grupo: s.name, first, last, deltaPP, trend, slope, proj2030, atingira100 };
-  });
-
-  const evoluindo = analises.filter(a => a.trend === 'em evolução');
-  const caindo    = analises.filter(a => a.trend === 'em queda');
-  const estaveis  = analises.filter(a => a.trend === 'estável');
-
-  // Strings amigáveis (sempre mostram algo)
-  const fmtEvol   = evoluindo.length ? evoluindo.map(a => `${a.grupo} (+${a.deltaPP.toFixed(1)} p.p.)`).join(', ') : 'Nenhum.';
-  const fmtQueda  = caindo.length    ? caindo.map(a => `${a.grupo} (${a.deltaPP.toFixed(1)} p.p.)`).join(', ')     : 'Nenhum.';
-  const fmtEstaveis = estaveis.length ? estaveis.map(a => a.grupo).join(', ') : 'Nenhum.';
-
-  // Projeções para 2030
-  const queAlcancam = analises.filter(a => a.atingira100);
-  const queNaoAlcancam = analises.filter(a => !a.atingira100);
-  const projHit = queAlcancam.length
-    ? `Tendem a alcançar 100% até 2030: ${queAlcancam.map(a => a.grupo).join(', ')}.`
-    : 'Nenhum grupo tende a alcançar 100% até 2030 no ritmo atual.';
-  const projNoHit = queNaoAlcancam.length
-    ? `Com o ritmo atual, podem ficar abaixo de 100% em 2030: ${queNaoAlcancam.map(a => `${a.grupo} (~${Math.min(100, Math.max(0, a.proj2030*100)).toFixed(0)}%)`).join(', ')}.`
-    : '';
-
-  // Riscos: projeção <70% ou desigualdade aumentando (range cresce)
-  const projabaixo70 = analises.filter(a => a.proj2030 < 0.70);
-  const riscoAbaixo = projabaixo70.length
-    ? `Atenção: risco de ficar para trás (projeção < 70% em 2030) para ${projabaixo70.map(a => a.grupo).join(', ')}.`
-    : '';
-
-  // desigualdade: range no primeiro ano vs último ano
-  const valoresNoAno = (idx) => serieTemporal.series.map(s => s.data[idx]).filter(v => typeof v === 'number');
-  const range = arr => (arr.length ? Math.max(...arr) - Math.min(...arr) : 0);
-  const rangeInicial = range(valoresNoAno(0)) * 100;                       // p.p.
-  const rangeFinal   = range(valoresNoAno(anos.length - 1)) * 100;         // p.p.
-  const desigualdadeSubiu = rangeFinal > rangeInicial + 0.5; // tolerância 0.5 p.p.
-  const desigualdadeTxt = desigualdadeSubiu
-    ? `A desigualdade entre grupos aumentou (de ${rangeInicial.toFixed(1)} p.p. para ${rangeFinal.toFixed(1)} p.p.).`
-    : `A desigualdade entre grupos não aumentou (de ${rangeInicial.toFixed(1)} p.p. para ${rangeFinal.toFixed(1)} p.p.).`;
-
-  // Resumo curto (não repetitivo em relação à introdução)
-  let resumoCurto = 'Ao observar a trajetória ao longo do tempo, vemos padrões distintos entre os grupos.';
-  if (evoluindo.length && !caindo.length && !estaveis.length) resumoCurto = 'Todos os grupos apresentam evolução ao longo do período.';
-  if (!evoluindo.length && !caindo.length && estaveis.length) resumoCurto = 'Os grupos permanecem estáveis ao longo do período.';
-  if (!evoluindo.length && caindo.length && !estaveis.length) resumoCurto = 'Predomina movimento de queda ao longo do período.';
-
-  // Montagem do texto final
-  return `
-    <p><strong>${resumoCurto}</strong> Período analisado: <strong>${primeiroAno}–${ultimoAno}</strong>.</p>
-    <ul class="list-disc ml-5 mt-2 space-y-1">
-      <li><strong>Em evolução</strong>: ${fmtEvol}</li>
-      <li><strong>Em queda</strong>: ${fmtQueda}</li>
-      <li><strong>Estáveis</strong>: ${fmtEstaveis} (variação &lt; 1 p.p.).</li>
-    </ul>
-    <p class="mt-3">${projHit} ${projNoHit}</p>
-    <p class="mt-1">${riscoAbaixo}</p>
-    <p class="mt-1">${desigualdadeTxt}</p>
-  `;
-}
-
-    narrarOds(ods) {
+  narrarOds(ods) {
     if (!ods?.series?.length) return '';
-    const grupos = ods.series.map(s => s.name);
-
-    // média por ODS (média dos grupos)
-    const mediasPorOds = ods.categories.map((cat, idx) => {
-        const valores = ods.series.map(s => s.data[idx]);
-        const media = valores.reduce((a,b)=>a+b,0) / valores.length;
-        return { cat, media };
+    const cats = ods.categories || [];
+    const labels = ods.labels || [];
+    const medias = cats.map((c, i) => {
+      const vals = (ods.series || []).map(s => s.data?.[i] ?? 0);
+      const media = vals.reduce((a,b)=>a+b,0) / (vals.length || 1);
+      return { i, media };
     });
-    const max = mediasPorOds.reduce((a,b)=> a.media>b.media ? a : b);
-    const min = mediasPorOds.reduce((a,b)=> a.media<b.media ? a : b);
+    const max = medias.reduce((a,b)=> a.media>b.media ? a : b, {media:-Infinity});
+    const min = medias.reduce((a,b)=> a.media<b.media ? a : b, {media: Infinity});
 
-    // ODS com maior disparidade (range entre grupos)
-    const disparidades = ods.categories.map((cat, idx) => {
-        const valores = ods.series.map(s => s.data[idx]);
-        const d = Math.max(...valores) - Math.min(...valores);
-        return { cat, d };
+    const gaps = cats.map((c, i) => {
+      const vals = (ods.series || []).map(s => s.data?.[i] ?? 0);
+      return { i, d: Math.max(...vals) - Math.min(...vals) };
     });
-    const worstGap = disparidades.reduce((a,b)=> a.d>b.d ? a : b);
+    const worst = gaps.reduce((a,b)=> a.d>b.d ? a : b, {d:-Infinity});
+    const nm = i => labels[i] ? `${cats[i]} — ${labels[i]}` : cats[i];
 
     return `
-        <p>
-        Em média, o <strong>${max.cat}</strong> apresenta o maior progresso (${max.media.toFixed(0)}%),
-        enquanto o <strong>${min.cat}</strong> tem o menor (${min.media.toFixed(0)}%). A maior disparidade 
-        entre grupos de raça e cor ocorre em <strong>${worstGap.cat}</strong>
-        (diferença de <strong>${worstGap.d.toFixed(0)} p.p.</strong> entre o maior e o menor valor).
-        </p>
+      <p>
+        Maior média em <strong>${nm(max.i)}</strong> (~${toComma(max.media.toFixed(1))}%),
+        menor em <strong>${nm(min.i)}</strong> (~${toComma(min.media.toFixed(1))}%).
+        Maior disparidade entre grupos em <strong>${nm(worst.i)}</strong> (${toComma(worst.d.toFixed(1))} p.p.).
+      </p>
     `;
-    }
+  }
 
-    narrarTabela(tabela) {
-    if (!tabela?.linhas?.length) return '';
+  /* ---------- Tabela ---------- */
 
-    // maior e menor desigualdade (range entre grupos)
-    const linhasCalc = tabela.linhas.map(l => {
-        const vals = [l.brancos, l.negros, l.indigenas, l.amarelos].filter(v=>typeof v==='number');
-        const range = Math.max(...vals) - Math.min(...vals);
-        return { indicador: l.indicador, range, vals };
+  renderTabelaIndicadores(tabela) {
+  const wrap = this.$.tabelaWrap;
+  if (!wrap) return;
+  wrap.innerHTML = '';
+
+  /* Controles */
+  const controls = document.createElement('div');
+  controls.className = 'flex flex-wrap gap-2 items-center mb-3';
+  controls.innerHTML = `
+    <input id="tbl-busca" type="search" placeholder="Buscar indicador ou ODS..."
+           class="px-3 py-2 border rounded w-full md:w-80" />
+    <select id="tbl-ods" class="px-3 py-2 border rounded">
+      <option value="">Todos os ODS</option>
+      ${(tabela.linhas || [])
+        .map(l => l.ods).filter(Boolean)
+        .filter((v,i,a)=>a.indexOf(v)===i)
+        .sort((a,b)=>String(a).localeCompare(String(b),'pt-BR'))
+        .map(v => `<option value="${String(v)}">ODS ${String(v)}</option>`).join('')}
+    </select>
+  `;
+  wrap.appendChild(controls);
+
+  /* Legenda de cores (se já não tiver incluído) */
+  const legend = document.createElement('div');
+  legend.className = 'tbl-legend';
+  legend.innerHTML = `
+    <span class="sw critico"></span> <span>&lt; 50% crítico</span>
+    <span class="sw atencao"></span> <span>&lt; 75%</span>
+    <span class="sw regular"></span> <span>&lt; 90%</span>
+    <span class="sw alto"></span> <span>&ge; 90%</span>
+  `;
+  wrap.appendChild(legend);
+
+  /* Wrapper com rolagem horizontal */
+  const scroller = document.createElement('div');
+  scroller.className = 'tbl-scroll';
+  wrap.appendChild(scroller);
+
+  /* Tabela */
+  const cols = (tabela.colunas || ['Indicador','Brancos','Negros','Indígenas','Amarelos']);
+  const table = document.createElement('table');
+  table.className = 'min-w-full divide-y divide-gray-200 text-sm text-left border border-gray-200 rounded-lg overflow-hidden';
+  table.innerHTML = `
+    <thead class="bg-gray-100">
+      <tr>
+        ${cols.map((c,i)=>`
+          <th class="px-3 py-2 font-semibold text-gray-700 select-none cursor-pointer ${i===0?'sticky-col text-right':''}" data-col-idx="${i}">
+            <span>${c}</span>
+            <span class="ml-1 text-gray-400 sort-indicator">↕</span>
+          </th>`).join('')}
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+  scroller.appendChild(table);
+
+  /* Mapeia colunas -> chaves */
+  const schema = cols.map(lbl => {
+    const L = lbl.toLowerCase();
+    if (L.includes('branco'))   return { key:'brancos',   numeric:true };
+    if (L.includes('negro'))    return { key:'negros',    numeric:true };
+    if (L.includes('indígena') || L.includes('indigena')) return { key:'indigenas', numeric:true };
+    if (L.includes('amarelo'))  return { key:'amarelos',  numeric:true };
+    return { key:'indicador', numeric:false }; // primeira coluna
+  });
+
+  const tbody = table.querySelector('tbody');
+
+  /* helper de cor de célula (% 0..100) */
+  const pctClass = (v) => {
+    if (v == null || isNaN(v)) return '';
+    if (v < 50) return 'pct-critico';
+    if (v < 75) return 'pct-atencao';
+    if (v < 90) return 'pct-regular';
+    return 'pct-alto';
+  };
+
+  const renderRows = (linhas) => {
+    tbody.innerHTML = linhas.map(l => {
+      const tds = schema.map((s, idx) => {
+        const v = l[s.key];
+
+        // primeira coluna: sticky + alinhada à direita
+        if (!s.numeric) {
+          return `<td class="px-3 py-2 text-gray-800 sticky-col text-right">${v ?? '—'}</td>`;
+        }
+
+        // demais colunas: % coloridas
+        if (typeof v === 'number') {
+          const cls = pctClass(v);
+          return `<td class="px-3 py-2 text-gray-800 pct ${cls}" data-sort="${v}">${toComma(v.toFixed(0))}%</td>`;
+        }
+        return `<td class="px-3 py-2 text-gray-800">—</td>`;
+      }).join('');
+      // mantém zebra para o bg do sticky herdar
+      return `<tr class="odd:bg-white even:bg-gray-50" data-ods="${l.ods || ''}">${tds}</tr>`;
+    }).join('');
+  };
+
+  // estado da tabela
+  this._tblState = {
+    allRows: [...(tabela.linhas || [])],
+    filtered: [...(tabela.linhas || [])],
+    schema,
+    cols,
+    sort: { idx: null, dir: 1 }, // 1 asc, -1 desc
+    renderRows,
+    tbody
+  };
+
+  // render inicial
+  renderRows(this._tblState.filtered);
+
+  // ordenação por coluna
+  table.querySelectorAll('thead th').forEach(th => {
+    th.addEventListener('click', () => {
+      const idx = Number(th.getAttribute('data-col-idx'));
+      this.sortTableByColumn(idx);
     });
-    const maior = linhasCalc.reduce((a,b)=> a.range>b.range ? a : b);
-    const menor = linhasCalc.reduce((a,b)=> a.range<b.range ? a : b);
+  });
+}
+
+
+  applyTableFilters() {
+    const q = (document.getElementById('tbl-busca')?.value || '').toLowerCase().trim();
+    const fOds = (document.getElementById('tbl-ods')?.value || '').trim();
+
+    const rows = this._tblState.allRows.filter(l => {
+      const txt = (l.indicador || '').toLowerCase();
+      const okQ = !q || txt.includes(q) || String(l.ods || '').includes(q);
+      const okO = !fOds || String(l.ods || '') === fOds;
+      return okQ && okO;
+    });
+
+    this._tblState.filtered = rows;
+  }
+
+  sortTableByColumn(idx) {
+    const st = this._tblState;
+    if (!st) return;
+
+    // alterna direção se clicar de novo na mesma coluna
+    if (st.sort.idx === idx) st.sort.dir *= -1;
+    else { st.sort.idx = idx; st.sort.dir = 1; }
+
+    const { key, numeric } = st.schema[idx];
+
+    st.filtered.sort((a,b) => {
+      const va = a[key], vb = b[key];
+      if (numeric) return ((va ?? -Infinity) - (vb ?? -Infinity)) * st.sort.dir;
+      // texto
+      return String(va ?? '').localeCompare(String(vb ?? ''), 'pt-BR') * st.sort.dir;
+    });
+
+    st.renderRows(st.filtered);
+
+    // atualiza indicador ↕ / ↑ / ↓
+    const ths = st.tbody.parentElement.querySelectorAll('thead th');
+    ths.forEach((th, i) => {
+      const span = th.querySelector('.sort-indicator');
+      if (!span) return;
+      if (i !== st.sort.idx) span.textContent = '↕';
+      else span.textContent = st.sort.dir === 1 ? '↑' : '↓';
+    });
+  }
+
+  attachTabelaInteracao() {
+    const busca = document.getElementById('tbl-busca');
+    const sel   = document.getElementById('tbl-ods');
+    const apply = () => {
+      this.applyTableFilters();
+      // mantém a ordenação atual (se houver)
+      if (this._tblState.sort.idx != null) this.sortTableByColumn(this._tblState.sort.idx);
+      else this._tblState.renderRows(this._tblState.filtered);
+    };
+    busca?.addEventListener('input', apply);
+    sel?.addEventListener('change', apply);
+  }
+
+  /* ---------- narrativa rápida da tabela ---------- */
+  narrarTabela(tabela) {
+    const L = tabela?.linhas || [];
+    if (!L.length) return '';
+    const diffs = L.map(l => {
+      const nums = ['brancos','negros','indigenas','amarelos'].map(k => l[k]).filter(v => typeof v === 'number');
+      const range = nums.length ? (Math.max(...nums) - Math.min(...nums)) : 0;
+      return { indicador: l.indicador || '—', range };
+    });
+    const max = diffs.reduce((a,b)=> a.range>b.range ? a : b, {range:-1});
+    const min = diffs.reduce((a,b)=> a.range<b.range ? a : b, {range:Infinity});
+    return `
+      <p class="mt-2">
+        Maior desigualdade em <strong>${max.indicador}</strong> (~${toComma(max.range.toFixed(1))} p.p.). 
+        Menor diferença em <strong>${min.indicador}</strong> (~${toComma(min.range.toFixed(1))} p.p.).
+      </p>
+    `;
+  }
+
+  /* ---------- textos dinâmicos (intro + série) ---------- */
+  getLocalidadeLabel(){
+    const byTom = this.tomSelect?.getValue?.() ? this.tomSelect?.getItem?.(this.tomSelect.getValue())?.textContent : null;
+    const bySelect = this.$.localidade?.selectedOptions?.[0]?.textContent?.trim();
+    return (byTom || bySelect || 'Brasil').trim();
+  }
+
+  narrarIntroducao(radiais = [], serieTemporal = {}){
+    if (!radiais.length) return '';
+    const local = this.getLocalidadeLabel();
+    const media = radiais.reduce((a,b)=>a+(b?.valor||0),0)/radiais.length;
+    const ordenados = [...radiais].sort((a,b)=>b.valor-a.valor);
+    const top = ordenados[0], bottom = ordenados[ordenados.length-1];
+    const gapPP = ((top.valor - bottom.valor) * 100).toFixed(1).replace('.0','');
+    const anos = serieTemporal.categorias || serieTemporal.categories || [];
+    const ultimoAno = anos[anos.length-1] ?? '';
+
+    // tendências simples (primeiro vs último ponto)
+    const deltas = (serieTemporal.series||[]).map(s=>{
+      const a = s.data?.[0] ?? 0, b = s.data?.[s.data.length-1] ?? 0;
+      const d = (b-a)*100;
+      const trend = Math.abs(d) < 0.5 ? 'estável' : (d>0 ? 'em evolução' : 'em queda');
+      return {nome:s.name, d, trend};
+    });
+    const evol = deltas.filter(x=>x.trend==='em evolução').map(x=>x.nome);
+    const queda = deltas.filter(x=>x.trend==='em queda').map(x=>x.nome);
+    const est = deltas.filter(x=>x.trend==='estável').map(x=>x.nome);
 
     return `
-        <p class="mt-2">
-        A maior desigualdade nos indicadores, em termo de progresso das metas, aparece em <strong>${maior.indicador}</strong>
-        (diferença de <strong>${maior.range.toFixed(0)} p.p.</strong> entre grupos).
-        Já a menor diferença está em <strong>${menor.indicador}</strong>
-        (cerca de <strong>${menor.range.toFixed(0)} p.p.</strong>).
-        </p>
+      <p>
+        Em <strong>${local}</strong> (${ultimoAno}), a média dos grupos é <strong>${(media*100).toFixed(0)}%</strong>.
+        <strong>${top.label}</strong> lidera com <strong>${(top.valor*100).toFixed(0)}%</strong>, e
+        <strong>${bottom.label}</strong> apresenta o menor nível (<strong>${(bottom.valor*100).toFixed(0)}%</strong>).
+        A diferença entre extremos é de <strong>${gapPP} p.p.</strong>
+      </p>
+      <p class="mt-2">
+        Tendência recente: 
+        ${evol.length ? `<strong>em evolução</strong>: ${evol.join(', ')}` : 'sem grupos em evolução'}; 
+        ${queda.length ? `<strong>em queda</strong>: ${queda.join(', ')}` : 'sem grupos em queda'}; 
+        ${est.length ? `<strong>estáveis</strong>: ${est.join(', ')}` : 'sem grupos estáveis'}.
+      </p>
     `;
-    }
+  }
+
+  narrarSerieTemporal(serieTemporal = {}){
+    const series = serieTemporal.series || [];
+    const anos = serieTemporal.categorias || serieTemporal.categories || [];
+    if (!series.length || !anos.length) return '';
+
+    const a0 = anos[0], aN = anos[anos.length-1];
+    const analise = series.map(s=>{
+      const first = s.data?.[0] ?? 0, last = s.data?.[s.data.length-1] ?? 0;
+      const deltaPP = (last-first)*100;
+      const slope = s.data && s.data.length>1 ? (last-first)/(s.data.length-1) : 0;
+      const anosRest = Math.max(0, 2030 - (+aN || 2030));
+      const proj2030 = Math.min(1, Math.max(0, last + slope*anosRest));
+      return {nome:s.name, deltaPP, proj2030};
+    });
+
+    const maiorAlta = analise.reduce((a,b)=> (a.deltaPP>b.deltaPP)?a:b);
+    const menorAlta = analise.reduce((a,b)=> (a.deltaPP<b.deltaPP)?a:b);
+    const chegam = analise.filter(x=>x.proj2030>=1).map(x=>x.nome);
+    const naoChegam = analise.filter(x=>x.proj2030<1).map(x=>`${x.nome} (~${(x.proj2030*100).toFixed(0)}%)`);
+
+    return `
+      <p><strong>${a0}–${aN}</strong>: maior avanço em <strong>${maiorAlta.nome}</strong> (+${maiorAlta.deltaPP.toFixed(1)} p.p.); 
+      pior desempenho em <strong>${menorAlta.nome}</strong> (${menorAlta.deltaPP.toFixed(1)} p.p.).</p>
+      <p class="mt-2">
+        Mantido o ritmo, ${chegam.length ? `alcançam 100% até 2030: <strong>${chegam.join(', ')}</strong>` : 'nenhum grupo deve bater 100% até 2030'}.
+        ${naoChegam.length ? `Outros podem ficar abaixo: ${naoChegam.join(', ')}.` : ''}
+      </p>
+    `;
+  }
 }

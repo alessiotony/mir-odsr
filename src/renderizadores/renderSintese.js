@@ -36,8 +36,8 @@ function computeRadialSizePx() {
 
 // fontes/offsets proporcionais ao tamanho do radial
 function computeRadialFonts(size) {
-  if (size >= 130) return { name: 13, value: 26, nameOffset: 24, valueOffset: -10 };
-  if (size >= 120) return { name: 12, value: 24, nameOffset: 22, valueOffset: -10 };
+  if (size >= 130) return { name: 13, value: 24, nameOffset: 20, valueOffset: -10 };
+  if (size >= 120) return { name: 12, value: 24, nameOffset: 20, valueOffset: -10 };
   if (size >= 110) return { name: 12, value: 22, nameOffset: 20, valueOffset: -8  };
   return              { name: 11, value: 20, nameOffset: 18, valueOffset: -6  };
 }
@@ -227,7 +227,7 @@ export function renderizarSintese(sinteseData, opts = {}) {
         colors: [ color ],
         plotOptions: {
           radialBar: {
-            hollow: { size: '52%' },
+            hollow: { size: '62%' },
             track:  { background: '#f3f4f6' },
             dataLabels: {
               name:  { offsetY: fonts.nameOffset,  fontSize: `${fonts.name}px`,  color: '#6b7280' },

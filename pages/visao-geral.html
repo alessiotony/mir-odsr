@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visão Geral - ODS Racial</title>
+    <title>Visão Geral • ODSR</title>
     <link rel="icon" type="image/png" href="/img/favicon.ico">    
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
         <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20" style="background-image: url('/img/background.jpeg');"></div>
         <div class="container mx-auto px-6 text-center relative">
             <h1 class="text-6xl md:text-3xl font-bold mb-0">
-                <div class="icone-svg-header h-10 w-10 pl-2 bg-white group-hover:bg-primaria transition-colors duration-300" style="mask-image: url('/img/icon-sdg.svg')" role="img" aria-label="ODS 18"></div>
+                <div class="icone-svg-header h-8 w-8 pl-2 bg-white group-hover:bg-primaria transition-colors duration-300" style="mask-image: url('/img/icon-sdg.svg')" role="img" aria-label="ODS 18"></div>
                 Visão Geral</h1>
             <p class="text-lg mx-auto mb-1">
                 Selecione uma unidade territorial para explorar o progresso dos ODS por raça e cor
@@ -39,42 +39,42 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-center justify-center max-w-xl mx-auto">
                 <div class="bg-transparent p-4 rounded-lg">
                     <i class="fas fa-chart-simple text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">86</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="indicadores">—</p>
                     <p class="text-sm text-texto-contraste">Indicadores</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-bullseye text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">11</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="objetivos">—</p>
                     <p class="text-sm text-texto-contraste">Objetivos</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-flag-checkered text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">9</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="metas">—</p>
                     <p class="text-sm text-texto-contraste">Períodos</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-users text-3xl text-texto-contraste mb-2"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">+212 mi</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="populacao">—</p>
                     <p class="text-sm text-texto-contraste">População</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-users text-3xl text-fundo-escuro mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">55.5%</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_negra">—</p>
                     <p class="text-sm text-texto-contraste">Negros</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
-                    <i class="fas fa-users text-3xl text-yellow-300 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">0.4%</p>
+                    <i class="fas fa-users text-3xl text-yellow-400 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_amarela">—</p>
                     <p class="text-sm text-texto-contraste">Amarelos</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-users text-3xl text-green-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">0.8%</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_indigena">—</p>
                     <p class="text-sm text-texto-contraste">Indígenas</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
                     <i class="fas fa-users text-3xl text-blue-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
-                    <p class="text-2xl font-bold text-texto-contraste">43.5%</p>
+                    <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_branca">—</p>
                     <p class="text-sm text-texto-contraste">Brancos</p>
                 </div>
             </div>
@@ -89,6 +89,7 @@
       <h3 class="font-bold text-lg mb-4 mt-6 text-texto-principal">Nível de Progresso Médio dos ODS por Raça e Cor</h3>
       <div id="texto-introducao-visao-geral" class="prose max-w-none"></div>
       <div id="grafico-progresso-racial" class="w-full flex justify-center items-center flex-wrap gap-8 py-4"></div>
+      <div id="texto-sintese-racial" class="prose max-w-none"></div>
     <!-- Série temporal -->
       <h3 class="font-bold text-lg mb-0 text-texto-principal">Evolução do Nível de Progresso por Raça e Cor</h3>
       <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>      
