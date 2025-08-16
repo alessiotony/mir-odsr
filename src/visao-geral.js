@@ -52,6 +52,71 @@ export class VisaoGeralController {
     this.odsModo = 'heatmap'; // padrão = mapa de calor (transposto)
     this._tblState = null;
   }
+  ensureHeaderLocalidadeSlot(){
+  // monta o slot no header (dentro do placeholder, se existir),
+  // e cai para body como fallback (segue fixo via CSS).
+  const placeholder = document.getElementById('header-placeholder') || document.body;
+  let slot = document.getElementById('header-localidade-slot');
+  if (!slot) {
+    slot = document.createElement('div');
+    slot.id = 'header-localidade-slot';
+    slot.className = 'header-localidade-slot';
+    placeholder.appendChild(slot);
+  }
+  return slot;
+}
+
+mountHeaderLocalidadeSelect(){
+  if (typeof TomSelect === 'undefined') return; // tolerância
+  const slot = this.ensureHeaderLocalidadeSlot();
+
+  // evita recriar
+  if (this.tomSelectHeader) return;
+
+  // cria um <select> exclusivo para o header
+  const sel = document.createElement('select');
+  sel.id = 'seletor-localidade-header';
+  sel.setAttribute('aria-label','Selecionar localidade');
+  slot.appendChild(sel);
+
+  // mesmas opções do seletor da hero
+  const options = (this.localidades || []).map(loc => ({
+    value: String(loc.id),
+    text: `${'\u00A0'.repeat((loc.nivel || 0) * 4)}${loc.nome}`,
+    nome: loc.nome, uf: loc.uf || '', nivel: loc.nivel || 0
+  }));
+
+  this.tomSelectHeader = new TomSelect(sel, {
+    options,
+    valueField: 'value', labelField: 'text',
+    searchField: ['nome','uf','text'],
+    placeholder: 'Brasil', allowEmptyOption: true,
+    maxOptions: 200, maxItems: 1, create: false, diacritics: true,
+    dropdownParent: 'body',
+    render: {
+      option: (d) => `<div class="text-sm">${d.text}${d.uf ? ` · ${d.uf}` : ''}</div>`,
+      item:   (d) => `<div class="text-base">${d.nome}${d.uf ? ` · ${d.uf}` : ''}</div>`,
+    }
+  });
+
+  // sincronização bidirecional (sem loop)
+  let syncing = false;
+  const syncTo = (from, to) => {
+    from.on('change', (val) => {
+      if (syncing) return;
+      syncing = true;
+      try { to.setValue(val || '', true); } finally { syncing = false; }
+      this.updateView();
+    });
+  };
+  if (this.tomSelect)  syncTo(this.tomSelect,  this.tomSelectHeader);
+  syncTo(this.tomSelectHeader, this.tomSelect);
+
+  // valor inicial (BR, se existir)
+  const def = (this.tomSelect?.getValue && this.tomSelect.getValue()) || this.defaultLocalidadeId || '';
+  if (def) this.tomSelectHeader.setValue(def, true);
+}
+
 
   async init() {
     this.setupSelectors();
@@ -132,6 +197,8 @@ export class VisaoGeralController {
       });
       const hasBR = this.localidades.find(l => String(l.id) === this.defaultLocalidadeId);
       if (hasBR) this.tomSelect.setValue(this.defaultLocalidadeId, true);
+      this.mountHeaderLocalidadeSelect();
+      this.$.localidade?.closest('.max-w-xl')?.classList?.add('hide-hero-localidade');
     }
   }
 

@@ -284,3 +284,47 @@ thead th.sticky-col{
 
 /* utilitário caso seu build não tenha Tailwind */
 .text-right{ text-align: right; }
+
+/* === Seletor de Localidade no Header (fixo à direita) === */
+/* === Seletor de Localidade no Header (fixo e responsivo) === */
+:root{
+  /* largura “reservada” pros ícones do header à direita.
+     Ajustes por breakpoint logo abaixo. */
+  --hdr-icons-w: 420px;
+  --hdr-top: 10px;
+}
+
+/* breakpoints (ajuste se seu layout usar outros) */
+@media (max-width: 1536px){ :root{ --hdr-icons-w: 360px; } }
+@media (max-width: 1280px){ :root{ --hdr-icons-w: 280px; } }
+@media (max-width: 1024px){ :root{ --hdr-icons-w: 180px; } }
+@media (max-width: 768px) { :root{ --hdr-icons-w: 12px;  } } /* celular: encosta na borda */
+
+/* slot fixo no topo, antes dos ícones */
+.header-localidade-slot{
+  position: fixed;
+  top: var(--hdr-top);
+  right: calc(var(--hdr-icons-w) + env(safe-area-inset-right));
+  z-index: 60;
+  display: flex; align-items: center; gap: .5rem;
+  padding-right: env(safe-area-inset-right); /* iPhone com notch */
+}
+
+/* largura adaptativa do controle (entre 160 e 300px conforme viewport) */
+.header-localidade-slot .ts-control{
+  width: clamp(160px, 24vw, 300px);
+  min-width: 0; /* evita overflow em telas muito estreitas */
+  max-width: 90vw;
+}
+
+/* texto do item com reticências se estreitar */
+.header-localidade-slot .ts-control .item{
+  max-width: 100%;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+
+/* afinando em telas pequenas */
+@media (max-width: 768px){
+  .header-localidade-slot{ top: 8px; }
+  .header-localidade-slot .ts-control{ width: clamp(150px, 48vw, 220px); }
+}
