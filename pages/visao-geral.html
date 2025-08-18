@@ -58,22 +58,22 @@
                     <p class="text-sm text-texto-contraste">População</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
-                    <i class="fas fa-users text-3xl text-fundo-escuro mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(196, 120, 120); text-stroke: 2.5px #964b00;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_negra">—</p>
                     <p class="text-sm text-texto-contraste">Negros</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
-                    <i class="fas fa-users text-3xl text-yellow-400 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(255, 187, 0); text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_amarela">—</p>
                     <p class="text-sm text-texto-contraste">Amarelos</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
-                    <i class="fas fa-users text-3xl text-green-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(60, 219, 60); text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_indigena">—</p>
                     <p class="text-sm text-texto-contraste">Indígenas</p>
                 </div>
                 <div class="bg-transparent p-4 rounded-lg ">
-                    <i class="fas fa-users text-3xl text-blue-700 mb-2" style="-webkit-text-stroke: 1.5px white; text-stroke: 1.5px white;"></i>
+                    <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px #007fff; text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_branca">—</p>
                     <p class="text-sm text-texto-contraste">Brancos</p>
                 </div>
@@ -83,26 +83,50 @@
     </section>
 
     <main class="container mx-auto px-6 py-2">
+    <div class="bg-white p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-semibold mb-2">Nível de Progresso Médio dos ODS por Raça e Cor</h2>
+    <!-- texto introdutório sobre metodologia -->
+    <p id="texto-metodologia-ods" class="text-gray-600 mb-4"></p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <!-- ESQUERDA: resumo geral -->
+        <div id="col-resumo-geral">
+        <div id="card-resumo-geral" class="resumo-card mb-4"></div>
+        <div id="cards-ranking" class="rank-grid"></div>
+        </div>
+
+        <!-- DIREITA: radiais por grupo racial (mantém o id) -->
+        <div>
+        <div id="grafico-progresso-racial"></div>
+        <!-- texto dinâmico: leitura do progresso médio/posições -->
+        <div id="texto-introducao-visao-geral" class="mt-4 text-gray-700"></div>
+        </div>
+    </div>
+    <div id="metodologia-card" class="mb-4"></div>
+    </section>
+
     <section id="visao-geral-graficos" class="space-y-8">    
     <div class="bg-white p-6 rounded-lg shadow">
       <!-- Radial (maior) -->
-      <h3 class="font-bold text-lg mb-4 mt-6 text-texto-principal">Nível de Progresso Médio dos ODS por Raça e Cor</h3>
+      <!-- <h3 class="font-bold text-lg mb-4 mt-6 text-texto-principal">Nível de Progresso Médio dos ODS por Raça e Cor</h3>
       <div id="texto-introducao-visao-geral" class="prose max-w-none"></div>
       <div id="grafico-progresso-racial" class="w-full flex justify-center items-center flex-wrap gap-8 py-4"></div>
-      <div id="texto-sintese-racial" class="prose max-w-none"></div>
+      <div id="texto-sintese-racial" class="prose max-w-none"></div> -->
     <!-- Série temporal -->
-      <h3 class="font-bold text-lg mb-0 text-texto-principal">Evolução do Nível de Progresso por Raça e Cor</h3>
+      <h2 class="font-bold text-lg mb-0 text-texto-principal">Evolução do Nível de Progresso por Raça e Cor</h2>
       <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>      
       <div id="texto-sintese-serie-temporal" class="text-gray-700 leading-relaxed space-y-2 mb-12"></div>
     
     <!-- ODS (full width) -->
-      <h3 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso dos Indicadores por ODS e Raça e Cor</h3>
+      <h2 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por ODS e Raça e Cor</h2>
       <div id="grafico-progresso-ods" class="w-full min-h-[400px]"></div>
     
     <!-- Texto interpretativo do ODS -->
-      <div id="texto-sintese-ods" class="prose max-w-none"></div>
+      <div id="texto-sintese-ods" class="prose max-w-none mb-12"></div>
     
     <!-- Tabela -->
+    <h2 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por Indicadores e Raça e Cor</h2>
+    <p id="texto-sintese-tabela" class="text-gray-600 mb-3"></p>
     <div class="bg-white p-6 rounded-lg shadow" id="tabela-indicadores-container"></div>
 
     <!-- Texto interpretativo da tabela -->
@@ -114,10 +138,22 @@
   </section>
 </main>
 
+<!-- MODAL: Metodologia dos ODS -->
+<div id="modal-metodo" class="metodo-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="metodo-modal__backdrop" data-close-modal></div>
+  <div class="metodo-modal__panel" role="document" tabindex="-1" aria-labelledby="modal-metodo-title">
+    <button class="metodo-modal__close" type="button" aria-label="Fechar" data-close-modal>×</button>
+    <h3 id="modal-metodo-title" class="text-xl font-semibold mb-2">Como medimos o progresso dos ODS</h3>
+    <div id="modal-metodo-content" class="prose max-w-none"></div>
+  </div>
+</div>
+
+
 
     <div id="footer-placeholder"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
