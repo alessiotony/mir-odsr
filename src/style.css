@@ -219,7 +219,7 @@ header {
   display: inline-block;
   vertical-align: middle; /* Alinha o ícone com o texto ao lado, se houver */
   /* Adicione esta linha para dar uma cor base ao ícone */
-  background-color: var(--cor-primaria);
+  /* background-color: var(--cor-primaria); */
   -webkit-mask-image: var(--mask-image);
   mask-image: var(--mask-image);
   -webkit-mask-size: contain;
