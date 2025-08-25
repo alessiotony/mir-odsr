@@ -233,7 +233,6 @@ header {
 }
 
 /* Toolbar ODS */
-/* Toolbar ODS */
 .ods-toolbar button { transition: all .15s ease; }
 .ods-toolbar button.is-active{
   background: var(--cor-primaria, #1d4ed8);
@@ -377,3 +376,48 @@ thead th.sticky-col{
 }
 .metodo-modal__close:hover{ background:#f9fafb; }
 
+/* Contêiner da tooltip precisa ter posição relativa */
+.tooltip-container {
+  position: relative;
+  display: inline-block; /* Ou block, dependendo do seu layout */
+}
+
+/* Estilo da tooltip (inicialmente escondida) */
+.tooltip-container .tooltip-text {
+  visibility: hidden;
+  width: 200px; /* Largura da tooltip */
+  background-color: #333; /* Cor de fundo */
+  color: #fff; /* Cor do texto */
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  
+  /* Posicionamento */
+  position: absolute;
+  z-index: 1;
+  bottom: 105%; /* Posiciona acima do elemento */
+  left: 50%;
+  margin-left: -100px; /* Metade da largura para centralizar */
+  
+  /* Efeito de fade */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Mostra a tooltip quando o mouse passa sobre o contêiner */
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* (Opcional) Adiciona uma seta/triângulo abaixo da tooltip */
+.tooltip-container .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Na parte de baixo da tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}

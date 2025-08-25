@@ -260,8 +260,8 @@ export class VisaoGeralController {
         </div>`;
 
       cards.push(mk('Ranking nacional', rkNac));
-      cards.push(mk('Ranking estadual', rkEst));
-      cards.push(mk('Ranking municipal/Regional', rkReg));
+      cards.push(mk('Ranking regional', rkEst));
+      cards.push(mk('Ranking estadual', rkReg));
 
       ranksHost.innerHTML = cards.join('');
     }
@@ -446,7 +446,7 @@ export class VisaoGeralController {
     });
 
     // legenda unificada
-    this.makeOdsLegend(host);
+    // this.makeOdsLegend(host);
 
     const options = {
       chart: { 
@@ -683,7 +683,8 @@ export class VisaoGeralController {
   textoMetodologiaOds(){
     return `
       <em>Como é medido?</em> O progresso dos ODS é expresso em <strong>percentual de alcance</strong>
-      (0–100%), onde 100% significa meta atingida. Aqui usamos a <strong>média simples</strong> entre
+      (0–100%), onde 100% significa que todas as metas dos indicadores foram atingidas. 
+      Aqui usamos a <strong>média simples</strong> entre
       os grupos raciais para o “progresso médio” e mostramos a <strong>tendência</strong> recente em pontos percentuais.
       Isso ajuda a identificar <strong>nível atual</strong> e <strong>ritmo</strong> de avanço.
     `;
@@ -693,7 +694,7 @@ export class VisaoGeralController {
     return `
       <p>
         Medimos o “progresso dos ODS” como <strong>percentual de alcance</strong> (0–100%),
-        onde 100% representa a meta atingida. Cada indicador é normalizado para esta escala.
+        onde 100% representa que todas as metas dos indicadores foram atingidas. Cada indicador é normalizado para esta escala.
       </p>
       <p>
         Para o <strong>progresso médio</strong>, calculamos a <strong>média simples</strong> entre os grupos raciais no ano mais recente.
@@ -718,7 +719,7 @@ export class VisaoGeralController {
     this.$.metodologiaCard.innerHTML = `
       <div class="lead">
         <strong>Como ler os resultados?</strong><br/>
-        Usamos 0–100% para medir o alcance das metas; a média entre grupos dá o <em>progresso médio</em>.
+        Usamos 0–100% para medir o alcance das metas relativas aos ODS; a média entre o nível de progresso de cada indicador para cada grupo nos dá o <em>progresso médio</em>.
       </div>
       <button id="btn-saiba-metodo" type="button" class="saiba-mais">Saiba mais</button>
     `;
@@ -776,11 +777,10 @@ export class VisaoGeralController {
 
     return `
       <p>
-        Em <strong>${local}</strong>, a média entre os grupos é <strong>${(media*100).toFixed(0)}%</strong>.
-        <strong>${top.label}</strong> tem o maior nível (<strong>${(top.valor*100).toFixed(0)}%</strong>)
-        e <strong>${bottom.label}</strong> o menor (<strong>${(bottom.valor*100).toFixed(0)}%</strong>), um gap de <strong>${gapPP} p.p.</strong>.
+        Em <strong>${local}</strong>, a média de progresso entre os grupos é de <strong>${(media*100).toFixed(0)}%</strong>.
+        O grupo de <strong>${top.label}</strong> tem o maior nível de progesso no período (<strong>${(top.valor*100).toFixed(0)}%</strong>)
+        e <strong>${bottom.label}</strong> o menor (<strong>${(bottom.valor*100).toFixed(0)}%</strong>), com uma diferença de <strong>${gapPP} pontos percentais</strong>.
       </p>
-      <p class="mt-2">${rkTxt || ''}</p>
     `;
   }
 
@@ -808,8 +808,7 @@ export class VisaoGeralController {
       <p><strong>${a0}–${aN}</strong>: maior avanço em <strong>${maiorAlta.nome}</strong> (+${toComma(maiorAlta.deltaPP.toFixed(1))} p.p.); 
       pior desempenho em <strong>${menorAlta.nome}</strong> (${toComma(menorAlta.deltaPP.toFixed(1))} p.p.).</p>
       <p class="mt-2">
-        Mantido o ritmo, ${chegam.length ? `alcançam 100% até 2030: <strong>${chegam.join(', ')}</strong>` : 'nenhum grupo deve bater 100% até 2030'}.
-        ${naoChegam.length ? `Outros podem ficar abaixo: ${naoChegam.join(', ')}.` : ''}
+        Se mantido o ritmo atual, ${chegam.length ? `alcançam 100% até 2030: <strong>${chegam.join(', ')}</strong>` : 'nenhum grupo deve obter 100% até 2030'}.
       </p>
     `;
   }

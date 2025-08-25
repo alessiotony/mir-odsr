@@ -37,45 +37,53 @@
 
             <section id="sintese-kpis" class="mt-0">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-center justify-center max-w-xl mx-auto">
-                <div class="bg-transparent p-4 rounded-lg">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-chart-simple text-3xl text-texto-contraste mb-2"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="indicadores">—</p>
                     <p class="text-sm text-texto-contraste">Indicadores</p>
+                    <span class="tooltip-text">Indicadores atualmente monitorados</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-bullseye text-3xl text-texto-contraste mb-2"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="objetivos">—</p>
                     <p class="text-sm text-texto-contraste">Objetivos</p>
+                    <span class="tooltip-text">Objetivos relacionados à Agenda Global</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-flag-checkered text-3xl text-texto-contraste mb-2"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="metas">—</p>
                     <p class="text-sm text-texto-contraste">Períodos</p>
+                    <span class="tooltip-text">Períodos analisados</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-users text-3xl text-texto-contraste mb-2"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="populacao">—</p>
                     <p class="text-sm text-texto-contraste">População</p>
+                    <span class="tooltip-text">Total da população no Censo Demográfico 2022</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container" >
                     <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(196, 120, 120); text-stroke: 2.5px #964b00;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_negra">—</p>
-                    <p class="text-sm text-texto-contraste">Negros</p>
+                    <p class="text-sm text-texto-contraste">Negros</p>                    
+                    <span class="tooltip-text">Proporção da população autodeclarada preta ou parda no Censo Demográfico 2022</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px #007fff; text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_branca">—</p>
                     <p class="text-sm text-texto-contraste">Brancos</p>
+                    <span class="tooltip-text">Proporção da população autodeclarada branca no Censo Demográfico 2022</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(255, 187, 0); text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_amarela">—</p>
                     <p class="text-sm text-texto-contraste">Amarelos</p>
+                    <span class="tooltip-text">Proporção da população autodeclarada amarela no Censo Demográfico 2022</span>
                 </div>
-                <div class="bg-transparent p-4 rounded-lg ">
+                <div class="bg-transparent p-4 rounded-lg relative tooltip-container">
                     <i class="fas fa-users text-3xl text-transparent mb-2" style="-webkit-text-stroke: 1.5px rgb(60, 219, 60); text-stroke: 1.5px white;"></i>
                     <p class="text-2xl font-bold text-texto-contraste" data-kpi="pop_indigena">—</p>
                     <p class="text-sm text-texto-contraste">Indígenas</p>
+                    <span class="tooltip-text">Proporção da população autodeclarada indígena no Censo Demográfico 2022</span>
                 </div>
             </div>
         </section>
@@ -84,7 +92,9 @@
 
     <main class="container mx-auto px-6 py-2">
     <div class="bg-white p-6 rounded-lg shadow">
-    <h2 class="text-2xl font-semibold mb-2">Nível de Progresso Médio dos ODS por Raça e Cor</h2>
+    <h2 class="text-2xl font-semibold mb-2">
+        <i class="fa-solid fa-bullseye text-primaria"></i> 
+        Nível de Progresso Médio dos ODS por Raça e Cor</h2>
     <!-- texto introdutório sobre metodologia -->
     <p id="texto-metodologia-ods" class="text-gray-600 mb-4"></p>
     
@@ -97,6 +107,7 @@
 
         <!-- DIREITA: radiais por grupo racial (mantém o id) -->
         <div>
+        <h3 class="text-xl font-semibold mb-2">Progresso Médio por Raça e Cor</h3>
         <div id="grafico-progresso-racial"></div>
         <!-- texto dinâmico: leitura do progresso médio/posições -->
         <div id="texto-introducao-visao-geral" class="mt-4 text-gray-700"></div>
@@ -113,19 +124,25 @@
       <div id="grafico-progresso-racial" class="w-full flex justify-center items-center flex-wrap gap-8 py-4"></div>
       <div id="texto-sintese-racial" class="prose max-w-none"></div> -->
     <!-- Série temporal -->
-      <h2 class="font-bold text-lg mb-0 text-texto-principal">Evolução do Nível de Progresso por Raça e Cor</h2>
+      <h2 class="font-bold text-2xl mb-0 text-texto-principal">
+        <i class="fa-solid fa-arrow-trend-up text-primaria"></i> 
+        Evolução do Nível de Progresso por Raça e Cor</h2>
       <div id="grafico-evolucao-progresso" class="w-full min-h-[320px]"></div>      
       <div id="texto-sintese-serie-temporal" class="text-gray-700 leading-relaxed space-y-2 mb-12"></div>
     
     <!-- ODS (full width) -->
-      <h2 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por ODS e Raça e Cor</h2>
+      <h2 class="font-bold text-2xl mb-4 text-texto-principal">
+        <i class="fa-solid fa-list-check text-primaria"></i> 
+        Nível de Progresso por ODS e Raça e Cor</h2>
       <div id="grafico-progresso-ods" class="w-full min-h-[400px]"></div>
     
     <!-- Texto interpretativo do ODS -->
       <div id="texto-sintese-ods" class="prose max-w-none mb-12"></div>
     
     <!-- Tabela -->
-    <h2 class="font-bold text-lg mb-4 text-texto-principal">Nível de Progresso por Indicadores e Raça e Cor</h2>
+    <h2 class="font-bold text-2xl mb-4 text-texto-principal">
+        <i class="fa-solid fa-table-list text-primaria"></i> 
+        Nível de Progresso por Indicadores e Raça e Cor</h2>
     <p id="texto-sintese-tabela" class="text-gray-600 mb-3"></p>
     <div class="bg-white p-6 rounded-lg shadow" id="tabela-indicadores-container"></div>
 
