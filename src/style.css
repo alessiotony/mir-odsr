@@ -218,8 +218,11 @@ header {
 .icone-svg-header {
   display: inline-block;
   vertical-align: middle; /* Alinha o ícone com o texto ao lado, se houver */
-  /* Adicione esta linha para dar uma cor base ao ícone */
-  /* background-color: var(--cor-primaria); */
+  
+  /* Adicione estas duas linhas */
+  background-color: var(--cor-texto-contraste); /* Cor padrão do ícone */
+  transition: background-color 0.3s ease; /* Transição para o hover */
+
   -webkit-mask-image: var(--mask-image);
   mask-image: var(--mask-image);
   -webkit-mask-size: contain;
@@ -227,6 +230,11 @@ header {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   mask-position: center;
+}
+
+/* Adicione o estado de hover */
+.icone-svg-header:hover {
+  background-color: var(--cor-primaria);
 }
 
 /* Toolbar ODS */
