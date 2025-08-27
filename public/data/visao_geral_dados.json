@@ -1,8 +1,8 @@
 {
   "kpis": {
-    "indicadores": 86,
+    "indicadores": 90,
     "objetivos": 11,
-    "metas": 7,
+    "metas": 9,
     "populacao": 212325000,
     "pop_negra": 0.555,
     "pop_amarela": 0.004,
@@ -13,24 +13,22 @@
     "titulo": "Nível de Progresso por Grupo Racial",
     "pregressoMedio": 0.428,
     "evolucao": 0.035,
-    "rankNacional": "1000/5570",
-    "rankRegional": "300/1870",
+    "rankNacional": "1/1",
+    "rankRegional": null,
     "rankEstadual": null,
     "data": [
-      { "label": "Negros",    "valor": 0.41,  "cor": "#4A2712" },
-      { "label": "Brancos",   "valor": 0.478, "cor": "#1d4ed8" },
-      { "label": "Amarelos",  "valor": 0.488, "cor": "#F1C40F" },
-      { "label": "Indígenas", "valor": 0.337, "cor": "#15803d" }
-    ]
+      {"label": "Negra", "valor": 0.507, "cor": "#4A2712"},
+      {"label": "Branca", "valor": 0.6225, "cor": "#1d4ed8"},
+      {"label": "Amarela", "valor": 0.6327, "cor": "#F1C40F"}, 
+      {"label": "Indígena", "valor": 0.4388, "cor": "#15803d"}]
   },
   "serieTemporal": {
     "titulo": "Evolução do Nível de Progresso por Grupo",
     "categorias": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
-    "series": [
-      { "name": "Negros",    "data": [0.399, 0.4, 0.396, 0.442, 0.446, 0.462, 0.45, 0.405, 0.41] },
-      { "name": "Brancos",   "data": [0.421, 0.438, 0.426, 0.467, 0.469, 0.491, 0.471, 0.444, 0.478] },
-      { "name": "Indígenas", "data": [0.311, 0.298, 0.289, 0.342, 0.34, 0.369, 0.357, 0.31, 0.337] },
-      { "name": "Amarelos",  "data": [0.397, 0.412, 0.413, 0.433, 0.423, 0.427, 0.445, 0.44, 0.488] }
+    "series": [{"name": "Negra", "data": [0.385, 0.4, 0.403, 0.451, 0.46, 0.477, 0.478, 0.483, 0.507]},
+   {"name": "Amarela", "data": [0.549, 0.56, 0.558, 0.574, 0.573, 0.572, 0.583, 0.582, 0.633]},
+   {"name": "Indígena", "data": [0.33, 0.335, 0.342, 0.39, 0.386, 0.415, 0.418, 0.415, 0.439]},
+   {"name": "Branca", "data": [0.542, 0.565, 0.569, 0.604, 0.602, 0.623, 0.612, 0.597, 0.623]}
     ]
   },
   "graficoOds": {

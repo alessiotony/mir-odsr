@@ -1,10 +1,10 @@
 {
     "global": {
-        "nIndicadores": 86,
-        "nMetasMonitoradas": 6,
-        "progresso": 0.77,
-        "paridade": 0.205,
-        "indice": 0.612
+        "nIndicadores": 90,
+        "nMetasMonitoradas": 9,
+        "progresso": 0.5503,
+        "paridade": 0.8062,
+        "indice": 0.4436
     },
     "metas": [
         {

@@ -15,10 +15,10 @@
     ]
   },
   "estatisticas": [
-    {"icon": "fas fa-users-viewfinder", "value": "86 indicadores", "label": "por Grupos Raciais e Localidades"},
+    {"icon": "fas fa-users-viewfinder", "value": "90 indicadores", "label": "por Grupos Raciais e Localidades"},
     {"icon": "fas fa-seedling", "value": "12 objetivos", "label": "de Desenvolvimento Sustentável, incluido o ODS 18"},
     {"icon": "fas fa-draw-polygon", "value": "5.603 unidades", "label": "territoriais do nível municipal ao nacional"},
-    {"icon": "fas fa-bullseye", "value": "6 metas", "label": "do ODS 18 com indicadores monitorados"},
+    {"icon": "fas fa-bullseye", "value": "9 metas", "label": "do ODS 18 com indicadores monitorados"},
     {"icon": "fas fa-database", "value": "+20 fontes de dados", "label": "usados para o desenvolvimento dos indicadores"},
     {"icon": "fas fa-users", "value": "4 grupos raciais", "label": "negros, indígenas, brancos e amarelos "}
   ],
